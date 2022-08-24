@@ -2,9 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomePage from "@/views/homePage.vue";
 import SignupPage from "@/views/signupPage";
-import LoginSignup from "@/views/loginSignup.vue";
+import ClientSignUp from "@/views/clientSignUp.vue";
 import RestaurantPage from "@/views/restaurantPage.vue";
-
+import ProfilePage from "@/views/profilePage.vue";
 Vue.use(VueRouter)
 
 const routes = [
@@ -17,12 +17,17 @@ const routes = [
     component: SignupPage
   },
   {
-    path:`/login_signup`,
-    component: LoginSignup
+    path:`/client_sign_up`,
+    component: ClientSignUp
   },
   {
     path: `/restaurant_page`,
     component: RestaurantPage
+  },
+  {
+    path: `/profile_page`,
+    component: ProfilePage
+
   }
 
 ]

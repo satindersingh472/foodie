@@ -1,24 +1,32 @@
 <template>
-  <div>
+  <div class="main_sign_up_form">
+    <page-header></page-header>
     <div class="registration">
+      <h2>Register as a Client</h2>
       <div class="form">
         <div class="information">
-          <label for="username">User Name</label>
-          <input type="text" ref="username" placeholder="username" />
-          <label for="password">Password</label>
-          <input type="text" ref="password" placeholder="password" />
-
-          <label for="first_name">First Name</label>
-          <input type="text" ref="first_name" placeholder="first name" />
-          <label for="last_name">Last Name</label>
-          <input type="text" ref="last_name" placeholder="last_name" />
-       
-           <label for="email">Email</label>
-          <input type="text" ref="email" placeholder="Email" />
-          <label for="file">Upload Image</label>
-          <input type="file" ref="file" />
+          <div>
+            <p>User Name</p>
+            <input type="text" ref="username" placeholder="username" />
+          </div>
+          <div>
+            <p>Password</p>
+            <input type="text" ref="password" placeholder="password" />
+          </div>
+          <div>
+            <p>First Name</p>
+            <input type="text" ref="first_name" placeholder="first name" />
+          </div>
+          <div>
+            <p>Last Name</p>
+            <input type="text" ref="last_name" placeholder="last_name" />
+          </div>
         </div>
-          <button @click="signup">submit</button>
+        <div class="email">
+          <p>Email</p>
+          <input type="text" ref="email" placeholder="Email" />
+        </div>
+        <button @click="signup">REGISTER</button>
       </div>
     </div>
   </div>
@@ -27,7 +35,11 @@
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
+import pageHeader from "@/components/pageHeader.vue";
 export default {
+  components: {
+    pageHeader,
+  },
   methods: {
     signup() {
       this.email = this.$refs[`email`][`value`];
@@ -57,7 +69,7 @@ export default {
           this.token = response[`data`][`token`];
           cookies.set(`token`, this.token);
           this.client_id = response[`data`][`client_id`];
-          cookies.set(`client_id`,this.client_id);
+          cookies.set(`client_id`, this.client_id);
         })
         .catch((error) => {
           error;
@@ -80,27 +92,59 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form {
-  border: 2px solid black;
-  margin: auto;
-  width: 60vw;
+.registration {
   text-align: center;
+}
+.form {
+  width: 100%;
   display: grid;
-  gap: 20px;
   place-items: center;
+  gap: 15px;
+  button {
+    width: 100%;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: red;
+    color: white;
+    font: 1.2rem white;
+    font-family: "Courier New", Courier, monospace;
+  }
   .information {
+    width: 100%;
     display: grid;
-    padding: 20px;
-    margin: 20px;
     grid-template-columns: 1fr 1fr;
-    justify-items: start;
-    gap: 20px;
-    place-items: center;
-    label{
-      justify-self: end;
+    gap: 15px;
+    div {
+      display: grid;
+      place-items: start;
+      p {
+        align-self: end;
+        justify-self: start;
+        margin: 5px 0px 5px 0px;
+        font-size: 0.8rem;
+      }
+      input {
+        width: 100%;
+        gap: 10px;
+        justify-self: center;
+        border: 2px solid black;
+        border-radius: 5px;
+      }
     }
-    input{
-      justify-self: start;
+  }
+  .email {
+    display: grid;
+    place-items: start;
+    width: 100%;
+    p {
+      margin: 5px 0px 5px 0px;
+      font-size: 0.8rem;
+    }
+    input {
+      width: 100%;
+      justify-self: center;
+      border: 2px solid black;
+      border-radius: 5px;
     }
   }
 }

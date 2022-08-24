@@ -1,13 +1,11 @@
 <template>
     <div>
-<customer-signup></customer-signup>
+<router-link to="/profile_page">Profile</router-link>
     </div>
 </template>
 
 <script>
-import customerSignup from '@/components/customerSignup.vue'
     export default {
-  components: { customerSignup },
         
     }
 </script>
