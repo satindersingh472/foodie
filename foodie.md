@@ -21,7 +21,7 @@ Don't worry, it is fairly simple. Let's see an example:
 axios.request({
     url: `https://innotechfoodie.ml/api/client`,
     headers: {
-        `x-api-key`: `TVTZDiQZDzjkWqVkNCxr`
+        `x-api-key`: `your_api_key_here`
     }
 }).then((response) => {
     // Success code here
