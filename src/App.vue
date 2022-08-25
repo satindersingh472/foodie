@@ -5,8 +5,5 @@
 </template>
 
 <style lang="scss">
-#app{
-  display: grid;
-  place-items: center;
-}
+
 </style>

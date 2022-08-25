@@ -5,12 +5,12 @@
 Welcome to your second large project! This is going to be a fun one that will extend your knowledge of all things front-end.  
 Here are you will find the documentation for each available API endpoint for you to work with.
 
-## Important
+## `Important`
 
 To properly identify you the user, I have assigned to you your own API key.  
 Make sure you have this at the ready as **you need it to make request**
 
-### Sending your API key
+### `Sending your API key`
 
 Sending your API key with the foodie API is done using **headers**.  
 Don't worry, it is fairly simple. Let's see an example:
@@ -21,7 +21,7 @@ Don't worry, it is fairly simple. Let's see an example:
 axios.request({
     url: `https://innotechfoodie.ml/api/client`,
     headers: {
-        `x-api-key`: `your_api_key_here`
+        'x-api-key': `your_api_key_here`
     }
 }).then((response) => {
     // Success code here
@@ -36,12 +36,12 @@ In the foodie API, you pass a header named `x-api-key` which will be used to ide
 
 # Endpoints
 
-## Client
+## `Client`
 
 **URL: https://innotechfoodie.ml/api/client**  
 Supported HTTP Methods: **GET, POST, PATCH, DELETE**
 
-### GET
+### `GET`
 
 Returns information about a single client, will error if the client_id does not exist.
 
@@ -67,7 +67,10 @@ Returns information about a single client, will error if the client_id does not 
 }
 ```
 
-### POST
+<br>
+<br>
+
+### `POST`
 
 Creates a new client that can now use the system. Also returns a valid login token meaning the user is now logged in after sign up.  
 Will error if there is a duplicate username or password (the user already exists)
@@ -94,7 +97,10 @@ Will error if there is a duplicate username or password (the user already exists
 }
 ```
 
-### PATCH
+<br>
+<br>
+
+### `PATCH`
 
 Modify an existing user if you have a valid token. Note that the token is sent as a header.
 
@@ -121,7 +127,10 @@ Modify an existing user if you have a valid token. Note that the token is sent a
 
 **No Data Returned**
 
-### DELETE
+<br>
+<br>
+
+### `DELETE`
 
 Delete an existing user if you have a valid token and password. Note that the token is sent as a header.
 
@@ -143,12 +152,15 @@ Delete an existing user if you have a valid token and password. Note that the to
 
 **No Data Returned**
 
-## Client-Login
+<br>
+<br>
+
+## `Client-Login`
 
 **URL: https://innotechfoodie.ml/api/client-login**  
 Supported HTTP Methods: **POST, DELETE**
 
-### POST
+### `POST`
 
 Log a client in. Will error if the email / password don't exist in the system.
 
@@ -170,7 +182,10 @@ Log a client in. Will error if the email / password don't exist in the system.
 }
 ```
 
-### DELETE
+<br>
+<br>
+
+### `DELETE`
 
 Delete an existing token. Will error if the token sent does not exist.
 
@@ -183,3 +198,325 @@ Delete an existing token. Will error if the token sent does not exist.
 ```
 
 **No Data Returned**
+
+<br>
+<br>
+
+## `Restaurant`
+
+**URL: https://innotechfoodie.ml/api/restaurant**  
+Supported HTTP Methods: **GET, POST, PATCH, DELETE**
+
+### `GET`
+
+Returns information about a single restaurant, will error if the restaurant_id does not exist.
+
+**Required Params:**
+
+```
+{
+    restaurant_id: (number)
+}
+```
+
+**Data Returned**
+
+```
+{
+    email: (string),
+    name: (string),
+    address: (string),
+    phone_number: (string in the form of ###-###-####),
+    bio: (string),
+    city: (string, one of Calgary, Vancouver or Toronto)
+    profile_url: (string),
+    banner_url: (string),
+}
+```
+
+<br>
+<br>
+
+### `POST`
+
+Creates a new restaurant that can now use the system. Also returns a valid login token meaning the restaurant is now logged in after sign up.  
+Will error if there is a duplicate email or phone number(the user already exists)
+
+**Required Data:**
+
+```
+{
+    email: (string),
+    name: (string),
+    address: (string),
+    phone_number: (string in the form of ###-###-####),
+    bio: (string),
+    city: (string, one of Calgary, Vancouver or Toronto)
+    profile_url: (string),
+    banner_url: (string),
+    password: (string)
+}
+```
+
+**Data Returned**
+
+```
+{
+    restaurant_id: (number),
+    token: (string)
+}
+```
+
+<br>
+<br>
+
+### `PATCH`
+
+Modify an existing restaurant if you have a valid token. Note that the token is sent as a header.
+
+**Required Headers:**
+
+```
+{
+    token: (string)
+}
+```
+
+**Optional Data:** Send 1 or more of these to update the restaurant that owns the given token
+
+```
+{
+    email: (string),
+    name: (string),
+    address: (string),
+    phone_number: (string in the form of ###-###-####),
+    bio: (string),
+    city: (string, one of Calgary, Vancouver or Toronto)
+    profile_url: (string),
+    banner_url: (string),
+    password: (string)
+}
+```
+
+**No Data Returned**
+
+<br>
+<br>
+
+### `DELETE`
+
+Delete an existing restaurant if you have a valid token and password. Note that the token is sent as a header.
+
+**Required Headers:**
+
+```
+{
+    token: (string)
+}
+```
+
+**Required Data:**
+
+```
+{
+    password: (string)
+}
+```
+
+**No Data Returned**
+<br>
+<br>
+
+## `Restaurants`
+
+**URL: https://innotechfoodie.ml/api/restaurants**  
+Supported HTTP Methods: **GET**
+
+### `GET`
+
+Returns information about all restaurants.
+
+**Data Returned**
+
+```
+[
+    {
+        email: (string),
+        name: (string),
+        address: (string),
+        phone_number: (string in the form of ###-###-####),
+        bio: (string),
+        city: (string, one of Calgary, Vancouver or Toronto)
+        profile_url: (string),
+        banner_url: (string),
+    },
+]
+```
+
+<br>
+<br>
+
+## `Restaurant-Login`
+
+**URL: https://innotechfoodie.ml/api/restaurant-login**  
+Supported HTTP Methods: **POST, DELETE**
+
+### `POST`
+
+Log a restaurant in. Will error if the email / password don't exist in the system.
+
+**Required Data:**
+
+```
+{
+    email: (string),
+    password: (string)
+}
+```
+
+**Data Returned**
+
+```
+{
+    restaurant_id: (number),
+    token: (string)
+}
+```
+
+<br>
+<br>
+
+### `DELETE`
+
+Delete an existing token. Will error if the token sent does not exist.
+
+**Required Headers:**
+
+```
+{
+    token: (string)
+}
+```
+
+**No Data Returned**
+
+<br>
+<br>
+
+## `Restaurant`
+
+**URL: https://innotechfoodie.ml/api/menu**  
+Supported HTTP Methods: **GET, POST, PATCH, DELETE**
+
+<br>
+<br>
+
+### `GET`
+
+Returns all menu items associated with a restaurant.
+
+**Required Params:**
+
+```
+{
+    restaurant_id: (number)
+}
+```
+
+**Data Returned**
+
+```
+[
+    {
+        description: (string),
+        id: (number),
+        image_url: (string),
+        name: (string),
+        price: (number)
+    },
+]
+```
+
+<br>
+<br>
+
+### `POST`
+
+Add a new menu item to a restaurant. Must be logged in as the restaurant to send the correct token.  
+Note that the token is sent as a header.
+
+**Required Headers:**
+
+```
+{
+    token: (string),
+}
+```
+
+**Required Data:**
+
+```
+{
+    description: (string),
+    image_url: (string),
+    name: (string),
+    price: (number)
+},
+```
+
+**No Data Returned**
+
+<br>
+<br>
+
+### `PATCH`
+
+Modify an existing menu item if you have a valid token. Note that the token is sent as a header.
+
+**Required Headers:**
+
+```
+{
+    token: (string)
+}
+```
+
+**Optional Data:** Send 1 or more of these to update the menu item owned by the token bearer
+
+```
+{
+    description: (string),
+    image_url: (string),
+    name: (string),
+    price: (number)
+}
+```
+
+**No Data Returned**
+
+<br>
+<br>
+
+### `DELETE`
+
+Delete an existing menu item if you have a valid token. Note that the token is sent as a header.
+
+**Required Headers:**
+
+```
+{
+    token: (string)
+}
+```
+
+**Required Data:**
+
+```
+{
+    menu_id: (number)
+}
+```
+
+**No Data Returned**
+<br>
+<br>

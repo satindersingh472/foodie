@@ -1,52 +1,69 @@
 <template>
   <div>
-    <div class="profile">
-      <h2>Welcome, {{user[`first_name`]}}</h2>
-      <h2>First Name:  {{user[`first_name`]}}</h2>
-      <h2>Last Name:   {{user[`last_name`]}}</h2>
-      <h2>User Name:   {{user[`username`]}}</h2>
-      <h2>Email:   {{user[`email`]}}</h2>
-      <img :src="user[`image_url`]" :alt="`image for ${user[`first_name`]}`"/>
+    <page-header></page-header>
+    <div class="form">
+      <div class="form_header">
+        <div class="info_header">
+          <h2>Profile</h2>
+        </div>
+        <div class="options_header">
+          <h2>Delete</h2>
+        </div>
+      </div>
     </div>
-    <div v-if="show_edit !== undefined" class="edit_profile">
-      <edit-profile></edit-profile>
-    </div>
+    
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
-import EditProfile from "@/components/editProfile.vue";
+import PageHeader from "@/components/pageHeader.vue";
 export default {
   components: {
-    EditProfile
+    PageHeader,
   },
-  mounted () {
-     axios
-        .request({
-          url: `https://innotechfoodie.ml/api/client`,
-          headers: {
-            "x-api-key": "TVTZDiQZDzjkWqVkNCxr",
-          },
-          params: {
-            client_id: cookies.get(`client_id`),
-          },
-        })
-        .then((response) => {
-          this.user = response[`data`][0];
-        })
-        .catch((error) => {
-          error;
-        });
+  mounted() {
+    axios
+      .request({
+        url: `https://innotechfoodie.ml/api/client`,
+        headers: {
+          "x-api-key": "TVTZDiQZDzjkWqVkNCxr",
+        },
+        params: {
+          client_id: cookies.get(`client_id`),
+        },
+      })
+      .then((response) => {
+        this.details = response[`data`][0];
+      })
+      .catch((error) => {
+        error;
+      });
   },
   data() {
     return {
-      user: [],
-      show_edit: true
+      details: [],
+      show_edit: true,
     };
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.form{
+    width: 70vw;
+    display: grid;
+    place-items: center;
+}
+.form_header{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    .info_header{
+
+    }
+    .options_header{
+
+    }
+}
+</style>
