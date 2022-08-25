@@ -1,5 +1,6 @@
 <template>
   <div>
+    <page-header></page-header>
     <div class="login_form">
       <p>Email</p>
       <input type="text" ref="email" />
@@ -13,7 +14,11 @@
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
+import PageHeader from "@/components/pageHeader.vue";
 export default {
+    components:{
+        PageHeader
+    },
   methods: {
     login() {
         this.email = this.$refs[`email`][`value`];

@@ -2,13 +2,14 @@
   <div>
     <div class="profile">
       <h2>Welcome, {{user[`first_name`]}}</h2>
-      <p>profile was created at {{user[`created_at`]}}</p>
       <h2>First Name:  {{user[`first_name`]}}</h2>
       <h2>Last Name:   {{user[`last_name`]}}</h2>
       <h2>User Name:   {{user[`username`]}}</h2>
       <h2>Email:   {{user[`email`]}}</h2>
-      <img :src="user[`image_url`]"/>
-      <button @click="get_details">click me</button>
+      <img :src="user[`image_url`]" :alt="`image for ${user[`first_name`]}`"/>
+    </div>
+    <div v-if="show_edit !== undefined" class="edit_profile">
+      <edit-profile></edit-profile>
     </div>
   </div>
 </template>
@@ -16,7 +17,11 @@
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
+import EditProfile from "@/components/editProfile.vue";
 export default {
+  components: {
+    EditProfile
+  },
   mounted () {
      axios
         .request({
@@ -37,7 +42,8 @@ export default {
   },
   data() {
     return {
-      user: []
+      user: [],
+      show_edit: true
     };
   },
 };
