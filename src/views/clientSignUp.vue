@@ -26,6 +26,10 @@
           <p>Email</p>
           <input type="text" ref="email" placeholder="Email" />
         </div>
+        <div class="image">
+          <p>Profile Image</p>
+          <input type="url" ref="file">
+        </div>
         <button @click="signup">REGISTER</button>
       </div>
     </div>
@@ -132,7 +136,7 @@ export default {
       }
     }
   }
-  .email {
+  .email,.image {
     display: grid;
     place-items: start;
     width: 100%;

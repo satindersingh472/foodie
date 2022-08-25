@@ -1,47 +1,45 @@
 <template>
   <div>
-<button @click="get_details" >click me </button>
+    <div class="profile">
+      <h2>Welcome, {{user[`first_name`]}}</h2>
+      <p>profile was created at {{user[`created_at`]}}</p>
+      <h2>First Name:  {{user[`first_name`]}}</h2>
+      <h2>Last Name:   {{user[`last_name`]}}</h2>
+      <h2>User Name:   {{user[`username`]}}</h2>
+      <h2>Email:   {{user[`email`]}}</h2>
+      <img :src="user[`image_url`]"/>
+      <button @click="get_details">click me</button>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import cookies from "vue-cookies"
+import cookies from "vue-cookies";
 export default {
- methods: {
-     get_details() {
-    axios
-      .request({
-        url:`https://innotechfoodie.ml/api/client`,
-        params:{ get_details() {
-    axios
-      .request({
-        url:`https://innotechfoodie.ml/api/client`,
-        headers:{
-            'x-api-key': 'TVTZDiQZDzjkWqVkNCxr'
-        },
-        params:{
-            client_id: cookies.get(`client_id`)
-        }
-      })
-      .then((response) => {
-        response;
-      })
-      .catch((error) => {
-        error;
-      });
+  mounted () {
+     axios
+        .request({
+          url: `https://innotechfoodie.ml/api/client`,
+          headers: {
+            "x-api-key": "TVTZDiQZDzjkWqVkNCxr",
+          },
+          params: {
+            client_id: cookies.get(`client_id`),
+          },
+        })
+        .then((response) => {
+          this.user = response[`data`][0];
+        })
+        .catch((error) => {
+          error;
+        });
   },
-            client_id: cookies.get(`client_id`)
-        }
-      })
-      .then((response) => {
-        response;
-      })
-      .catch((error) => {
-        error;
-      });
+  data() {
+    return {
+      user: []
+    };
   },
- },
 };
 </script>
 
