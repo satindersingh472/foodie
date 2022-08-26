@@ -5,7 +5,7 @@
       <router-link class="links" to="/client_sign_up"><button>Login / Sign Up as a Customer</button></router-link>
     </div>
     <div class="client">
-      <router-link class="links" to="/restaurant_page"><button>Login / Sign Up as a Restaurant</button></router-link>
+      <router-link class="links" to="/restaurant_sign_up"><button>Login / Sign Up as a Restaurant</button></router-link>
     </div>
   </div>
 </template>
