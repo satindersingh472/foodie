@@ -1,10 +1,11 @@
 <template>
-  <div class="both_options">
+  <div class="both_options" ref="both_options">
+    <h1>FOODIE</h1>
     <div class="client">
-      <router-link class="links" to="/client_sign_up"><button>SignUp as a Customer<br/>OR<br/>LogIn as a Customer</button></router-link>
+      <router-link class="links" to="/client_sign_up"><button>Login / Sign Up as a Customer</button></router-link>
     </div>
     <div class="client">
-      <router-link class="links" to="/restaurant_page"><button>SignUp as a Restaurant<br/>OR<br/>LogIn as a Restaurant</button></router-link>
+      <router-link class="links" to="/restaurant_page"><button>Login / Sign Up as a Restaurant</button></router-link>
     </div>
   </div>
 </template>
@@ -19,20 +20,14 @@ export default {
 <style lang="scss" scoped>
 .both_options {
   display: grid;
-  grid-auto-flow: column;
   gap:10%;
+  place-items: center;
+  .links{
+    text-decoration: none;
+  }
   .client {
     display: grid;
     width: 30vw;
-    .links{
-        text-decoration: none;
-    }
-    &:nth-of-type(1){
-        justify-self: end;
-    }
-    &:nth-of-type(2){
-        justify-self: start;
-    }
     button {
         font-size:2rem;
         text-transform: uppercase;

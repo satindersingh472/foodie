@@ -1,27 +1,20 @@
 <template>
-<div>
   <div>
-    <button @click="get_details(details,$event)">Edit</button>
-    <div>
-    </div>
+    <h2 v-if="message === true">profile changed successfull</h2>
+    <h2 v-else-if="message === false">Changes not applied</h2>
   </div>
-</div>
 </template>
 
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
 export default {
-  props:{
-    details: Object
-  },
-  methods: {
-    get_details(details){
-      this.information = details;
-      this.make_changes(details);
+     mounted () {
+      this.$root.$on(`send_details`, this.make_changes);
     },
-    make_changes(details) {
-      this.change_item = details
+  methods: {
+ make_changes(details) {
+      this.details = details;
       axios
         .request({
           url: `https://innotechfoodie.ml/api/client`,
@@ -30,21 +23,31 @@ export default {
             'x-api-key': `TVTZDiQZDzjkWqVkNCxr`,
             token: cookies.get(`token`)
           },
-          data:{ 
+          data:{
+            first_name: this.details[`first_name`],
+            last_name: this.details[`last_name`],
+            email: this.details[`email`],
+            username: this.details[`username`],
+            password: this.details[`password`],
+            image_url: this.details[`image_url`]
           }
         })
         .then((response) => {
-          this.message = response;
+         if(response){
+          this.message = true;
+         }
         })
         .catch((error) => {
-          error;
+          if(error){
+            this.message = false
+          }
         });
     },
   },
   data() {
     return {
-      information: undefined,
-      change_item: undefined
+      message: undefined,
+  details: undefined
     };
   },
 };

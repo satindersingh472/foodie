@@ -32,7 +32,7 @@ export default {
           },
           data: {
             email: this.email,
-            password: this.password,
+            password: this.password
           },
         })
         .then((response) => {
