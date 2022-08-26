@@ -33,7 +33,7 @@
     </div>
     <div class="content_item">
       <p>Profile URL</p>
-      <input type="url" placeholder="profile URL`" />
+      <input type="url" placeholder="profile URL" />
     </div>
     <div class="content_item">
       <p>Banner URL</p>
