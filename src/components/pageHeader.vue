@@ -2,15 +2,15 @@
     <div>
 <router-link to="/profile_page">Profile</router-link>
 <router-link to="/client_login">Login</router-link>
-<client-logout></client-logout>
+<all-logout></all-logout>
     </div>
 </template>
 
 <script>
-import ClientLogout from "@/components/clientLogout.vue";
+import AllLogout from "@/components/allLogout.vue";
     export default {
         components:{
-            ClientLogout,
+            AllLogout,
         }
     }
 </script>
