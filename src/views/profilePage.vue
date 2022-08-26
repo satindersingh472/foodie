@@ -5,23 +5,13 @@
       <div class="form_header">
         <div>
           <h2>Profile</h2>
-          <div v-if="profile_clicked === false">
-            <p @click="change_profile_picture" class="edit_profile">
-              <em>edit profile picture</em>
-            </p>
-          </div>
-          <div v-else-if="profile_clicked === true">
-            <input
-              type="url"
-              ref="image_url"
-              :value="`${details[`image_url`]}`"
-            />
-          </div>
         </div>
         <div class="image">
+          <edit-profile-image class="edit_button"></edit-profile-image>
           <img
             class="img"
             :src="details[`image_url`]"
+            ref="image_url"
             :alt="`image of ${details[`first_name`]}`"
           />
         </div>
@@ -59,10 +49,7 @@
             placeholder="enter password to save changes"
           />
         </div>
-        <!-- <div class="content_item">
-          <p>Image</p>
-          <input type="url" :value="`${details[`image_url`]}`" ref="image_url" />
-        </div> -->
+        <delete-existense class="delete_button"></delete-existense>
       </div>
       <button @click="send_info">Save</button>
       <edit-profile></edit-profile>
@@ -75,28 +62,26 @@ import axios from "axios";
 import cookies from "vue-cookies";
 import PageHeader from "@/components/pageHeader.vue";
 import EditProfile from "@/components/editProfile.vue";
+import DeleteExistense from "@/components/deleteExistense.vue";
+import EditProfileImage from "@/components/editProfileImage.vue";
 export default {
   components: {
     PageHeader,
     EditProfile,
+    DeleteExistense,
+    EditProfileImage,
   },
   methods: {
-    change_profile_picture() {
-      this.profile_clicked = true;
-    },
     send_info() {
       this.details[`first_name`] = this.$refs[`first_name`][`value`];
       this.details[`last_name`] = this.$refs[`last_name`][`value`];
       this.details[`email`] = this.$refs[`email`][`value`];
       this.details[`username`] = this.$refs[`username`][`value`];
       this.details[`password`] = this.$refs[`password`][`value`];
-      this.details[`image_url`] = this.$refs[`image_url`][`value`];
       this.$root.$emit(`send_details`, this.details);
     },
   },
   mounted() {
-    this.profile_clicked = false;
-
     axios
       .request({
         url: `https://innotechfoodie.ml/api/client`,
@@ -109,6 +94,7 @@ export default {
       })
       .then((response) => {
         this.details = response[`data`][0];
+         this.$root.$emit(`send_image_data`, this.details[`image_url`]);
       })
       .catch((error) => {
         error;
@@ -118,7 +104,6 @@ export default {
     return {
       details: undefined,
       show_edit: true,
-      profile_clicked: false,
     };
   },
 };
@@ -132,11 +117,11 @@ export default {
 .main_page {
   display: grid;
   text-align: center;
-place-items: center;
+  place-items: center;
 }
 .form {
-    border: 2px solid black;
-    padding: 5px;
+  border: 2px solid black;
+  padding: 5px;
   display: grid;
   gap: 20px;
   width: 100%;
@@ -144,6 +129,9 @@ place-items: center;
     display: grid;
     justify-self: center;
     padding: 10px;
+  }
+  .delete_button {
+    align-self: end;
   }
 }
 .form_data {
@@ -179,14 +167,16 @@ place-items: center;
   }
   .image {
     display: grid;
-    border: 2px solid black;
     justify-self: end;
-    height: 75px;
-    width: 75px;
-    padding: 10px;
+    grid-template-columns: 1fr 1fr;
+    .edit_button{
+        align-self: end;
+    }
+
     .img {
-      height: 100%;
-      width: 100%;
+      height: 70px;
+      width: 70px;
+      padding-right: 20px;
       object-fit: cover;
     }
   }

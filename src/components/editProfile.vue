@@ -29,7 +29,6 @@ export default {
             email: this.details[`email`],
             username: this.details[`username`],
             password: this.details[`password`],
-            image_url: this.details[`image_url`]
           }
         })
         .then((response) => {
