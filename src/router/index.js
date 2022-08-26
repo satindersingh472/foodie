@@ -5,6 +5,7 @@ import ClientSignUp from "@/views/clientSignUp.vue";
 import RestaurantSignUp from "@/views/restaurantSignUp.vue";
 import ProfilePage from "@/views/profilePage.vue";
 import ClientLogin from "@/views/clientLogin.vue";
+import RestaurantLogin from "@/views/restaurantLogin.vue";
 Vue.use(VueRouter)
 
 const routes = [
@@ -27,6 +28,10 @@ const routes = [
   {
     path: `/client_login`,
     component: ClientLogin
+  },
+  {
+    path: `/restaurant_login`,
+    component: RestaurantLogin
   }
 
 ]

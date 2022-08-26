@@ -1,6 +1,8 @@
 <template>
   <div class="main_signup">
     <foodie-header></foodie-header>
+    <h1>Register as a Restauurant</h1>
+    <h3>Already have an account? <router-link class="links" to="/restaurant_login">LogIn</router-link></h3>
     <div class="form">
       <div class="content_item">
         <p>Name</p>
@@ -131,5 +133,8 @@ export default {
     text-align: center;
     padding: 10px 0px;
   }
+}
+.links{
+  color: #f79797;
 }
 </style>
