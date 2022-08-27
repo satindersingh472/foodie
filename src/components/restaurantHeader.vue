@@ -5,8 +5,11 @@
 </template>
 
 <script>
+import AllLogout from "@/components/allLogout.vue";
     export default {
-        
+      components: {
+        AllLogout,
+      },  
     }
 </script>
 

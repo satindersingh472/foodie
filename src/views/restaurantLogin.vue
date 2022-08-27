@@ -1,6 +1,7 @@
 <template>
-     <div class="background">
+  <div class="background">
     <div class="main_login" ref="main_login">
+        <restaurant-header></restaurant-header>
       <foodie-header></foodie-header>
       <h1>Login as a Restaurant</h1>
       <div class="login_form">
@@ -20,15 +21,44 @@
 
 <script>
 import FoodieHeader from "@/components/foodieHeader.vue";
-    export default {
-     components: {
-        FoodieHeader,
-     },   
-    }
+import axios from "axios";
+import RestaurantHeader from '@/components/restaurantHeader.vue';
+import cookies from "vue-cookies";
+export default {
+  components: {
+    FoodieHeader,
+    RestaurantHeader,
+  },
+  methods: {
+    login() {
+      axios
+        .request({
+          url: `https://innotechfoodie.ml/api/restaurant-login`,
+          method: `POST`,
+          headers: {
+            "x-api-key": "TVTZDiQZDzjkWqVkNCxr",
+          },
+          data: {
+            email: this.$refs[`email`][`value`],
+            password: this.$refs[`password`][`value`],
+          },
+        })
+        .then((response) => {
+          if(response){
+            cookies.set(`token`,response[`data`][`token`]);
+            cookies.set(`restaurant_id`, response[`data`][`restaurantId`]);
+            this.$router.push(`/discover_restaurants`);
+          }
+        })
+        .catch((error) => {
+          error;
+        });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-
 @import url("https://fonts.googleapis.com/css2?family=Gluten:wght@100;200;300;400;600;700;900&family=Judson:ital,wght@0,400;0,700;1,400&display=swap");
 * {
   display: grid;

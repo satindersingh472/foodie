@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="show_component !== false">
 <p @click="delete_token" >LogOut</p>
     </div>
 </template>
@@ -20,6 +20,16 @@ import cookies from "vue-cookies";
             }
             
         }
+        },
+        mounted () {
+            if(cookies.get(`token`)){
+                this.show_component = true
+            }
+        },
+        data() {
+            return {
+                show_component: false
+            }
         },
       
     }
