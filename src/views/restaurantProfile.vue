@@ -2,9 +2,6 @@
   <div>
     <restaurant-header></restaurant-header>
     <rest-profile-header :details="details" ></rest-profile-header>
-   <div class="banner_image">
-    <img class="profile_image" :src="details[`profile_url`]" :alt="`logo for ${details[`name`]}`">
-   </div>
     <div  class="form">
         <div class="content_item">
             <h3>Name</h3>

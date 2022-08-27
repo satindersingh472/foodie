@@ -8,6 +8,7 @@ import ClientLogin from "@/views/clientLogin.vue";
 import RestaurantLogin from "@/views/restaurantLogin.vue";
 import RestaurantProfile from "@/views/restaurantProfile.vue";
 import DiscoverRestaurants from "@/views/discoverRestaurants.vue";
+import RestMenuProfile from "@/views/restMenuProfile.vue";
 Vue.use(VueRouter)
 
 const routes = [
@@ -42,6 +43,10 @@ const routes = [
   {
     path: `/discover_restaurants`,
     component: DiscoverRestaurants
+  },
+  {
+    path: `/rest_menu_profile`,
+    component: RestMenuProfile
   }
 
 ]

@@ -4,7 +4,7 @@
             <img :src="details[`profile_url`]" :alt="`logo for ${details[`name`]}`"/>
         </div>
         <div class="options">
-            <p>View Menu</p>
+            <router-link to="/rest_menu_profile">View Menu</router-link>
             <p>Add items</p>
             <p>Edit Account</p>
             <p>Delete Account</p>

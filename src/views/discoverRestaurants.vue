@@ -1,7 +1,7 @@
 <template>
   <div>
     <page-header></page-header>
-    <div class="content_item" v-for="detail in details" :key="detail[`id`]">
+    <div @click="send_detail(detail,$event)" class="content_item" v-for="detail in details" :key="detail[`id`]">
       <div class="content_item_image">
         <img :src="detail[`banner_url`]" :alt="`image for ${detail[`name`]}`" />
       </div>
@@ -9,6 +9,9 @@
       <div class="content_item_detail">
         <p> {{detail[`address`]}}<br/>{{ detail[`city`] }}</p>
         <p>{{ detail[`phone_number`] }}</p>
+      </div>
+      <div>
+        <p>{{detail[`restaurant_id`]}}</p>
       </div>
     </div>
   </div>
@@ -20,6 +23,12 @@ import axios from "axios";
 export default {
   components: {
     PageHeader,
+  },
+  methods: {
+    send_detail(detail) {
+      this.$root.$emit(`recieve_detail`, detail);
+      this.$router.push(`/rest_menu_profile`);
+    }
   },
   mounted() {
     axios
