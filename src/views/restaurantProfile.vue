@@ -49,6 +49,7 @@ export default {
       })
       .then((response) => {
         this.details = response[`data`][0];
+        cookies.set(`details`,this.details);
       })
       .catch((error) => {
         error;

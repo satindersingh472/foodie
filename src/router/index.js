@@ -10,6 +10,7 @@ import RestaurantProfile from "@/views/restaurantProfile.vue";
 import DiscoverRestaurants from "@/views/discoverRestaurants.vue";
 import ViewMenu from "@/views/viewMenu.vue";
 import AddItems from "@/views/addItems.vue";
+import RestEditProfile from "@/views/restEditProfile.vue";
 Vue.use(VueRouter)
 
 const routes = [
@@ -52,6 +53,10 @@ const routes = [
   {
     path: `/add_items`,
     component: AddItems
+  },
+  {
+    path: '/rest_edit_profile',
+    component: RestEditProfile
   }
 
 ]

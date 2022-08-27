@@ -11,7 +11,7 @@
         <p>{{ detail[`description`] }}</p>
         <div class="content_item_details">
           <p>{{ detail[`name`]}}</p>
-          <p>{{detail[`price`]}}</p>
+          <p>${{detail[`price`]}}</p>
         </div>
       </div>
     </div>
@@ -61,6 +61,14 @@ export default {
 img{
     width: 100%;
     height: 250px;
+}
+.content_item{
+    display: grid;
+    text-align: center;
+    .content_item_details{
+        display: grid;
+        grid-auto-flow: column;
+    }
 }
 
 </style>

@@ -6,7 +6,7 @@
         <div class="options">
             <router-link to="/view_menu">View Menu</router-link>
            <router-link to="/add_items">Add Items</router-link> 
-            <p>Edit Account</p>
+            <router-link to="/rest_edit_profile">Edit Account</router-link>
             <p>Delete Account</p>
         </div>
     </div>
@@ -16,7 +16,7 @@
     export default {
         props:{
             details: Object
-        }
+        },
     }
 </script>
 
