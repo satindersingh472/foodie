@@ -22,7 +22,7 @@ import cookies from "vue-cookies";
         }
         },
         mounted () {
-            if(cookies.get(`token`)){
+            if(cookies.get(`token`) && (cookies.get(`client_id`) || cookies.get(`restaurant_id`))){
                 this.show_component = true
             }
         },

@@ -228,9 +228,10 @@ Returns information about a single restaurant, will error if the restaurant_id d
     address: (string),
     phone_number: (string in the form of ###-###-####),
     bio: (string),
-    city: (string, one of Calgary, Vancouver or Toronto)
+    city: (string, one of Calgary, Vancouver or Toronto),
     profile_url: (string),
     banner_url: (string),
+    restaurant_id: (number)
 }
 ```
 
@@ -349,6 +350,7 @@ Returns information about all restaurants.
         city: (string, one of Calgary, Vancouver or Toronto)
         profile_url: (string),
         banner_url: (string),
+        restaurant_id: (number)
     },
 ]
 ```
@@ -403,7 +405,7 @@ Delete an existing token. Will error if the token sent does not exist.
 <br>
 <br>
 
-## `Restaurant`
+## `Menu`
 
 **URL: https://innotechfoodie.ml/api/menu**  
 Supported HTTP Methods: **GET, POST, PATCH, DELETE**
@@ -471,7 +473,7 @@ Note that the token is sent as a header.
 
 ### `PATCH`
 
-Modify an existing menu item if you have a valid token. Note that the token is sent as a header.
+Modify an existing menu item if you have a valid token and menu_id. Note that the token is sent as a header.
 
 **Required Headers:**
 
@@ -479,6 +481,14 @@ Modify an existing menu item if you have a valid token. Note that the token is s
 {
     token: (string)
 }
+```
+
+**Required Data:**
+
+```
+{
+    menu_id: (number)
+},
 ```
 
 **Optional Data:** Send 1 or more of these to update the menu item owned by the token bearer
@@ -518,5 +528,169 @@ Delete an existing menu item if you have a valid token. Note that the token is s
 ```
 
 **No Data Returned**
+<br>
+<br>
+
+## `Client-Order`
+
+**URL: https://innotechfoodie.ml/api/client-order**  
+Supported HTTP Methods: **GET, POST**
+
+<br>
+<br>
+
+### `GET`
+
+Returns all orders associated with a particular client.  
+Can be customized to show all, only confirmed, or only completed orders.  
+Note that the token is sent as a header.
+
+**Required Headers:**
+
+```
+{
+    token: (string)
+}
+```
+
+**Optional Params:**
+
+```
+{
+    is_confirmed: (string, either "true" or "false"),
+    is_complete: (string, either "true" or "false"),
+}
+```
+
+**Data Returned**
+
+```
+[
+    {
+        is_complete: (boolean),
+        is_confirmed: (boolean),
+        name: (string),
+        price: (number),
+        menu_item_id: (number),
+        order_id: (number)
+    },
+]
+```
+
+<br>
+<br>
+
+### `POST`
+
+Create a new order for a restaurant to see.  
+Note that one order must be associated with one restaurant only.  
+Note that the token is sent as a header.
+
+**Required Headers:**
+
+```
+{
+    token: (string),
+}
+```
+
+**Required Data:**
+
+```
+{
+    menu_items: (array of numbers),
+    restaurant_id: (string)
+},
+```
+
+**No Data Returned**
+
+<br>
+<br>
+
+## `Restaurant-Order`
+
+**URL: https://innotechfoodie.ml/api/restaurant-order**  
+Supported HTTP Methods: **GET, PATCH**
+
+<br>
+<br>
+
+### `GET`
+
+Returns all orders associated with a particular restaurant.  
+Can be customized to show all, only confirmed, or only completed orders.  
+Send no params if you want all orders associated with a restaurant regardless of status.
+Note that the token is sent as a header.
+
+**Required Headers:**
+
+```
+{
+    token: (string)
+}
+```
+
+**Optional Params:**
+
+```
+{
+    is_confirmed: (string, either "true" or "false"),
+    is_complete: (string, either "true" or "false"),
+}
+```
+
+**Data Returned**
+
+```
+[
+    {
+        is_complete: (boolean),
+        is_confirmed: (boolean),
+        name: (string),
+        price: (number),
+        menu_item_id: (number),
+        order_id: (number)
+    },
+]
+```
+
+<br>
+<br>
+
+### `PATCH`
+
+Modify an existing order.  
+Orders can be confirmed and then completed only by the restaurant associated with the order.  
+Note if you try to complete and order that has not been confirmed, it will automatically be confirmed as well.  
+Note that the token is sent as a header.
+
+**Required Headers:**
+
+```
+{
+    token: (string),
+}
+```
+
+**Required Data:**
+
+```
+{
+    order_id: (number)
+},
+```
+
+**Optional Data:**
+
+```
+{
+    is_confirmed: (string, either "true" or "false"),
+    is_complete: (string, either "true" or "false"),
+},
+```
+
+**No Data Returned**
+
 <br>
 <br>

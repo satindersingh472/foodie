@@ -20,14 +20,15 @@
 <script>
 import PageHeader from "@/components/pageHeader.vue";
 import axios from "axios";
+import cookies from "vue-cookies";
 export default {
   components: {
     PageHeader,
   },
   methods: {
     send_detail(detail) {
-      this.$root.$emit(`recieve_detail`, detail);
-      this.$router.push(`/rest_menu_profile`);
+      cookies.set(`restaurant_id`, detail[`restaurant_id`]);
+      this.$router.push(`/view_menu`);
     }
   },
   mounted() {
