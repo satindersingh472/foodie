@@ -93,6 +93,7 @@ export default {
     padding: 10px;
     border-radius: 15px;
     background-color: #b0cad8;
+    font-size: 1.8rem;
   }
   .links {
     color: blue;
