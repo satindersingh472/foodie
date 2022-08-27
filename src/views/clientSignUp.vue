@@ -74,6 +74,7 @@ export default {
           cookies.set(`token`, this.token);
           this.client_id = response[`data`][`client_id`];
           cookies.set(`client_id`, this.client_id);
+          this.$router.push(`/discover_restaurants`);
         })
         .catch((error) => {
           error;
