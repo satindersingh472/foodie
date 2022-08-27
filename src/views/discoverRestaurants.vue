@@ -1,6 +1,6 @@
 <template>
     <div>
-this is discover page
+        
     </div>
 </template>
 
