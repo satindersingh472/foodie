@@ -45,7 +45,7 @@ export default {
         .then((response) => {
           cookies.set(`client_id`, response[`data`][`client_id`]);
           cookies.set(`token`, response[`data`][`token`]);
-          this.$router.push(`/profile_page`);
+          this.$router.push(`/discover_restaurants`);
         })
         .catch((error) => {
           error;
