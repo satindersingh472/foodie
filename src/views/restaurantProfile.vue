@@ -12,6 +12,10 @@
             <p>{{details[`address`]}}</p>
         </div>
         <div class="content_item">
+          <h3>City</h3>
+          <p>{{details[`city`]}}</p>
+        </div>
+        <div class="content_item">
             <h3>Phone</h3>
             <p>{{details[`phone_number`]}}</p>
         </div>

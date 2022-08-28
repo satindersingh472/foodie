@@ -7,13 +7,15 @@
             <router-link to="/view_menu">View Menu</router-link>
            <router-link to="/add_items">Add Items</router-link> 
             <router-link to="/rest_edit_profile">Edit Account</router-link>
-            <p>Delete Account</p>
+            <delete-existense></delete-existense>
         </div>
     </div>
 </template>
 
 <script>
+import deleteExistense from "@/components/deleteExistense.vue"
     export default {
+  components: { deleteExistense },
         props:{
             details: Object
         },
