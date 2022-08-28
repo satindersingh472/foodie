@@ -1,5 +1,6 @@
 <template>
   <div>
+<restaurant-header></restaurant-header>
     <h1>this is menu profile page</h1>
     <div v-if="info !== undefined">
       <div class="content_item" v-for="detail in details" :key="detail[`id`]">
@@ -8,7 +9,12 @@
           :src="detail[`image_url`]"
           :alt="`image of ${detail[`name`]}`"
         />
+        <div class="content_item_options">
         <p>{{ detail[`description`] }}</p>
+        <button v-if="show_order === true" >Order</button>
+        <button @click="send_details(detail,$event)" v-if="show_menu_edit === true">Edit</button>
+        <edit-menu></edit-menu>
+        </div>
         <div class="content_item_details">
           <p>{{ detail[`name`]}}</p>
           <p>${{detail[`price`]}}</p>
@@ -21,8 +27,24 @@
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
+import EditMenu from './editMenu.vue';
+import RestaurantHeader from '@/components/restaurantHeader.vue';
 export default {
+    components: {
+        EditMenu,
+        RestaurantHeader,
+    },
+    methods: {
+        send_details(details) {
+            this.$root.$emit(`recieve_edit`,details);
+        }
+    },
   mounted() {
+    if(cookies.get(`client_id`)){
+        this.show_order = true; 
+    } else if (cookies.get(`restaurant_id`)){
+        this.show_menu_edit = true;
+    }
     this.info = cookies.get(`restaurant_id`);
     axios
       .request({
@@ -46,8 +68,10 @@ export default {
   },
   data() {
     return {
+        show_order: false,
+        show_menu_edit: false,
       info: undefined,
-      details: undefined,
+      details: undefined
     };
   },
 };
@@ -65,6 +89,11 @@ img{
 .content_item{
     display: grid;
     text-align: center;
+    .content_item_options{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        place-items: center;
+    }
     .content_item_details{
         display: grid;
         grid-auto-flow: column;

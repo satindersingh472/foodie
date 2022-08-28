@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
 import HomePage from "@/views/homePage.vue";
 import ClientSignUp from "@/views/clientSignUp.vue";
 import RestaurantSignUp from "@/views/restaurantSignUp.vue";
@@ -11,58 +11,67 @@ import DiscoverRestaurants from "@/views/discoverRestaurants.vue";
 import ViewMenu from "@/views/viewMenu.vue";
 import AddItems from "@/views/addItems.vue";
 import RestEditProfile from "@/views/restEditProfile.vue";
-Vue.use(VueRouter)
+import ClientOrder from "@/views/clientOrder.vue";
+import EditMenu from "@/views/editMenu.vue";
+Vue.use(VueRouter);
 
 const routes = [
   {
     path: `/`,
-    component:HomePage
+    component: HomePage,
   },
   {
-    path:`/client_sign_up`,
-    component: ClientSignUp
+    path: `/client_sign_up`,
+    component: ClientSignUp,
   },
   {
     path: `/restaurant_sign_up`,
-    component: RestaurantSignUp
+    component: RestaurantSignUp,
   },
   {
     path: `/profile_page`,
-    component: ProfilePage
+    component: ProfilePage,
   },
   {
     path: `/client_login`,
-    component: ClientLogin
+    component: ClientLogin,
   },
   {
     path: `/restaurant_login`,
-    component: RestaurantLogin
+    component: RestaurantLogin,
   },
   {
     path: `/restaurant_profile`,
-    component: RestaurantProfile
+    component: RestaurantProfile,
   },
   {
     path: `/discover_restaurants`,
-    component: DiscoverRestaurants
+    component: DiscoverRestaurants,
   },
   {
     path: `/view_menu`,
-    component: ViewMenu
+    component: ViewMenu,
   },
   {
     path: `/add_items`,
-    component: AddItems
+    component: AddItems,
   },
   {
-    path: '/rest_edit_profile',
-    component: RestEditProfile
+    path: "/rest_edit_profile",
+    component: RestEditProfile,
+  },
+  {
+    path: `/client_order`,
+    component: ClientOrder,
+  },
+  {
+    path: `/edit_menu`,
+    component: EditMenu
   }
-
-]
+];
 
 const router = new VueRouter({
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
