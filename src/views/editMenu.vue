@@ -43,9 +43,9 @@ export default {
           headers: {
             'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
             token: cookies.get(`token`),
-            menu_id: this.detail[`id`],
           },
           data:{
+            menu_id: this.detail[`id`],
             decription: this.$refs[`description`][`value`],
             image_url: this.$refs[`image_url`][`value`],
             name: this.$refs[`name`][`value`],
