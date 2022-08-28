@@ -17,7 +17,9 @@
       <input type="url" ref="image_url" :value="`${detail[`image_url`]}`" />
     </h4>
     <button @click="send_request">save</button>
-    <div class="form"></div>
+    <h2 v-if="message !== undefined" >
+        {{message}}
+    </h2>
   </div>
 </template>
 
@@ -43,12 +45,22 @@ export default {
             token: cookies.get(`token`),
             menu_id: this.detail[`id`],
           },
+          data:{
+            decription: this.$refs[`description`][`value`],
+            image_url: this.$refs[`image_url`][`value`],
+            name: this.$refs[`name`][`value`],
+            price:this.$refs[`price`][`value`]
+          }
         })
         .then((response) => {
-          response;
+          if(response){
+            this.message = `changes applied`;
+          }
         })
         .catch((error) => {
-          error;
+          if(error){
+            this.message = `changes NOT applied`;
+          }
         });
     },
   },
@@ -56,6 +68,7 @@ export default {
     return {
       detail: undefined,
       data: undefined,
+      message: undefined
     };
   },
 };
