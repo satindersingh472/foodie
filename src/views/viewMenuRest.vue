@@ -1,6 +1,6 @@
 <template>
   <div>
- <page-header></page-header>
+<restaurant-header></restaurant-header>
     <h1>this is menu profile page</h1>
     <div v-if="info !== undefined">
       <div class="content_item" v-for="detail in details" :key="detail[`id`]">
@@ -11,7 +11,12 @@
         />
         <div class="content_item_options">
           <p>{{ detail[`description`] }}</p>
-          <button>Order</button>
+          <div>
+            <edit-menu :detail="detail"></edit-menu>
+          </div>
+          <div class="delete_button">
+            <delete-menu :detail="detail" ></delete-menu>
+          </div>
         </div>
         <div class="content_item_details">
           <p>{{ detail[`name`] }}</p>
@@ -25,13 +30,17 @@
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
-import PageHeader from "@/components/pageHeader.vue";
+import EditMenu from "./editMenu.vue";
+import RestaurantHeader from "@/components/restaurantHeader.vue";
+import DeleteMenu from "@/components/deleteMenu.vue";
 export default {
   components: {
-PageHeader
+    EditMenu,
+    RestaurantHeader,
+    DeleteMenu,
   },
   mounted() {
-    this.info = cookies.get(`restaurant_number`);
+    this.info = cookies.get(`restaurant_id`);
     axios
       .request({
         url: `https://innotechfoodie.ml/api/menu`,

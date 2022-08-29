@@ -9,10 +9,11 @@ import RestaurantLogin from "@/views/restaurantLogin.vue";
 import RestaurantProfile from "@/views/restaurantProfile.vue";
 import DiscoverRestaurants from "@/views/discoverRestaurants.vue";
 import ViewMenu from "@/views/viewMenu.vue";
+import ViewMenuRest from "@/views/viewMenuRest.vue";
 import AddItems from "@/views/addItems.vue";
 import RestEditProfile from "@/views/restEditProfile.vue";
-import ClientOrder from "@/views/clientOrder.vue";
 import EditMenu from "@/views/editMenu.vue";
+import ClientCart from "@/views/clientCart.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -53,6 +54,10 @@ const routes = [
     component: ViewMenu,
   },
   {
+    path: `/view_menu_rest`,
+    component: ViewMenuRest
+  },
+  {
     path: `/add_items`,
     component: AddItems,
   },
@@ -61,12 +66,12 @@ const routes = [
     component: RestEditProfile,
   },
   {
-    path: `/client_order`,
-    component: ClientOrder,
-  },
-  {
     path: `/edit_menu`,
     component: EditMenu
+  },
+  {
+    path: `/client_cart`,
+    component: ClientCart
   }
 ];
 
