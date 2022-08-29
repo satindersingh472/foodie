@@ -19,6 +19,7 @@
         <input type="text" ref="price">
       </div>
       <button @click="send_request">Add Items</button>
+      <p>{{message}}</p>
     </div>
     
   </div>
@@ -46,12 +47,21 @@ export default {
           },
         })
         .then((response) => {
-          response;
+          if(response){
+            this.message = `Added successfully`;
+          }
         })
         .catch((error) => {
-          error;
+          if(error){
+            this.message= `item not added`;
+          }
         });
     },
+  },
+  data() {
+    return {
+      message: undefined
+    }
   },
 };
 </script>
