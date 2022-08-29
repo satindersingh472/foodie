@@ -1,7 +1,7 @@
 <template>
   <div class="background">
     <div class="main_login" ref="main_login">
-        <restaurant-header></restaurant-header>
+      <restaurant-header></restaurant-header>
       <foodie-header></foodie-header>
       <h1>Login as a Restaurant</h1>
       <div class="login_form">
@@ -22,7 +22,7 @@
 <script>
 import FoodieHeader from "@/components/foodieHeader.vue";
 import axios from "axios";
-import RestaurantHeader from '@/components/restaurantHeader.vue';
+import RestaurantHeader from "@/components/restaurantHeader.vue";
 import cookies from "vue-cookies";
 export default {
   components: {
@@ -44,15 +44,20 @@ export default {
           },
         })
         .then((response) => {
-          if(response){
-            cookies.set(`token`,response[`data`][`token`]);
+          if (response) {
+            cookies.set(`token`, response[`data`][`token`]);
             cookies.set(`restaurant_id`, response[`data`][`restaurantId`]);
-            this.$router.push(`/restaurant_profile`);
+            this.authenticated();
           }
         })
         .catch((error) => {
           error;
         });
+    },
+    authenticated() {
+      if (cookies.get(`token`) && cookies.get(`restaurant_id`) !== undefined) {
+        this.$router.push(`/restaurant_profile`);
+      }
     },
   },
 };
