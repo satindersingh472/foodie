@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     send_detail(detail) {
-      cookies.set(`restaurant_number`, detail[`restaurant_id`]);
+      cookies.set(`restaurant_id`, detail[`restaurant_id`]);
       this.$router.push(`/view_menu`);
     }
   },

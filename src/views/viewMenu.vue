@@ -50,7 +50,7 @@ export default {
       this.cookies_restaurant = true;
         this.show_menu_edit = true;
     }
-    this.info = cookies.get(`restaurant_number`);
+    this.info = cookies.get(`restaurant_id`);
     axios
       .request({
         url: `https://innotechfoodie.ml/api/menu`,
