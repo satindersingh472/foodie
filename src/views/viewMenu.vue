@@ -1,7 +1,7 @@
 <template>
   <div>
-<restaurant-header v-if="cookies_restaurant === true"></restaurant-header>
-<page-header v-if="cookies_restaurant === false" ></page-header>
+    <restaurant-header v-if="cookies_restaurant === true"></restaurant-header>
+    <page-header v-if="cookies_restaurant === false"></page-header>
     <h1>this is menu profile page</h1>
     <div v-if="info !== undefined">
       <div class="content_item" v-for="detail in details" :key="detail[`id`]">
@@ -11,14 +11,23 @@
           :alt="`image of ${detail[`name`]}`"
         />
         <div class="content_item_options">
-        <p>{{ detail[`description`] }}</p>
-        <button v-if="show_order === true" >Order</button>
-        <button @click="send_details(detail,$event)" v-if="show_menu_edit === true">Edit</button>
-        <edit-menu></edit-menu>
+          <p>{{ detail[`description`] }}</p>
+          <button v-if="show_order === true">Order</button>
+          <div v-if="show_menu_edit === true">
+            <edit-menu :detail="detail" ></edit-menu>
+          </div>
+          <button
+            class="delete_button"
+            v-if="show_menu_edit"
+            @click="send_delete(detail, $event)"
+          >
+            Delete
+          </button>
+          <delete-menu></delete-menu>
         </div>
         <div class="content_item_details">
-          <p>{{ detail[`name`]}}</p>
-          <p>${{detail[`price`]}}</p>
+          <p>{{ detail[`name`] }}</p>
+          <p>${{ detail[`price`] }}</p>
         </div>
       </div>
     </div>
@@ -28,27 +37,32 @@
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
-import EditMenu from './editMenu.vue';
-import RestaurantHeader from '@/components/restaurantHeader.vue';
+import EditMenu from "./editMenu.vue";
+import RestaurantHeader from "@/components/restaurantHeader.vue";
 import PageHeader from "@/components/pageHeader.vue";
+import DeleteMenu from "@/components/deleteMenu.vue";
 export default {
-    components: {
-        EditMenu,
-        RestaurantHeader,
-        PageHeader
+  components: {
+    EditMenu,
+    RestaurantHeader,
+    PageHeader,
+    DeleteMenu,
+  },
+  methods: {
+    send_details(detail) {
+      this.$root.$emit(`recieve_edit`, detail);
     },
-    methods: {
-        send_details(details) {
-            this.$root.$emit(`recieve_edit`,details);
-        }
+    send_delete(detail) {
+      this.$root.$emit(`recieve_delete`, detail);
     },
+  },
   mounted() {
-    if(cookies.get(`client_id`)){
+    if (cookies.get(`client_id`)) {
       this.cookies_restaurant = false;
-        this.show_order = true; 
-    } else if (cookies.get(`restaurant_id`)){
+      this.show_order = true;
+    } else if (cookies.get(`restaurant_id`)) {
       this.cookies_restaurant = true;
-        this.show_menu_edit = true;
+      this.show_menu_edit = true;
     }
     this.info = cookies.get(`restaurant_id`);
     axios
@@ -63,8 +77,8 @@ export default {
       })
       .then((response) => {
         this.details = response[`data`];
-        for(let i =0; i<response[`data`].length;i++){
-            this.details[i][`price`] = response[`data`][i][`price`].toFixed(2);
+        for (let i = 0; i < response[`data`].length; i++) {
+          this.details[i][`price`] = response[`data`][i][`price`].toFixed(2);
         }
       })
       .catch((error) => {
@@ -73,37 +87,36 @@ export default {
   },
   data() {
     return {
-        show_order: false,
-        show_menu_edit: false,
+      show_order: false,
+      show_menu_edit: false,
       info: undefined,
       details: undefined,
-      cookies_restaurant : true
+      cookies_restaurant: true,
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-*{
-    padding: 0px;
-    margin: 0px;
+* {
+  padding: 0px;
+  margin: 0px;
 }
-img{
-    width: 100%;
-    height: 250px;
+img {
+  width: 100%;
+  height: 250px;
 }
-.content_item{
+.content_item {
+  display: grid;
+  text-align: center;
+  .content_item_options {
     display: grid;
-    text-align: center;
-    .content_item_options{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        place-items: center;
-    }
-    .content_item_details{
-        display: grid;
-        grid-auto-flow: column;
-    }
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+  }
+  .content_item_details {
+    display: grid;
+    grid-auto-flow: column;
+  }
 }
-
 </style>

@@ -1,5 +1,7 @@
 <template>
-  <div v-if="detail !== undefined">
+<div>
+<button @click="show_options" >Edit Menu</button>
+  <div v-if="show_form !== false">
     <h4>Name: <input type="text" ref="name" :value="`${detail[`name`]}`" /></h4>
     <h4>
       Decription:
@@ -21,20 +23,20 @@
         {{message}}
     </h2>
   </div>
+</div>
 </template>
 
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
 export default {
-  mounted() {
-    this.$root.$on(`recieve_edit`, this.store_changes);
-  },
+    props: {
+        detail: Object 
+        },
   methods: {
-    store_changes(detail) {
-      this.detail = detail;
-    },
-
+show_options(){
+    this.show_form = true;
+},
     send_request() {
       axios
         .request({
@@ -66,7 +68,7 @@ export default {
   },
   data() {
     return {
-      detail: undefined,
+      show_form: false,
       data: undefined,
       message: undefined
     };
