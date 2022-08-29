@@ -1,6 +1,7 @@
 <template>
   <div>
-<restaurant-header></restaurant-header>
+<restaurant-header v-if="cookies_restaurant === true"></restaurant-header>
+<page-header v-if="cookies_restaurant === false" ></page-header>
     <h1>this is menu profile page</h1>
     <div v-if="info !== undefined">
       <div class="content_item" v-for="detail in details" :key="detail[`id`]">
@@ -29,10 +30,12 @@ import axios from "axios";
 import cookies from "vue-cookies";
 import EditMenu from './editMenu.vue';
 import RestaurantHeader from '@/components/restaurantHeader.vue';
+import PageHeader from "@/components/pageHeader.vue";
 export default {
     components: {
         EditMenu,
         RestaurantHeader,
+        PageHeader
     },
     methods: {
         send_details(details) {
@@ -41,11 +44,13 @@ export default {
     },
   mounted() {
     if(cookies.get(`client_id`)){
+      this.cookies_restaurant = false;
         this.show_order = true; 
     } else if (cookies.get(`restaurant_id`)){
+      this.cookies_restaurant = true;
         this.show_menu_edit = true;
     }
-    this.info = cookies.get(`restaurant_id`);
+    this.info = cookies.get(`restaurant_number`);
     axios
       .request({
         url: `https://innotechfoodie.ml/api/menu`,
@@ -71,7 +76,8 @@ export default {
         show_order: false,
         show_menu_edit: false,
       info: undefined,
-      details: undefined
+      details: undefined,
+      cookies_restaurant : true
     };
   },
 };
