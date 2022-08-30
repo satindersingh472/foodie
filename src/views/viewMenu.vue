@@ -12,7 +12,9 @@
         <div class="content_item_options">
           <p>{{ detail[`description`] }}</p>
           <p>{{detail[`id`]}}</p>
-          <button @click="add_items(detail,$event)">Add to Cart <client-cart></client-cart></button>
+          <button @click="add_items(detail,$event)">
+          Add to cart
+          </button>
           <p>{{quantity}}</p>
         </div>
         <div class="content_item_details">
@@ -28,15 +30,15 @@
 import axios from "axios";
 import cookies from "vue-cookies";
 import PageHeader from "@/components/pageHeader.vue";
-import ClientCart from "@/views/clientCart.vue";
+
 export default {
   components: {
 PageHeader,
-ClientCart
   },
 methods: {
     add_items(detail) {
-        this.orders.push(detail[`id`]);
+        this.orders.push(detail);
+        json.stringify(this.orders);
         cookies.set(`orders`, this.orders);
     }
 },
@@ -68,7 +70,7 @@ methods: {
   data() {
     return {
       info: undefined,
-      details: undefined,
+      details: [],
       orders: [],
       quantity: undefined
     };

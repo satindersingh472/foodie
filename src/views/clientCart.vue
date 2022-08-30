@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>{{order_details}}</h2>
+    <h2>{{order_details[`name`]}}</h2>
     </div>
 </template>
 
