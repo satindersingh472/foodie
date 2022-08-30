@@ -15,7 +15,6 @@
           <button @click="add_items(detail,$event)">
           Add to cart
           </button>
-          <p>{{quantity}}</p>
         </div>
         <div class="content_item_details">
           <p>{{ detail[`name`] }}</p>
@@ -30,7 +29,6 @@
 import axios from "axios";
 import cookies from "vue-cookies";
 import PageHeader from "@/components/pageHeader.vue";
-
 export default {
   components: {
 PageHeader,
@@ -38,7 +36,7 @@ PageHeader,
 methods: {
     add_items(detail) {
         this.orders.push(detail);
-        cookies.set(`orders`,  JSON.stringify(this.orders));
+        cookies.set(`orders`, JSON.stringify(this.orders));
     }
 },
   mounted() {
@@ -70,8 +68,7 @@ methods: {
     return {
       info: undefined,
       details: undefined,
-      orders: undefined,
-      quantity: undefined
+      orders:[]
     };
   },
 };

@@ -14,6 +14,7 @@ import AddItems from "@/views/addItems.vue";
 import RestEditProfile from "@/views/restEditProfile.vue";
 import EditMenu from "@/views/editMenu.vue";
 import ClientCart from "@/views/clientCart.vue";
+import OrderPlaced from "@/views/orderPlaced.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -72,6 +73,10 @@ const routes = [
   {
     path: `/client_cart`,
     component: ClientCart
+  },
+  {
+    path: `/order_placed`,
+    component: OrderPlaced
   }
 ];
 
