@@ -48,7 +48,9 @@ export default {
         })
         .then((response) => {
           if(response){
-            this.message = `Order placed successfully`;
+            this.message = `Successfull <br> Your order id is ${response[`data`][`order_id`]}`;
+            this.orders.push(response[`data`][`order_id`]);
+
           }
         })
         .catch((error) => {
