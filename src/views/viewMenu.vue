@@ -38,14 +38,13 @@ PageHeader,
 methods: {
     add_items(detail) {
         this.orders.push(detail);
-        json.stringify(this.orders);
-        cookies.set(`orders`, this.orders);
+        cookies.set(`orders`,  JSON.stringify(this.orders));
     }
 },
   mounted() {
-      if(cookies.get(`orders`)){
-        this.orders.push(cookies.get(`orders`));
-      }
+    if(cookies.get([`orders`])){
+      this.orders = JSON.parse(cookies.get([`orders`]));
+    }
     this.info = cookies.get(`restaurant_number`);
     axios
       .request({
