@@ -69,8 +69,8 @@ methods: {
   data() {
     return {
       info: undefined,
-      details: [],
-      orders: [],
+      details: undefined,
+      orders: undefined,
       quantity: undefined
     };
   },
