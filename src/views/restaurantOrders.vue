@@ -1,32 +1,20 @@
 <template>
   <div class="orders">
-    <div v-if="message !== undefined ">{{message}}</div>
-    <div v-for="(detail,index) in details" :key="index">
-        <h2>Order ID:{{detail[`order_id`]}}</h2>
-        <h2>Name:{{detail[`name`]}}</h2>
-        <p>Price:{{detail[`prcie`]}}</p>
-        <p>Confirmed{{detail[`is_confirmed`]}}</p>
-        <p>Completed{{detail[`is_complete`]}}</p>
-        <p>Menu Item Id: {{detail[`menu_item_id`]}}</p>
-        <div>
-            <confirm-order :order="detail[`order_id`]"></confirm-order>
-            <complete-order :order="detail[`order_id`]"></complete-order>
-        </div>
-    </div>
+    <div v-if="message !== undefined">{{ message }}</div>
+    <order-id v-for="detail in details" :key="detail[`order_id`]" :order_id="detail[`order_id`]"></order-id>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
-import ConfirmOrder from "@/components/confirmOrder.vue";
-import CompleteOrder from "@/components/completeOrder.vue";
+import OrderId from '@/components/orderId.vue';
 export default {
-    components: {
-        ConfirmOrder,
-        CompleteOrder
-    },
+  components: {
+    OrderId,
+  },
   mounted() {
+
     axios
       .request({
         url: `https://innotechfoodie.ml/api/restaurant-order`,
@@ -36,27 +24,32 @@ export default {
         },
       })
       .then((response) => {
-    this.details = response[`data`]
+        this.details = response[`data`]; 
       })
       .catch((error) => {
-        if(error){
-            this.message = `There is some error`;
+        if (error) {
+          this.message = `There is some error`;
         }
       });
   },
   data() {
     return {
-        details: undefined,
-        message: undefined
-    }
+      details: undefined,
+      message: undefined,
+      orders: undefined
+    
+    
+    };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.orders{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+.orders {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
-
+.single_order {
+  border: 2px solid black;
+}
 </style>
