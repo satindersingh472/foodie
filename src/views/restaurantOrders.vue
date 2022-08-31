@@ -1,16 +1,21 @@
 <template>
-  <div class="orders">
+  <div>
+    <restaurant-header></restaurant-header>
+    <div class="orders" >
     <div v-if="message !== undefined">{{ message }}</div>
     <order-id v-for="detail in details" :key="detail[`order_id`]" :detail="detail"></order-id>
+    </div>
   </div>
 </template>
 
 <script>
+import RestaurantHeader from "@/components/restaurantHeader.vue";
 import axios from "axios";
 import cookies from "vue-cookies";
 import OrderId from '@/components/orderId.vue';
 export default {
   components: {
+    RestaurantHeader,
     OrderId,
   },
   mounted() {
