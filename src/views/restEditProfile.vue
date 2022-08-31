@@ -137,7 +137,7 @@ export default {
         .then((response) => {
           if (response) {
             this.message = true;
-            this.$router.push('/restaurant_profile')
+            this.$router.push('/restaurant_profile');
           }
         })
         .catch((error) => {

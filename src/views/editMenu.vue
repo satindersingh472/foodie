@@ -57,6 +57,7 @@ show_options(){
         .then((response) => {
           if(response){
             this.message = `changes applied`;
+            this.show_form = false;
           }
         })
         .catch((error) => {
