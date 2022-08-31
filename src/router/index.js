@@ -15,6 +15,7 @@ import RestEditProfile from "@/views/restEditProfile.vue";
 import EditMenu from "@/views/editMenu.vue";
 import ClientCart from "@/views/clientCart.vue";
 import OrderPlaced from "@/views/orderPlaced.vue";
+import RestaurantOrders from "@/views/restaurantOrders.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -77,6 +78,10 @@ const routes = [
   {
     path: `/order_placed`,
     component: OrderPlaced
+  },
+  {
+    path: `/restaurant_orders`,
+    component: RestaurantOrders
   }
 ];
 

@@ -1,6 +1,7 @@
 <template>
-    <div>
+    <div class="navbar" >
       <router-link to="/restaurant_profile">Profile</router-link>
+      <router-link to="/restaurant_orders">Orders</router-link>
     <all-logout></all-logout>
 
     </div>
@@ -17,5 +18,8 @@ import AllLogout from "@/components/allLogout.vue";
 </script>
 
 <style lang="scss" scoped>
-
+ .navbar{
+  display: grid;
+  grid-auto-flow: column;
+ }
 </style>
