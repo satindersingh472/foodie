@@ -10,6 +10,7 @@
         <p>Menu Item Id: {{detail[`menu_item_id`]}}</p>
         <div>
             <confirm-order :order="detail[`order_id`]"></confirm-order>
+            <complete-order :order="detail[`order_id`]"></complete-order>
         </div>
     </div>
   </div>
@@ -19,9 +20,11 @@
 import axios from "axios";
 import cookies from "vue-cookies";
 import ConfirmOrder from "@/components/confirmOrder.vue";
+import CompleteOrder from "@/components/completeOrder.vue";
 export default {
     components: {
         ConfirmOrder,
+        CompleteOrder
     },
   mounted() {
     axios

@@ -5,10 +5,8 @@
         <p>Order ID:{{detail[`order_id`]}}</p>
         <p>Item ID {{detail[`menu_item_id`]}}</p>
         <p>Price:{{detail[`price`]}}</p>
-        <p v-if="confirmation === false">Not Confirmed</p>
-        <p v-if="confirmation !== false">Confirmed</p>
-        <p v-if="completion === false">Not Completed</p>
-        <p v-if="completion !== false">Completed</p>
+        <p>Confirmed: {{detail[`is_confirmed`]}}</p>
+        <p>Completed: {{detail[`is_complete`]}}</p>
     </div>
   </div>
 </template>
@@ -30,12 +28,6 @@ export default {
         this.details = response[`data`];
          for (let i = 0; i < response[`data`].length; i++) {
           this.details[i][`price`] = response[`data`][i][`price`].toFixed(2);
-          if(response[`data`][i][`is_complete`] !== 0){
-           this.completion = true;
-          }
-          if(response[`data`][i][`is_confirmed`] !== 0){
-            this.confirmation = true;
-          }
         }
       })
       .catch((error) => {
@@ -48,8 +40,6 @@ export default {
     return {
         message: undefined,
         details: undefined,
-        completion: false,
-        confirmation: false
     }
   },
 };
