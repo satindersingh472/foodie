@@ -1,7 +1,7 @@
 <template>
   <div class="orders">
     <div v-if="message !== undefined">{{ message }}</div>
-    <order-id v-for="detail in details" :key="detail[`order_id`]" :order_id="detail[`order_id`]"></order-id>
+    <order-id v-for="detail in details" :key="detail[`order_id`]" :detail="detail"></order-id>
   </div>
 </template>
 

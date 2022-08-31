@@ -1,25 +1,26 @@
 <template>
-    <div>
-<h2>{{unique_order}}</h2>
-    </div>
+  <div>
+    <h1>Order ID: {{detail[`order_id`]}}</h1>
+    <h2>Name: {{detail[`name`]}}</h2>
+    <p>Complete {{detail[`is_complete`]}}</p>
+    <p>Confirm: {{detail[`is_confirmed`]}}</p>
+    <confirm-order></confirm-order>
+    <complete-order></complete-order>
+  </div>
 </template>
 
 <script>
-    export default {
-        props:{
-            order_id: Number
-        },
-        mounted () {
-            this.unique_order =  new Set(this.order_id);
-        },
-        data() {
-            return {
-                unique_order: undefined
-            }
-        },
-    }
+import ConfirmOrder from "@/components/confirmOrder.vue";
+import CompleteOrder from "@/components/completeOrder.vue";
+export default {
+    components: {
+        ConfirmOrder,
+        CompleteOrder
+    },
+  props: {
+  detail: Object
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
