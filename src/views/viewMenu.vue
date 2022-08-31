@@ -3,7 +3,7 @@
  <page-header></page-header>
     <h1>this is menu profile page</h1>
     <div v-if="info !== undefined">
-      <div class="content_item" v-for="detail in details" :key="detail[`id`]">
+      <div class="content_item" v-for="(detail,index) in details" :key="index">
         <img
           class="content_item_image"
           :src="detail[`image_url`]"

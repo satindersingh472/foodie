@@ -2,6 +2,7 @@
     <div class="navbar">
 <router-link to="/profile_page">Profile</router-link>
 <router-link to="/client_login">Login</router-link>
+<router-link to="/discover_restaurants">Restaurants</router-link>
 <router-link to="/order_placed">Orders</router-link>
 <router-link to="/client_cart">Cart</router-link>
 <all-logout></all-logout>
