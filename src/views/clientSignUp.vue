@@ -69,7 +69,6 @@ export default {
           },
         })
         .then((response) => {
-          response;
           this.token = response[`data`][`token`];
           cookies.set(`token`, this.token);
           this.client_id = response[`data`][`client_id`];

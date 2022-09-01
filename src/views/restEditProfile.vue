@@ -1,5 +1,6 @@
 <template>
   <div>
+    <restaurant-header></restaurant-header>
     <h2>Edit the profile of your Restaurant</h2>
     <div class="form">
       <div class="content_item">
@@ -108,7 +109,11 @@
 <script>
 import cookies from "vue-cookies";
 import axios from "axios";
+import RestaurantHeader from "@/components/restaurantHeader.vue";
 export default {
+  components: {
+    RestaurantHeader,
+  },
   mounted() {
     this.current_details = cookies.get(`details`);
   },

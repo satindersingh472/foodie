@@ -113,6 +113,7 @@ export default {
 * {
   margin: 0px;
   padding: 0px;
+  width:100%;
 }
 .main_page {
   display: grid;
@@ -141,11 +142,13 @@ export default {
   .content_item {
     display: grid;
     margin-top: 40px;
+    width: 100%;
     p {
       justify-self: start;
       margin: 10px 5px 5px 0px;
     }
     input {
+      width: 100%;
       padding: 10px;
       border: 1px solid black;
       background-color: #b0cad9;

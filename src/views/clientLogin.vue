@@ -1,5 +1,7 @@
 <template>
+<div>
   <div class="background">
+    <page-header></page-header>
     <div class="main_login" ref="main_login">
       <foodie-header></foodie-header>
       <h1>Login as a Customer</h1>
@@ -16,15 +18,18 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
 import FoodieHeader from "@/components/foodieHeader.vue";
+import PageHeader from "@/components/pageHeader.vue";
 export default {
   components: {
     FoodieHeader,
+    PageHeader
   },
   methods: {
     login() {
@@ -69,6 +74,7 @@ export default {
   font-family: judson, serif;
   margin: 0px;
   padding: 0px;
+  width: 100%;
 }
 .background {
   height: 100vh;

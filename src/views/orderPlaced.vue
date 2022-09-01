@@ -1,4 +1,6 @@
 <template>
+<div>
+     <page-header></page-header>
   <div class="main_page">
     <div class="order_item" v-for="(detail,index) in details" :key="index">
         <h2>Ordered {{detail[`name`]}}</h2>
@@ -9,12 +11,15 @@
         <p>Completed: {{detail[`is_complete`]}}</p>
     </div>
   </div>
+</div>
 </template>
 
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
+import pageHeader from '@/components/pageHeader.vue';
 export default {
+  components: { pageHeader },
   mounted() {
     axios
       .request({

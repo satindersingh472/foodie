@@ -1,7 +1,8 @@
 <template>
+<div>
+  <restaurant-header></restaurant-header>
   <div class="background">
     <div class="main_login" ref="main_login">
-      <restaurant-header></restaurant-header>
       <foodie-header></foodie-header>
       <h1>Login as a Restaurant</h1>
       <div class="login_form">
@@ -17,6 +18,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -71,6 +73,7 @@ export default {
   font-family: judson, serif;
   margin: 0px;
   padding: 0px;
+  width: 100%;
 }
 .background {
   height: 100vh;

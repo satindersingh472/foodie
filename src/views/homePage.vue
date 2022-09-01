@@ -1,6 +1,6 @@
 <template>
   <div class="both_options" ref="both_options">
-    <h1>FOODIE</h1>
+  <foodie-header></foodie-header>
     <div class="client">
       <router-link class="links" to="/client_sign_up"><button>Login / Sign Up as a Customer</button></router-link>
     </div>
@@ -11,9 +11,11 @@
 </template>
 
 <script>
+import FoodieHeader from "@/components/foodieHeader.vue";
 export default {
-
-
+  components: {
+    FoodieHeader,
+  },
 };
 </script>
 

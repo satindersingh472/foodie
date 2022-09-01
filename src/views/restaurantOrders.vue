@@ -1,9 +1,16 @@
 <template>
   <div>
     <restaurant-header></restaurant-header>
-    <div class="orders" >
-    <div v-if="message !== undefined">{{ message }}</div>
-    <order-id v-for="detail in details" :key="detail[`order_id`]" :detail="detail"></order-id>
+    <div class="orders">
+      <div v-if="message !== undefined">{{ message }}</div>
+      <order-id
+        v-for="detail in details"
+        :key="detail[`order_id`]"
+        :detail="detail"
+      ></order-id>
+      <div v-for="(order,index) in orders" :key="index" >
+        <h2>Order ID: {{order}}</h2>
+      </div>
     </div>
   </div>
 </template>
@@ -12,14 +19,13 @@
 import RestaurantHeader from "@/components/restaurantHeader.vue";
 import axios from "axios";
 import cookies from "vue-cookies";
-import OrderId from '@/components/orderId.vue';
+import OrderId from "@/components/orderId.vue";
 export default {
   components: {
     RestaurantHeader,
     OrderId,
   },
   mounted() {
-
     axios
       .request({
         url: `https://innotechfoodie.ml/api/restaurant-order`,
@@ -29,7 +35,7 @@ export default {
         },
       })
       .then((response) => {
-        this.details = response[`data`]; 
+        this.details = response[`data`];
       })
       .catch((error) => {
         if (error) {
@@ -42,8 +48,6 @@ export default {
       details: undefined,
       message: undefined,
       orders: undefined
-    
-    
     };
   },
 };

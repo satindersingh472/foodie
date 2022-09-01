@@ -1,5 +1,6 @@
 <template>
   <div class="main_page">
+    <page-header></page-header>
     <div class="all_items">
       <div
         class="order_recieved"
@@ -20,7 +21,9 @@
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
+import pageHeader from '@/components/pageHeader.vue';
 export default {
+  components: { pageHeader },
   mounted() {
     this.order_details = JSON.parse(cookies.get(`orders`));
     for (let i = 0; i < this.order_details.length; i++) {
