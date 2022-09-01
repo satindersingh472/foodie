@@ -11,7 +11,6 @@ import DiscoverRestaurants from "@/views/discoverRestaurants.vue";
 import ViewMenu from "@/views/viewMenu.vue";
 import ViewMenuRest from "@/views/viewMenuRest.vue";
 import AddItems from "@/views/addItems.vue";
-import EditMenu from "@/views/editMenu.vue";
 import ClientCart from "@/views/clientCart.vue";
 import OrderPlaced from "@/views/orderPlaced.vue";
 import RestaurantOrders from "@/views/restaurantOrders.vue";
@@ -61,10 +60,6 @@ const routes = [
   {
     path: `/add_items`,
     component: AddItems,
-  },
-  {
-    path: `/edit_menu`,
-    component: EditMenu
   },
   {
     path: `/client_cart`,

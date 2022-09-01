@@ -30,7 +30,7 @@
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
-import EditMenu from "./editMenu.vue";
+import EditMenu from "@/components/editMenu.vue";
 import RestaurantHeader from "@/components/restaurantHeader.vue";
 import DeleteMenu from "@/components/deleteMenu.vue";
 export default {

@@ -3,7 +3,9 @@
     <restaurant-header></restaurant-header>
     <div ref="orders">
       <div v-if="message !== undefined">{{ message }}</div>
-      <div ref="single_order"></div>
+      <div ref="single_order" v-for="(detail,index) in details" :key="index">
+        <h2>{{detail[`name`]}}</h2>
+      </div>
     </div>
   </div>
 </template>
@@ -27,13 +29,8 @@ export default {
         },
       })
       .then((response) => {
-        for (let i = 0; i < response[`data`].length; i++) {
-            // if(this.$refs[`single_order`][`innerHTML`] === (this.$refs[`order_id_${response[`data`][i][`order_id`]}`])){
-            //     this.$refs[`order_id_${response[`data`][i][`order_id`]}`] += `<div> <h2>${response[`data`][i][`name`]}</h2>  </div>`
-            // }
-          this.$refs[`order`][`innerHTML`] += `<div ref="order_id_${response[`data`][i][`order_id`]}">
-        <h2>${response[`data`][i][`name`]}</h2>
-        </div>`;
+        if (response) {
+          this.details = response[`data`];
         }
       })
       .catch((error) => {
@@ -42,10 +39,14 @@ export default {
         }
       });
   },
+  methods: {
+  },
   data() {
     return {
       details: undefined,
       message: undefined,
+      order_id: undefined,
+      key: undefined
     };
   },
 };

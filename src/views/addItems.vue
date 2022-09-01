@@ -1,6 +1,6 @@
 <template>
   <div class="main_page" >
-    <restaurant-header></restaurant-header>
+  <page-header></page-header>
     <div class="main_form">
       <h2>
         Add Items to the Menu <br />
@@ -33,10 +33,11 @@
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
-import RestaurantHeader from "@/components/restaurantHeader.vue";
+import PageHeader from "@/components/pageHeader.vue";
 export default {
   components: {
-    RestaurantHeader,
+    PageHeader,
+
   },
   methods: {
     send_request() {
