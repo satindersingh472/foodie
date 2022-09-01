@@ -63,7 +63,7 @@ export default {
       this.details[`address`] = this.$refs[`address`][`value`];
       this.details[`city`] = this.$refs[`city`][`value`];
       this.details[`email`] = this.$refs[`email`][`value`];
-      this.details[`phone_number`] = this.$refs[`Phone_number`][`value`];
+      this.details[`phone_number`] = this.$refs[`phone_number`][`value`];
       this.details[`password`] = this.$refs[`password`][`value`];
       this.details[`bio`] = this.$refs[`bio`][`value`];
       this.details[`banner_url`] = this.$refs[`banner_url`][`value`];
