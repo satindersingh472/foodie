@@ -1,8 +1,6 @@
 <template>
   <div>
-    <restaurant-header></restaurant-header>
-    <h2>Edit the profile of your Restaurant</h2>
-    <div class="form">
+    <!-- <div class="form">
       <div class="content_item">
         <p>Name: {{ current_details[`name`] }}</p>
         <h4>
@@ -99,26 +97,21 @@
           :value="`${current_details[`banner_url`]}`"
         />
       </div>
-    </div>
-    <button @click="send_request">Save Changes</button>
-    <p v-if="message === true">Profile changes applied</p>
-    <p v-if="message === false">Profile changes not applied!!</p>
+    </div> -->
+    <p v-if="message !== undefined">{{message}}</p>
   </div>
 </template>
 
 <script>
 import cookies from "vue-cookies";
 import axios from "axios";
-import RestaurantHeader from "@/components/restaurantHeader.vue";
 export default {
-  components: {
-    RestaurantHeader,
-  },
-  mounted() {
-    this.current_details = cookies.get(`details`);
-  },
+    mounted () {
+        this.$root.$on(`send_edit`,this.send_request);
+    },
   methods: {
-    send_request() {
+    send_request(details) {
+        this.details = details
       axios
         .request({
           url: ` https://innotechfoodie.ml/api/restaurant`,
@@ -128,33 +121,32 @@ export default {
             token: cookies.get(`token`),
           },
           data: {
-            name: this.$refs[`name`][`value`],
-            address: this.$refs[`address`][`value`],
-            city: this.$refs[`city`][`value`],
-            email: this.$refs[`email`][`value`],
-            phone_number: this.$refs[`phone_number`][`value`],
-            bio: this.$refs[`bio`][`value`],
-            password: this.$refs[`password`][`value`],
-            profile_url: this.$refs[`profile_url`][`value`],
-            banner_url: this.$refs[`banner_url`][`value`],
+            name: this.details[`name`],
+            address: this.details[`address`],
+            city: this.details[`city`],
+            email: this.details[`email`],
+            phone_number: this.details[`phone_number`], 
+            bio: this.details[`bio`],
+            password: this.details[`password`],
+            profile_url: this.details[`profile_url`],
+            banner_url: this.details[`banner_url`],
           },
         })
         .then((response) => {
           if (response) {
-            this.message = true;
-            this.$router.push('/restaurant_profile');
+            this.message = `profile changed successfully`;
           }
         })
         .catch((error) => {
           if (error) {
-            this.message = false;
+            this.message =`error in changing`;
           }
         });
     },
   },
   data() {
     return {
-      current_details: undefined,
+      details: undefined,
       message: undefined,
     };
   },

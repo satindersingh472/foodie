@@ -1,6 +1,6 @@
 <template>
 <div>
-  <restaurant-header></restaurant-header>
+
   <div>
     <h1>Order ID: {{detail[`order_id`]}}</h1>
     <h2>Name: {{detail[`name`]}}</h2>
@@ -15,12 +15,10 @@
 <script>
 import ConfirmOrder from "@/components/confirmOrder.vue";
 import CompleteOrder from "@/components/completeOrder.vue";
-import RestaurantHeader from "@/components/restaurantHeader.vue";
 export default {
     components: {
         ConfirmOrder,
         CompleteOrder,
-        RestaurantHeader
     },
   props: {
   detail: Object
