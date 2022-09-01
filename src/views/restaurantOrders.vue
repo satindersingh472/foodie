@@ -3,14 +3,7 @@
     <restaurant-header></restaurant-header>
     <div class="orders">
       <div v-if="message !== undefined">{{ message }}</div>
-      <order-id
-        v-for="detail in details"
-        :key="detail[`order_id`]"
-        :detail="detail"
-      ></order-id>
-      <div v-for="(order,index) in orders" :key="index" >
-        <h2>Order ID: {{order}}</h2>
-      </div>
+      <div class="one_order" ></div>
     </div>
   </div>
 </template>
@@ -19,11 +12,10 @@
 import RestaurantHeader from "@/components/restaurantHeader.vue";
 import axios from "axios";
 import cookies from "vue-cookies";
-import OrderId from "@/components/orderId.vue";
+
 export default {
   components: {
     RestaurantHeader,
-    OrderId,
   },
   mounted() {
     axios
@@ -35,7 +27,18 @@ export default {
         },
       })
       .then((response) => {
+        this.orders = response[`data`];
+        let one_order = document.getElementsByClassName(`one_order`);
+        let order = document.getElementsByClassName(`order`);
+        for(let i=0; i<this.orders.length;i++){
+          if(this.orders[i][`order_id`] === response[`data`][i][`order_id`]){
+            one_order[`innerHTML`] += `<div> <h2>${response[`data`][i][`name`]}</h2> </div>`;
+          } else {
+            order[`innerHTML`] += `<div> <h2> ${response[`data`][i][`name`]} </h2></div>`;
+          }
+        }
         this.details = response[`data`];
+
       })
       .catch((error) => {
         if (error) {
