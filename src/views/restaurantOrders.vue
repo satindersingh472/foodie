@@ -1,9 +1,9 @@
 <template>
   <div>
     <restaurant-header></restaurant-header>
-    <div class="orders">
+    <div ref="orders">
       <div v-if="message !== undefined">{{ message }}</div>
-      <div class="one_order" ></div>
+      <div ref="single_order"></div>
     </div>
   </div>
 </template>
@@ -27,18 +27,14 @@ export default {
         },
       })
       .then((response) => {
-        this.orders = response[`data`];
-        let one_order = document.getElementsByClassName(`one_order`);
-        let order = document.getElementsByClassName(`order`);
-        for(let i=0; i<this.orders.length;i++){
-          if(this.orders[i][`order_id`] === response[`data`][i][`order_id`]){
-            one_order[`innerHTML`] += `<div> <h2>${response[`data`][i][`name`]}</h2> </div>`;
-          } else {
-            order[`innerHTML`] += `<div> <h2> ${response[`data`][i][`name`]} </h2></div>`;
-          }
+        for (let i = 0; i < response[`data`].length; i++) {
+            // if(this.$refs[`single_order`][`innerHTML`] === (this.$refs[`order_id_${response[`data`][i][`order_id`]}`])){
+            //     this.$refs[`order_id_${response[`data`][i][`order_id`]}`] += `<div> <h2>${response[`data`][i][`name`]}</h2>  </div>`
+            // }
+          this.$refs[`order`][`innerHTML`] += `<div ref="order_id_${response[`data`][i][`order_id`]}">
+        <h2>${response[`data`][i][`name`]}</h2>
+        </div>`;
         }
-        this.details = response[`data`];
-
       })
       .catch((error) => {
         if (error) {
@@ -50,7 +46,6 @@ export default {
     return {
       details: undefined,
       message: undefined,
-      orders: undefined
     };
   },
 };
@@ -61,7 +56,7 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
-.single_order {
+.one_box {
   border: 2px solid black;
 }
 </style>
