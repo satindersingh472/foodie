@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- various links from the client header to navigate to different pages and logout as well  -->
 <router-link to="/profile_page">Profile</router-link>
 <router-link to="/client_login">Login</router-link>
 <router-link to="/discover_restaurants">Restaurants</router-link>

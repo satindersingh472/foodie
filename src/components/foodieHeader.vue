@@ -1,6 +1,6 @@
 <template>
     <div>
-<h1 class="main_heading" >FOODIE</h1>
+<h1><router-link class="main_heading" to="/">Foodie</router-link></h1>
     </div>
 </template>
 

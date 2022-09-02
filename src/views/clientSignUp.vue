@@ -1,8 +1,9 @@
 <template>
   <div class="main_sign_up_form">
-    <page-header></page-header>
+    <foodie-header></foodie-header>
     <div class="registration">
       <h2>Register as a Client</h2>
+      <p>Already a User?<router-link to="client_login">LogIn</router-link></p>
       <div class="form">
         <div class="information">
           <div>
@@ -39,10 +40,10 @@
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
-import pageHeader from "@/components/pageHeader.vue";
+import FoodieHeader from '@/components/foodieHeader.vue';
 export default {
   components: {
-    pageHeader,
+    FoodieHeader,
   },
   methods: {
     signup() {

@@ -48,10 +48,10 @@
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
-import foodieHeader from "@/components/foodieHeader.vue";
+import FoodieHeader from "@/components/foodieHeader.vue";
 export default {
   components: {
-    foodieHeader,
+    FoodieHeader,
   },
   methods: {
     send_request() {

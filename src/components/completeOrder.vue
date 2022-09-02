@@ -1,11 +1,14 @@
 <template>
   <div>
-    <button @click="send_request(order,$event) ">Complete</button>
+    <!-- this component is the complete order button which is used to mark order as complete -->
+    <button @click="send_request(order,$event)">Complete</button>
+    <!-- h2 tag will display a message if it is undefined and based on condition -->
     <h2 v-if="message !== undefined">{{message}}</h2>
   </div>
 </template>
 
 <script>
+// need cookies and axios for this page so importing both
 import axios from "axios";
 import cookies from "vue-cookies";
 export default {

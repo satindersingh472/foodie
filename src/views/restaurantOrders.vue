@@ -5,6 +5,7 @@
       <div v-if="message !== undefined">{{ message }}</div>
       <div ref="single_order" v-for="(detail,index) in details" :key="index">
         <h2>{{detail[`name`]}}</h2>
+        <complete-order></complete-order>
       </div>
     </div>
   </div>
@@ -14,10 +15,11 @@
 import RestaurantHeader from "@/components/restaurantHeader.vue";
 import axios from "axios";
 import cookies from "vue-cookies";
-
+import CompleteOrder from "@/components/completeOrder.vue";
 export default {
   components: {
     RestaurantHeader,
+    CompleteOrder
   },
   mounted() {
     axios
