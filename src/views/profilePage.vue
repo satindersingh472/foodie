@@ -1,58 +1,75 @@
 <template>
-  <div class="main_page">
-    <page-header></page-header>
-    <div class="form">
-      <div class="form_header">
-        <div>
-          <h2>Profile</h2>
+  <!-- profile page is for the profile of a client -->
+  <!-- this component will show the profile of a client and show the profile related data in a form input fields -->
+  <!-- this component will also emit the details from the form inputs -->
+  <!-- the emitted data will be used to edit the profile -->
+  <div>
+    <div v-if="message !== undefined">{{message}}</div>
+    <div class="main_page">
+      <page-header></page-header>
+      <div class="form">
+        <!-- the form header is the header for the form which will contain the images and other options as well -->
+        <div class="form_header">
+          <div>
+            <h2>Profile</h2>
+          </div>
+          <div class="image">
+            <!-- edit profile image is a component which is used to change the proifle image for a client  -->
+            <edit-profile-image class="edit_button"></edit-profile-image>
+            <img
+              class="img"
+              :src="details[`image_url`]"
+              ref="image_url"
+              :alt="`image of ${details[`first_name`]}`"
+            />
+          </div>
         </div>
-        <div class="image">
-          <edit-profile-image class="edit_button"></edit-profile-image>
-          <img
-            class="img"
-            :src="details[`image_url`]"
-            ref="image_url"
-            :alt="`image of ${details[`first_name`]}`"
-          />
+        <div class="form_data">
+          <div class="content_item">
+            <p>First Name</p>
+            <input
+              type="text"
+              :value="`${details[`first_name`]}`"
+              ref="first_name"
+            />
+          </div>
+          <div class="content_item">
+            <p>Last Name</p>
+            <input
+              type="text"
+              :value="`${details[`last_name`]}`"
+              ref="last_name"
+            />
+          </div>
+          <div class="content_item">
+            <p>Email</p>
+            <input type="text" :value="`${details[`email`]}`" ref="email" />
+          </div>
+          <div class="content_item">
+            <p>User Name</p>
+            <input
+              type="text"
+              :value="`${details[`username`]}`"
+              ref="username"
+            />
+          </div>
+          <div class="content_item">
+            <p>Password</p>
+            <input
+              type="text"
+              ref="password"
+              placeholder="enter password to save changes"
+            />
+          </div>
+          <!-- the form contains the delete existense component to delete the client account -->
+          <delete-existense class="delete_button"></delete-existense>
         </div>
+        <!-- save button will trigger send info and which will emit the info grabbed from all the form values -->
+        <button @click="send_info">Save</button>
+        <!-- edit profile is a component which is here to make an api call after recieving all the data from this component by emitting -->
+        <!-- edit profile component will just show a message on this page because everything is happening on the backend for edit profile -->
+        <edit-profile></edit-profile>
       </div>
-      <div class="form_data">
-        <div class="content_item">
-          <p>First Name</p>
-          <input
-            type="text"
-            :value="`${details[`first_name`]}`"
-            ref="first_name"
-          />
-        </div>
-        <div class="content_item">
-          <p>Last Name</p>
-          <input
-            type="text"
-            :value="`${details[`last_name`]}`"
-            ref="last_name"
-          />
-        </div>
-        <div class="content_item">
-          <p>Email</p>
-          <input type="text" :value="`${details[`email`]}`" ref="email" />
-        </div>
-        <div class="content_item">
-          <p>User Name</p>
-          <input type="text" :value="`${details[`username`]}`" ref="username" />
-        </div>
-        <div class="content_item">
-          <p>Password</p>
-          <input
-            type="text"
-            ref="password"
-            placeholder="enter password to save changes"
-          />
-        </div>
-        <delete-existense class="delete_button"></delete-existense>
-      </div>
-      <button @click="send_info">Save</button>
-      <edit-profile></edit-profile>
     </div>
   </div>
 </template>
@@ -73,6 +90,8 @@ export default {
   },
   methods: {
     send_info() {
+      // send info method will emit the data from the forms to the edit profile component
+      // edit profile component will use the data in the api call
       this.details[`first_name`] = this.$refs[`first_name`][`value`];
       this.details[`last_name`] = this.$refs[`last_name`][`value`];
       this.details[`email`] = this.$refs[`email`][`value`];
@@ -84,6 +103,7 @@ export default {
   mounted() {
     axios
       .request({
+        // api endpoint to get information of client's profile
         url: `https://innotechfoodie.ml/api/client`,
         headers: {
           "x-api-key": "TVTZDiQZDzjkWqVkNCxr",
@@ -93,17 +113,20 @@ export default {
         },
       })
       .then((response) => {
+        // there will be only one object in data array from response
         this.details = response[`data`][0];
-         this.$root.$emit(`send_image_data`, this.details[`image_url`]);
       })
       .catch((error) => {
-        error;
+        if (error) {
+          this.message = `There is an error while showing the user profile`;
+        }
       });
   },
   data() {
     return {
       details: undefined,
       show_edit: true,
+      message: undefined,
     };
   },
 };
@@ -113,7 +136,7 @@ export default {
 * {
   margin: 0px;
   padding: 0px;
-  width:100%;
+  width: 100%;
 }
 .main_page {
   display: grid;
@@ -172,8 +195,8 @@ export default {
     display: grid;
     justify-self: end;
     grid-template-columns: 1fr 1fr;
-    .edit_button{
-        align-self: end;
+    .edit_button {
+      align-self: end;
     }
 
     .img {
