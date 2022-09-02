@@ -3,6 +3,7 @@
   <div class="main_page">
     <page-header></page-header>
     <!-- all items div will have divs with class order recieved  -->
+    <!-- if show something is true then show the items i.e if no cookies then show something is false and there will be nothing on the page -->
     <div  v-if="show_something === true" class="all_items">
       <!-- order_recieved will have detail about the items in cart -->
       <div
@@ -30,6 +31,7 @@ import pageHeader from '@/components/pageHeader.vue';
 export default {
   components: { pageHeader },
   mounted() {
+    // if cookies are there then show something is true
     if(cookies.get(`orders`)){
       this.show_something = true;
     }
@@ -72,15 +74,17 @@ export default {
         .then((response) => {
           if(response){
             // if response is successfull then the value of message will displayed on page
+            // cookies will be removed 
             cookies.remove(`orders`);
+            // show something will set to false i.e there will be no items displayed after an order is placed
             this.show_something = false;
+            // the message will appear after the order is successfully placed 
             this.message = `Successfull!! Your order id is ${response[`data`][`order_id`]}`;
-            
-
           }
         })
         .catch((error) => {
           if(error){
+            // if there is an error then the following message will get displayed
             this.message = `Order not placed`;
           }
         });
