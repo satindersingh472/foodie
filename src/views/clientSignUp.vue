@@ -1,11 +1,14 @@
 <template>
+<!-- client signup component is for registering the client -->
   <div class="main_sign_up_form">
     <foodie-header></foodie-header>
     <div class="registration">
       <h2>Register as a Client</h2>
+      <!-- if already a user there is a login link  -->
       <p>Already a User?<router-link to="client_login">LogIn</router-link></p>
       <div class="form">
         <div class="information">
+          <!-- this form will have all the input fields required to signup  -->
           <div>
             <p>User Name</p>
             <input type="text" ref="username" placeholder="username" />
@@ -31,7 +34,9 @@
           <p>Profile Image</p>
           <input type="url" ref="file">
         </div>
+        <!-- register button will call the api-->
         <button @click="signup">REGISTER</button>
+        <p v-if="message !== undefined">{{message}}</p>
       </div>
     </div>
   </div>
@@ -47,12 +52,6 @@ export default {
   },
   methods: {
     signup() {
-      this.email = this.$refs[`email`][`value`];
-      this.password = this.$refs[`password`][`value`];
-      this.username = this.$refs[`username`][`value`];
-      this.file = this.$refs[`file`][`value`];
-      this.first_name = this.$refs[`first_name`][`value`];
-      this.last_name = this.$refs[`last_name`][`value`];
       axios
         .request({
           url: `https://innotechfoodie.ml/api/client`,
@@ -61,36 +60,31 @@ export default {
             "x-api-key": "TVTZDiQZDzjkWqVkNCxr",
           },
           data: {
-            email: this.email,
-            password: this.password,
-            username: this.username,
-            image_url: this.file,
-            first_name: this.first_name,
-            last_name: this.last_name,
+            email: this.$refs[`email`][`value`],
+            password: this.$refs[`password`][`value`],
+            username: this.$refs[`username`][`value`],
+            image_url: this.$refs[`image_url`][`value`],
+            first_name: this.$refs[`first_name`][`value`],
+            last_name: this.$refs[`last_name`][`value`]
           },
         })
         .then((response) => {
-          this.token = response[`data`][`token`];
-          cookies.set(`token`, this.token);
-          this.client_id = response[`data`][`client_id`];
-          cookies.set(`client_id`, this.client_id);
+          cookies.set(`token`, response[`data`][`token`]);
+          cookies.set(`client_id`, response[`data`][`client_id`]);
           this.$router.push(`/discover_restaurants`);
         })
         .catch((error) => {
-          error;
+          if(error[`response`][`status`] === 409 ){
+            this.message = `User Already Exists`;
+          } else if(error) {
+            this.message = `Please fill out all the Required fields`;
+          }
         });
     },
   },
   data() {
     return {
-      email: undefined,
-      password: undefined,
-      username: undefined,
-      file: undefined,
-      first_name: undefined,
-      last_name: undefined,
-      token: undefined,
-      client_id: undefined,
+      message: undefined
     };
   },
 };
