@@ -78,6 +78,9 @@ export default {
           if(response){
             cookies.set(`restaurant_id` , response[`data`][`restaurantId`]);
             cookies.set(`token`, response[`data`][`token`]);
+            if(cookies.get(`restaurant_id`) && cookies.get(`token`)){
+              this.$router.push(`/restaurant_profile`);
+            }
           }
         })
         .catch((error) => {

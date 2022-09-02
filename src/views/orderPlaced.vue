@@ -1,5 +1,6 @@
 <template>
 <div>
+  <!-- this component will show the orders placed by the client that is logged in -->
      <page-header></page-header>
   <div class="main_page">
     <div class="order_item" v-for="(detail,index) in details" :key="index">
@@ -23,6 +24,7 @@ export default {
   mounted() {
     axios
       .request({
+        // endpoint for getting all the orders placed by the client
         url: `https://innotechfoodie.ml/api/client-order`,
         headers: {
           "x-api-key": `TVTZDiQZDzjkWqVkNCxr`,
@@ -30,13 +32,16 @@ export default {
         },
       })
       .then((response) => {
+        // if response is successfull then all the orders will be stored in an array called details
         this.details = response[`data`];
+        // the following code is to set the decimal place for price to 2
          for (let i = 0; i < response[`data`].length; i++) {
           this.details[i][`price`] = response[`data`][i][`price`].toFixed(2);
         }
       })
       .catch((error) => {
         if(error){
+          // if error exists then the following string will be shown as a message
             this.message = `something went wrong`;
         }
       });

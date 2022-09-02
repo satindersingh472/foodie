@@ -1,20 +1,46 @@
 <template>
-  <div class="both_options" ref="both_options">
-  <foodie-header></foodie-header>
-    <div class="client">
-      <router-link class="links" to="/client_sign_up"><button>Login / Sign Up as a Customer</button></router-link>
-    </div>
-    <div class="client">
-      <router-link class="links" to="/restaurant_sign_up"><button>Login / Sign Up as a Restaurant</button></router-link>
+  <!-- this page contains the options to login or signup as a client or a restaurant -->
+  <div>
+    <!-- if cookies token are present then there will be no options -->
+    <discover-restaurants v-if="show_options === false" ></discover-restaurants>
+    <div v-if="show_options === true" class="both_options" ref="both_options">
+      <foodie-header></foodie-header>
+      <div class="client">
+        <!-- router link to login or sign up as customer -->
+        <router-link class="links" to="/client_sign_up"
+          ><button>Login / Sign Up as a Customer</button></router-link
+        >
+      </div>
+      <div class="client">
+        <!-- link to login or sign up as a restaurant -->
+        <router-link class="links" to="/restaurant_sign_up"
+          ><button>Login / Sign Up as a Restaurant</button></router-link
+        >
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import FoodieHeader from "@/components/foodieHeader.vue";
+import DiscoverRestaurants from "@/views/discoverRestaurants.vue";
+import cookies from "vue-cookies";
 export default {
   components: {
     FoodieHeader,
+    DiscoverRestaurants
+  },
+  mounted () {
+    // check if cookies token is present if yes then show option is true
+    // if show options is true it will change the html 
+    if(cookies.get(`token`)){
+      this.show_options = false;
+    }
+  },
+  data() {
+    return {
+      show_options: true
+    }
   },
 };
 </script>
@@ -22,18 +48,18 @@ export default {
 <style lang="scss" scoped>
 .both_options {
   display: grid;
-  gap:10%;
+  gap: 10%;
   place-items: center;
-  .links{
+  .links {
     text-decoration: none;
   }
   .client {
     display: grid;
     width: 30vw;
     button {
-        font-size:2rem;
-        text-transform: uppercase;
-        padding: 10%;
+      font-size: 2rem;
+      text-transform: uppercase;
+      padding: 10%;
       display: grid;
     }
   }

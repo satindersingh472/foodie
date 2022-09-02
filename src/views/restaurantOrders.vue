@@ -3,10 +3,8 @@
     <restaurant-header></restaurant-header>
     <div ref="orders">
       <div v-if="message !== undefined">{{ message }}</div>
-      <div ref="single_order" v-for="(detail,index) in details" :key="index">
-        <h2>{{detail[`name`]}}</h2>
         <complete-order></complete-order>
-      </div>
+        <h2>{{orders}}</h2>
     </div>
   </div>
 </template>
@@ -33,8 +31,18 @@ export default {
       .then((response) => {
         if (response) {
           this.details = response[`data`];
-        }
-      })
+          for(let i=0;i<this.details.length;i++){
+            if(this.orders.includes(this.details[i][`order_id`]) === false){
+              this.orders.push(this.details[i][`order_id`]);
+              }
+              for(let k=0;k<this.orders.length;k++){
+                if(this.orders[k]=== this.details[i][`order_id`]){
+                  this.orders.push(this.details[i])
+                }
+              }
+            }
+          }
+        })
       .catch((error) => {
         if (error) {
           this.message = `There is some error`;
@@ -47,8 +55,7 @@ export default {
     return {
       details: undefined,
       message: undefined,
-      order_id: undefined,
-      key: undefined
+      orders: []
     };
   },
 };

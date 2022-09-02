@@ -51,14 +51,19 @@ export default {
     FoodieHeader,
   },
   methods: {
+    // signup will call the api
     signup() {
       axios
         .request({
+          // endpoint used for signup
           url: `https://innotechfoodie.ml/api/client`,
+          // post method is used 
           method: `POST`,
+          // api key is used as headers
           headers: {
             "x-api-key": "TVTZDiQZDzjkWqVkNCxr",
           },
+          // the following data is used from the form to send as a data
           data: {
             email: this.$refs[`email`][`value`],
             password: this.$refs[`password`][`value`],
@@ -69,14 +74,18 @@ export default {
           },
         })
         .then((response) => {
+          // if response is successfull then token and client cookies are set
           cookies.set(`token`, response[`data`][`token`]);
           cookies.set(`client_id`, response[`data`][`client_id`]);
+          // the user will be routed to discover restaurants
           this.$router.push(`/discover_restaurants`);
         })
         .catch((error) => {
+          // if user exists then message will be displayed
           if(error[`response`][`status`] === 409 ){
             this.message = `User Already Exists`;
           } else if(error) {
+            // if there is any other error than the following message will get displayed
             this.message = `Please fill out all the Required fields`;
           }
         });

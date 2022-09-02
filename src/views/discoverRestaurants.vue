@@ -1,6 +1,12 @@
 <template>
   <div>
     <page-header></page-header>
+    <!-- content item div will display each restaurant available to the client -->
+    <!-- each div can trigger send detail method and send detail with it -->
+    <!-- after it send detail to the method the method will use that detail and set cookies restaurant number -->
+    <!-- restaurant number will be used in menu api to be send as restaurant id
+    to open menu associated with that restaurant -->
+    <h2 v-if="message !== undefined">{{message}}</h2>
     <div @click="send_detail(detail,$event)" class="content_item" v-for="detail in details" :key="detail[`id`]">
       <div class="content_item_image">
         <img :src="detail[`banner_url`]" :alt="`image for ${detail[`name`]}`" />
@@ -26,6 +32,7 @@ export default {
     PageHeader,
   },
   methods: {
+    // send detail will set cookies restaurant number and route the user to the view menu page
     send_detail(detail) {
       cookies.set(`restaurant_number`, detail[`restaurant_id`]);
       this.$router.push(`/view_menu`);
@@ -34,21 +41,27 @@ export default {
   mounted() {
     axios
       .request({
+        // endpoint for discovering all the restaurants available
         url: `https://innotechfoodie.ml/api/restaurants`,
         headers: {
+          // api key is used as a headers
           "x-api-key": "TVTZDiQZDzjkWqVkNCxr",
         },
       })
       .then((response) => {
+        // if response is successfull then details array will have data from the response
         this.details = response[`data`];
       })
       .catch((error) => {
-        error;
+        if(error){
+          this.message = `There is an error in retrieving Restaurants`;
+        }
       });
   },
   data() {
     return {
       details: undefined,
+      message: undefined
     };
   },
 };
