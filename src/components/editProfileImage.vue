@@ -1,8 +1,11 @@
 <template>
   <div>
+    <!-- edit profile image is just for editing the profile image of a client -->
     <div>
       <div>
+        <!-- edit will trigger the edit button method and show the div with input field -->
         <button @click="edit_button">edit</button>
+        <!-- save button will send the request to change profile image -->
         <button v-if="edit_clicked === true" @click="send_request">Save</button>
       </div>
       <div v-if="edit_clicked === true">
