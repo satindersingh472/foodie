@@ -1,36 +1,43 @@
 <template>
-<div>
-  <restaurant-header></restaurant-header>
-  <div class="background">
-    <div class="main_login" ref="main_login">
-      <foodie-header></foodie-header>
-      <h1>Login as a Restaurant</h1>
-      <div class="login_form">
-        <input type="text" ref="email" placeholder="Enter Your Email" />
-        <input type="text" ref="password" placeholder="Enter your Password" />
-        <button @click="login">LOGIN</button>
-        <h3>Don't have an account?</h3>
-        <h2>
-          <router-link class="links" to="/restaurant_sign_up"
-            >Register Here</router-link
-          >
-        </h2>
-      </div>
+  <div>
+    <!-- restaurant login component is for login as a restaurant -->
+    <div v-if="hide_fields === true">
+      <!-- will show a restaurant profile if logged in -->
+      <restaurant-profile> </restaurant-profile>
+    </div>
+    <div v-if="hide_fields === false" >
+        <div class="main_login" ref="main_login">
+          <foodie-header></foodie-header>
+          <h1>Login as a Restaurant</h1>
+          <div class="login_form">
+            <input type="text" ref="email" placeholder="Enter Your Email" />
+            <input type="text" ref="password" placeholder="Enter your Password"/>
+            <button @click="login">LOGIN</button>
+            <h3>Don't have an account?</h3>
+            <h2>
+              <router-link class="links" to="/restaurant_sign_up">Register Here</router-link>
+            </h2>
+          </div>
+        </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
 import FoodieHeader from "@/components/foodieHeader.vue";
 import axios from "axios";
-import RestaurantHeader from "@/components/restaurantHeader.vue";
 import cookies from "vue-cookies";
+import RestaurantProfile from "@/views/restaurantProfile.vue";
 export default {
   components: {
     FoodieHeader,
-    RestaurantHeader,
+    RestaurantProfile,
   },
+    mounted() {
+      if (cookies.get(`restaurant_id`) && cookies.get(`token`)) {
+        this.hide_fields = true;
+      }
+    },
   methods: {
     login() {
       axios
@@ -53,7 +60,9 @@ export default {
           }
         })
         .catch((error) => {
-          error;
+          if(error){
+            this.message = `Invalid Email or Password`;
+          }
         });
     },
     authenticated() {
@@ -61,6 +70,12 @@ export default {
         this.$router.push(`/restaurant_profile`);
       }
     },
+  },
+  data() {
+    return {
+      hide_fields: false,
+      message: undefined
+    };
   },
 };
 </script>

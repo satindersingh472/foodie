@@ -16,6 +16,7 @@ export default {
       if (cookies.get(`client_id`)) {
         cookies.remove(`client_id`);
         cookies.remove(`token`);
+        cookies.remove(`restaurant_number`);
         this.$router.push(`/`);
       } else if (cookies.get(`restaurant_id`)) {
         cookies.remove(`restaurant_id`);
