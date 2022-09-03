@@ -2,16 +2,13 @@
 <div>
   <!-- this component will show the orders placed by the client that is logged in -->
      <page-header></page-header>
-  <div class="main_page">
-    <div class="order_item" v-for="(detail,index) in details" :key="index">
-        <h2>Ordered {{detail[`name`]}}</h2>
-        <p>Order ID:{{detail[`order_id`]}}</p>
-        <p>Item ID {{detail[`menu_item_id`]}}</p>
-        <p>Price:{{detail[`price`]}}</p>
-        <p>Confirmed: {{detail[`is_confirmed`]}}</p>
-        <p>Completed: {{detail[`is_complete`]}}</p>
+       <div class="unique_order" v-for="(order, index) in orders" :key="index">
+      <div v-for="detail in details" :key="detail[`order_id`]">
+        <div v-if="order === detail[`order_id`]">
+          <h2>{{ detail[`name`] }}</h2>
+        </div>
+      </div>
     </div>
-  </div>
 </div>
 </template>
 
@@ -21,6 +18,15 @@ import cookies from "vue-cookies";
 import pageHeader from '@/components/pageHeader.vue';
 export default {
   components: { pageHeader },
+  methods: {
+   unique_orders() {
+      for (let i = 0; i < this.details.length; i++) {
+        if (this.orders.includes(this.details[i][`order_id`]) === false) {
+          this.orders.push(this.details[i][`order_id`]);
+        }
+      }
+    }
+  },
   mounted() {
     axios
       .request({
@@ -38,6 +44,7 @@ export default {
          for (let i = 0; i < response[`data`].length; i++) {
           this.details[i][`price`] = response[`data`][i][`price`].toFixed(2);
         }
+        this.unique_orders();
       })
       .catch((error) => {
         if(error){
@@ -50,6 +57,7 @@ export default {
     return {
         message: undefined,
         details: undefined,
+        orders: []
     }
   },
 };
@@ -61,7 +69,7 @@ export default {
     place-items: center;
     grid-auto-flow: column;
 }
-.order_item{
+.unique_order{
     border: 2px solid black;
     display: grid;
     padding: 10px;
