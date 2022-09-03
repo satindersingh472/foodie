@@ -1,10 +1,8 @@
 <template>
   <div>
     <!-- restaurant login component is for login as a restaurant -->
-    <div v-if="hide_fields === true">
       <!-- will show a restaurant profile if logged in -->
-      <restaurant-profile> </restaurant-profile>
-    </div>
+      <restaurant-profile v-if="hide_fields === true"></restaurant-profile>
     <div v-if="hide_fields === false" >
         <div class="main_login" ref="main_login">
           <foodie-header></foodie-header>
@@ -12,9 +10,13 @@
           <div class="login_form">
             <input type="text" ref="email" placeholder="Enter Your Email" />
             <input type="text" ref="password" placeholder="Enter your Password"/>
+            <!-- login button will trigger the login method which 
+            will further call the api -->
             <button @click="login">LOGIN</button>
             <h3>Don't have an account?</h3>
             <h2>
+              <!-- if the user do not have an account the following router link will
+              take the user to the register as a restaurant page -->
               <router-link class="links" to="/restaurant_sign_up">Register Here</router-link>
             </h2>
           </div>
@@ -34,6 +36,7 @@ export default {
     RestaurantProfile,
   },
     mounted() {
+      // if user authenticated already then restaurant profile will be shown to the user
       if (cookies.get(`restaurant_id`) && cookies.get(`token`)) {
         this.hide_fields = true;
       }
@@ -42,30 +45,38 @@ export default {
     login() {
       axios
         .request({
+          // endpoint for the post method to authenticate the user
           url: `https://innotechfoodie.ml/api/restaurant-login`,
           method: `POST`,
           headers: {
             "x-api-key": "TVTZDiQZDzjkWqVkNCxr",
           },
           data: {
+            // email and password sent as data
             email: this.$refs[`email`][`value`],
             password: this.$refs[`password`][`value`],
           },
         })
         .then((response) => {
           if (response) {
+            // if response is successfull then cookies are set 
+            // token and restaurant id cookies will be used for authentication
             cookies.set(`token`, response[`data`][`token`]);
             cookies.set(`restaurant_id`, response[`data`][`restaurantId`]);
+            // authenticated function will get called after success
             this.authenticated();
           }
         })
         .catch((error) => {
           if(error){
+            // if error then the following message will appear on the page
             this.message = `Invalid Email or Password`;
           }
         });
     },
     authenticated() {
+      // authenticated method will check for the cookies 
+      // and direct the user towards restaurant profile
       if (cookies.get(`token`) && cookies.get(`restaurant_id`) !== undefined) {
         this.$router.push(`/restaurant_profile`);
       }
@@ -84,7 +95,6 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Gluten:wght@100;200;300;400;600;700;900&family=Judson:ital,wght@0,400;0,700;1,400&display=swap");
 * {
   display: grid;
-  place-items: center;
   font-family: judson, serif;
   margin: 0px;
   padding: 0px;
