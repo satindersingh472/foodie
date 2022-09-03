@@ -41,6 +41,5 @@ export default {
 .navbar {
   display: grid;
   grid-auto-flow: column;
-  place-items: center;
 }
 </style>

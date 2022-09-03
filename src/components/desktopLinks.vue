@@ -1,5 +1,5 @@
 <template>
-  <div ref="links">
+  <div class="links">
     <router-link to="/profile_page">Profile</router-link>
     <router-link to="/discover_restaurants">Restaurants</router-link>
     <router-link to="/order_placed">Orders</router-link>
@@ -33,4 +33,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.links{
+  display: grid;
+  grid-auto-flow:column;
+  gap: 20px;
+}
+</style>

@@ -2,7 +2,7 @@
   <div class="navbar">
     <!-- various links from the client header to navigate to different pages and logout as well  -->
     <div v-if="desktop_view === false" class="navbar_mobile">
-        
+        <mobile-links></mobile-links>
     </div>
     <div v-if="desktop_view === true" class="navbar_desktop">
      <desktop-links></desktop-links>      
@@ -12,21 +12,27 @@
 
 <script>
 import DesktopLinks from "@/components/desktopLinks.vue";
-import NavigationLinks from "@/components/desktopLinks.vue";
+import MobileLinks from "@/components/mobileLinks.vue";
 export default {
   components: {
     DesktopLinks,
+    MobileLinks,
   },
-mounted () {
-    if(this.element.clientWidth < 500){
+  methods: {
+    change_querie() {
+    if(document.documentElement.clientWidth < 500){
         this.desktop_view = false;
-    } else if(this.element.clientWidth >= 500){
+    } else if(document.documentElement.clientWidth >= 500){
         this.desktop_view = true;
     }
+    }
+  },
+mounted () {
+    window.addEventListener(`resize`,this.change_querie);
 },
 data() {
     return {
-        desktop_view: true
+        desktop_view: false
     }
 },
 };
