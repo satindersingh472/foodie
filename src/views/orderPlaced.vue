@@ -3,9 +3,10 @@
   <!-- this component will show the orders placed by the client that is logged in -->
      <page-header></page-header>
        <div class="unique_order" v-for="(order, index) in orders" :key="index">
+        <h2>Order No. {{order}}</h2>
       <div v-for="detail in details" :key="detail[`order_id`]">
         <div v-if="order === detail[`order_id`]">
-          <h2>{{ detail[`name`] }}</h2>
+          <h2>{{detail[`name`]}}</h2>
         </div>
       </div>
     </div>

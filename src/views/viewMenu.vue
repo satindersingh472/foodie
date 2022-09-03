@@ -42,8 +42,8 @@ methods: {
     }
 },
   mounted() {
-    if(cookies.get([`orders`])){
-      this.orders = JSON.parse(cookies.get([`orders`]));
+    if(cookies.get(`orders`)){
+      this.orders = JSON.parse(cookies.get(`orders`));
     }
     this.info = cookies.get(`restaurant_number`);
     axios
