@@ -1,7 +1,10 @@
 <template>
+<!-- restaurant sign up component will be used to allow a restaurant user to create a new restaurant -->
   <div class="main_signup">
     <foodie-header></foodie-header>
     <h1>Register as a Restauurant</h1>
+    <!-- if already have an account the below router link
+    will take the user to the restaurant login page -->
     <h3>Already have an account? <router-link class="links" to="/restaurant_login">LogIn</router-link></h3>
     <div class="form">
       <div class="content_item">
@@ -41,7 +44,9 @@
       <p>Banner URL</p>
       <input type="url" placeholder="banner URL" ref="banner_url" />
     </div>
+    <!-- Register button will trigger the send request method  -->
    <button class="submit" @click="send_request">Register</button>
+   <h2 v-if="message !== undefined">{{message}}</h2>
   </div>
 </template>
 
@@ -54,15 +59,18 @@ export default {
     FoodieHeader,
   },
   methods: {
+    /*send request method will call the api */
     send_request() {
       axios
         .request({
+          /*endpoint url for post method */
           url: `https://innotechfoodie.ml/api/restaurant`,
           method: `POST`,
           headers: {
             "x-api-key": "TVTZDiQZDzjkWqVkNCxr",
           },
           data: {
+            /*data is grabbed  from the input fields  */
             name: this.$refs[`name`][`value`],
             address: this.$refs[`address`][`value`],
             city: this.$refs[`city`][`value`],
@@ -76,21 +84,26 @@ export default {
         })
         .then((response) => {
           if(response){
+            /* if response is successfull then the user will 
+            get token and restaurant id in return and which will 
+            be used for authetication purposes */
             cookies.set(`restaurant_id` , response[`data`][`restaurantId`]);
             cookies.set(`token`, response[`data`][`token`]);
-            if(cookies.get(`restaurant_id`) && cookies.get(`token`)){
+            /*the user will sent to restaurant profile page */
               this.$router.push(`/restaurant_profile`);
-            }
           }
         })
         .catch((error) => {
-          error;
+          if(error){
+            this.message = `Error Registering the Restaurant.`
+          }
         });
     },
   },
   data() {
     return {
       details: undefined,
+      message: undefined
     };
   },
 };
