@@ -1,35 +1,37 @@
-<template>
-  <div>
+<template> 
+  <div class="navbar">
     <!-- various links from the client header to navigate to different pages and logout as well  -->
-    <router-link to="/profile_page">Profile</router-link>
-    <router-link to="/discover_restaurants">Restaurants</router-link>
-    <router-link to="/order_placed">Orders</router-link>
-    <router-link to="/client_cart">Cart</router-link>
-    <router-link v-if="cookies_exist === false" to="/client_login">LogIn</router-link>
-    <all-logout v-if="cookies_exist === true"></all-logout>
+    <div v-if="desktop_view === false" class="navbar_mobile">
+        
+    </div>
+    <div v-if="desktop_view === true" class="navbar_desktop">
+     <desktop-links></desktop-links>      
+    </div>
   </div>
 </template>
 
 <script>
-import AllLogout from "@/components/allLogout.vue";
-import cookies from "vue-cookies";
+import DesktopLinks from "@/components/desktopLinks.vue";
+import NavigationLinks from "@/components/desktopLinks.vue";
 export default {
   components: {
-    AllLogout,
+    DesktopLinks,
   },
-  mounted() {
-    if (cookies.get(`client_id`)) {
-      this.cookies_exist = true;
-    } else {
-      this.cookies_exist = false;
+mounted () {
+    if(this.element.clientWidth < 500){
+        this.desktop_view = false;
+    } else if(this.element.clientWidth >= 500){
+        this.desktop_view = true;
     }
-  },
-  data() {
+},
+data() {
     return {
-      cookies_exist: false,
-    };
-  },
+        desktop_view: true
+    }
+},
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>
