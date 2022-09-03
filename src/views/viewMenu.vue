@@ -1,5 +1,7 @@
 <template>
   <div>
+    <!-- view menu component is for the client side menu view 
+    it is little different from restaurant menu because it -->
  <page-header></page-header>
     <h1>this is menu profile page</h1>
     <div v-if="info !== undefined">

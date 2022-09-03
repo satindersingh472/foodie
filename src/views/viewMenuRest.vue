@@ -1,6 +1,6 @@
 <template>
   <div>
-<restaurant-header></restaurant-header>
+<page-header></page-header>
     <h1>this is menu profile page</h1>
     <div v-if="info !== undefined">
       <div class="content_item" v-for="detail in details" :key="detail[`id`]">
@@ -31,12 +31,12 @@
 import axios from "axios";
 import cookies from "vue-cookies";
 import EditMenu from "@/components/editMenu.vue";
-import RestaurantHeader from "@/components/restaurantHeader.vue";
 import DeleteMenu from "@/components/deleteMenu.vue";
+import PageHeader from "@/components/pageHeader.vue";
 export default {
   components: {
     EditMenu,
-    RestaurantHeader,
+    PageHeader,
     DeleteMenu,
   },
   mounted() {

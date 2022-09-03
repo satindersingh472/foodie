@@ -34,7 +34,7 @@ export default {
   methods: {
     // send detail will set cookies restaurant number and route the user to the view menu page
     send_detail(detail) {
-      cookies.set(`restaurant_number`, detail[`restaurant_id`]);
+    cookies.set(`restaurant_number`, detail[`restaurant_id`])
       this.$router.push(`/view_menu`);
     }
   },

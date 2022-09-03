@@ -1,9 +1,8 @@
 <template>
   <div>
     <!-- restaurant profile component is used to display for a restaurant -->
-    <!-- restaurant header is for displaying options in restaurant profile form -->
     <h2 v-if="message !== undefined">{{message}}</h2>
-    <restaurant-header></restaurant-header>
+ <page-header></page-header>
     <rest-profile-header :details="details"></rest-profile-header>
     <!-- restaurant form will contain all the information about profile of a restaurant -->
     <div class="form">
@@ -71,12 +70,12 @@
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
-import RestaurantHeader from "@/components/restaurantHeader.vue";
+import PageHeader from "@/components/pageHeader.vue";
 import RestProfileHeader from "@/components/restProfileHeader.vue";
 import RestEditProfile from "@/components/restEditProfile.vue";
 export default {
   components: {
-    RestaurantHeader,
+    PageHeader,
     RestProfileHeader,
     RestEditProfile,
   },
