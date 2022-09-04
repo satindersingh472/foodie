@@ -12,7 +12,7 @@ import ViewMenu from "@/views/viewMenu.vue";
 import ViewMenuRest from "@/views/viewMenuRest.vue";
 import AddItems from "@/views/addItems.vue";
 import ClientCart from "@/views/clientCart.vue";
-import OrderPlaced from "@/views/orderPlaced.vue";
+import AllOrders from "@/views/allOrders.vue";
 import RestaurantOrders from "@/views/restaurantOrders.vue";
 Vue.use(VueRouter);
 
@@ -66,8 +66,8 @@ const routes = [
     component: ClientCart
   },
   {
-    path: `/order_placed`,
-    component: OrderPlaced
+    path: `/all_orders`,
+    component: AllOrders
   },
   {
     path: `/restaurant_orders`,
