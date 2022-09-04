@@ -11,13 +11,13 @@
       <div class="content_item_image">
         <img :src="detail[`banner_url`]" :alt="`image for ${detail[`name`]}`" />
       </div>
+      <div class="profile_logo">
+        <img class="logo_rest" :src="detail[`profile_url`]" :alt="`logo for ${detail[`name`]}`">
+      </div>
       <h1>{{ detail[`name`] }}</h1>
       <div class="content_item_detail">
         <p> {{detail[`address`]}}<br/>{{ detail[`city`] }}</p>
         <p>{{ detail[`phone_number`] }}</p>
-      </div>
-      <div>
-        <p>{{detail[`restaurant_id`]}}</p>
       </div>
     </div>
   </div>
@@ -74,6 +74,19 @@ export default {
 }
 .content_item {
   display: grid;
+  gap: 10px;
+  margin-top: 15px;
+  box-shadow: 3px 3px 6px grey;
+  text-align: center;
+  background-color: antiquewhite;
+  .profile_logo{
+    display: grid;
+    place-items: center;
+    .logo_rest{
+      height: 75px;
+      width: 75px;
+    }
+  }
   .content_item_image {
     width: 100%;
     height: 200px;
@@ -86,6 +99,8 @@ export default {
   .content_item_detail {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      align-items: center;
+      justify-items: center;
     }
 }
 </style>

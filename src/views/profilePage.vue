@@ -4,14 +4,16 @@
   <!-- this component will also emit the details from the form inputs -->
   <!-- the emitted data will be used to edit the profile -->
   <div>
-    <div v-if="message !== undefined">{{message}}</div>
+    <div v-if="message !== undefined">{{ message }}</div>
     <div class="main_page">
       <page-header></page-header>
       <div class="form">
         <!-- the form header is the header for the form which will contain the images and other options as well -->
         <div class="form_header">
           <div>
-            <h2>Welcome, {{details[`first_name`]}} {{details[`last_name`]}}</h2>
+            <h2>
+              Welcome, {{ details[`first_name`] }} {{ details[`last_name`] }}
+            </h2>
           </div>
           <div class="image">
             <!-- edit profile image is a component which is used to change the proifle image for a client  -->
@@ -61,14 +63,14 @@
               placeholder="enter password to save changes"
             />
           </div>
-          <!-- the form contains the delete existense component to delete the client account -->
-          <delete-existense class="delete_button"></delete-existense>
         </div>
         <!-- save button will trigger send info and which will emit the info grabbed from all the form values -->
         <button @click="send_info">Save</button>
         <!-- edit profile is a component which is here to make an api call after recieving all the data from this component by emitting -->
         <!-- edit profile component will just show a message on this page because everything is happening on the backend for edit profile -->
         <edit-profile></edit-profile>
+        <!-- the form contains the delete existense component to delete the client account -->
+        <delete-existense class="delete_button"></delete-existense>
       </div>
     </div>
   </div>
@@ -140,18 +142,14 @@ export default {
 }
 .main_page {
   display: grid;
-  text-align: center;
   place-items: center;
 }
 .form {
-  border: 2px solid black;
-  padding: 5px;
   display: grid;
-  gap: 20px;
   width: 100%;
+  gap: 10px;
+  margin-top: 10px;
   button {
-    display: grid;
-    justify-self: center;
     padding: 10px;
   }
   .delete_button {
@@ -161,18 +159,18 @@ export default {
 .form_data {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
   .content_item {
     display: grid;
-    margin-top: 40px;
+    margin-top: 10px;
     width: 100%;
+    text-align: center;
     p {
       justify-self: start;
-      margin: 10px 5px 5px 0px;
     }
     input {
+      text-align: center;
+      padding: 10px 0px;
       width: 100%;
-      padding: 10px;
       border: 1px solid black;
       background-color: #b0cad9;
     }
@@ -181,22 +179,22 @@ export default {
 .form_header {
   display: grid;
   width: 100%;
-  height: 10vh;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   div {
     align-items: center;
     h2 {
       display: grid;
+      text-transform: capitalize;
     }
   }
   .image {
     display: grid;
     grid-template-columns: 1fr 1fr;
-  place-items: center;
+    justify-items: start;
     .edit_button {
       display: grid;
-      place-items: center;
+      justify-items: end;
       align-self: end;
     }
     .img {
@@ -208,7 +206,12 @@ export default {
 }
 @media only screen and (min-width: 600px) {
   .form {
-    width: 50vw;
+    width: 40vw;
+    margin-top: 20px;
+    gap: 20px;
+  }
+  .form_data{
+    gap: 10px;
   }
 }
 </style>
