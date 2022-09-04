@@ -4,7 +4,7 @@
     it is little different from restaurant menu because it -->
     <page-header></page-header>
     <h1>{{info[`name`]}}'s Menu</h1>
-    <div v-if="info !== undefined">
+    <div class="all_content" v-if="info !== undefined">
       <div class="content_item" v-for="(detail, index) in details" :key="index">
         <img
           class="content_item_image"
@@ -106,6 +106,20 @@ img {
       grid-template-columns: 1fr 1fr;
       gap: 10px;
       text-align: start;
+    }
+  }
+}
+@media only screen and (min-width: 500px){
+  .all_content{
+    display: grid;
+    grid-template-columns:repeat(auto-fit,minmax(500px,1fr));
+    place-items: center;
+    .content_item{
+      width: 500px;
+      img{
+        width:100%;
+        height: 25vh;
+      }
     }
   }
 }

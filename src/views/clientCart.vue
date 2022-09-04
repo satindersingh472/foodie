@@ -115,21 +115,31 @@ img {
   width: 300px;
   object-fit: cover;
 }
+.all_items{
+  display: grid;
+}
+.order_recieved{
+  width: 100%;
+}
 .place_order {
   display: grid;
   justify-self: center;
-  padding: 20px;
+  padding: 10px;
 }
 .main_page {
   display: grid;
   gap: 20px;
 }
-.all_items {
+
+@media only screen and (min-width:500px){
+  .all_items {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  place-items: center;
   .order_recieved {
     display: grid;
     place-items: center;
+     grid-template-columns: repeat(auto-fit,min-max(250px,1fr));
   }
+}
 }
 </style>
