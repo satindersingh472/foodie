@@ -3,10 +3,10 @@
   <!-- this component will show the orders placed by the client that is logged in -->
      <page-header></page-header>
        <div class="unique_order" v-for="(order, index) in orders" :key="index">
-        <h2>Order No. {{order}}</h2>
+   <div class="order_number"><h2>Order No. {{order}}</h2></div>
       <div v-for="detail in details" :key="detail[`order_id`]">
         <div v-if="order === detail[`order_id`]">
-          <h2>{{detail[`name`]}}</h2>
+          <h2>{{detail[`name`]}}  ${{detail[`price`]}}</h2>
         </div>
       </div>
     </div>
@@ -18,7 +18,7 @@ import axios from "axios";
 import cookies from "vue-cookies";
 import pageHeader from '@/components/pageHeader.vue';
 export default {
-  components: { pageHeader },
+  components: { pageHeader,},
   methods: {
    unique_orders() {
       for (let i = 0; i < this.details.length; i++) {
@@ -74,6 +74,12 @@ export default {
     border: 2px solid black;
     display: grid;
     padding: 10px;
+    margin-top: 10px;
+    .order_number{
+      display: grid;
+      place-items: center;
+      background-color: green;
+    }
 }
 
  </style>

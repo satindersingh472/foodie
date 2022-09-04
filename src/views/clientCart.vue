@@ -25,16 +25,16 @@
 </template>
 
 <script>
-import axios from "axios";
-import cookies from "vue-cookies";
-import pageHeader from "@/components/pageHeader.vue";
+import axios from 'axios'
+import cookies from 'vue-cookies'
+import pageHeader from '@/components/pageHeader.vue'
 export default {
   components: { pageHeader },
   mounted() {
-    this.order_details = JSON.parse(cookies.get(`orders`));
+    this.order_details = JSON.parse(cookies.get(`orders`))
     // if cookies are there then show something is true
     if (cookies.get(`orders`)) {
-      this.show_something = true;
+      this.show_something = true
     }
     // order details is parsed value of cookies orders
     // cookies orders have the details or object containing detail of evey item
@@ -42,16 +42,16 @@ export default {
     // for every item in the cart or inside the orders cookies the id will be pushed to items array
     for (let i = 0; i < this.order_details.length; i++) {
       // items array will be used to send menu items id coming from orders cookies
-      this.items.push(this.order_details[i][`id`]);
+      this.items.push(this.order_details[i][`id`])
     }
   },
   methods: {
     // delete item will delete the item based on index
     delete_item(index) {
-      this.order_details.splice(index, 1);
+      this.order_details.splice(index, 1)
       // after deleting the item it will set the cookies back again to stringify
       // mounted lifecycle will help parse the cookies back again
-      cookies.set(`orders`, JSON.stringify(this.order_details));
+      cookies.set(`orders`, JSON.stringify(this.order_details))
     },
     send_request() {
       axios
@@ -62,7 +62,7 @@ export default {
           method: `POST`,
           // api key and token for client authentication is used as headers
           headers: {
-            "x-api-key": "TVTZDiQZDzjkWqVkNCxr",
+            'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
             token: cookies.get(`token`),
           },
           // menu items and restaurant id are used to send data for an order
@@ -75,21 +75,21 @@ export default {
           if (response) {
             // if response is successfull then the value of message will displayed on page
             // cookies will be removed
-            cookies.remove(`orders`);
+            cookies.remove(`orders`)
             // show something will set to false i.e there will be no items displayed after an order is placed
-            this.show_something = false;
+            this.show_something = false
             // the message will appear after the order is successfully placed
             this.message = `Successfull!! Your order id is ${
               response[`data`][`order_id`]
-            }`;
+            }`
           }
         })
         .catch((error) => {
           if (error) {
             // if there is an error then the following message will get displayed
-            this.message = `Order not placed`;
+            this.message = `Order not placed`
           }
-        });
+        })
     },
   },
   data() {
@@ -99,9 +99,9 @@ export default {
       unique_orders: [],
       message: undefined,
       show_something: false,
-    };
+    }
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -115,10 +115,10 @@ img {
   width: 300px;
   object-fit: cover;
 }
-.all_items{
+.all_items {
   display: grid;
 }
-.order_recieved{
+.order_recieved {
   width: 100%;
 }
 .place_order {
@@ -131,15 +131,16 @@ img {
   gap: 20px;
 }
 
-@media only screen and (min-width:500px){
+@media only screen and (min-width: 500px) {
   .all_items {
-  display: grid;
-  place-items: center;
-  .order_recieved {
     display: grid;
     place-items: center;
-     grid-template-columns: repeat(auto-fit,min-max(250px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    .order_recieved {
+      display: grid;
+      width: 250px;
+      place-items: center;
+    }
   }
-}
 }
 </style>
