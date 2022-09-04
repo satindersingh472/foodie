@@ -28,7 +28,8 @@ export default {
     }
   },
 mounted () {
-    window.addEventListener(`resize`,this.change_querie);
+this.change_querie();
+window.addEventListener(`resize`,this.change_querie);
 },
 data() {
     return {

@@ -1,7 +1,10 @@
 <template>
   <div class="main_header">
     <div class="navbar">
-      profile
+      <div class="logo">
+        <img class="icon" src="@/assets/logo.svg" alt="logo for foodie">
+        <h4>Foodie</h4>
+      </div>
       <div class="button_open">
         <button>
           <img
@@ -14,6 +17,15 @@
       </div>
     </div>
     <div v-if="show_links_all === true" class="links">
+      <div class="button_close">
+        <button>
+          <img
+            @click="hide_links"
+            src="@/assets/menu_icon_close.svg"
+            alt="close_menu_icon"
+          />
+        </button>
+      </div>
       <router-link to="/profile_page">Profile</router-link>
       <router-link to="/discover_restaurants">Restaurants</router-link>
       <router-link to="/order_placed">Orders</router-link>
@@ -42,11 +54,10 @@ export default {
   },
   methods: {
     show_links() {
-      if (this.show_links_all === false) {
-        this.show_links_all = true;
-      } else {
-        this.show_links_all = false;
-      }
+      this.show_links_all = true;
+    },
+    hide_links() {
+      this.show_links_all = false;
     },
   },
   data() {
@@ -59,6 +70,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+* {
+  padding: 0px;
+  margin: 0px;
+}
 .main_header {
   display: grid;
   width: 100%;
@@ -66,10 +81,23 @@ export default {
     display: grid;
     grid-auto-flow: column;
     height: 10vh;
-    align-items: center;
+    align-items: start;
+    background-color: #b0cad8;
+    .logo{
+        display: grid;
+        justify-items: start;
+        padding: 0px 0px 10px 10px;
+        h4{
+            font-family: gluten,sans-serif;
+        }
+    }
     .button_open {
       display: grid;
       justify-items: end;
+      button {
+        background-color: transparent;
+        border: none;
+      }
     }
   }
 }
@@ -77,25 +105,37 @@ export default {
   display: grid;
   grid-auto-flow: row;
   gap: 10px;
-  place-items: center;
+  justify-items: center;
   background-color: white;
   position: fixed;
   right: 0px;
-  top: 10vh;
+  top: 0px;
   height: 100vh;
-  width: 100%;
-*{
+  width: 50%;
+
+  .button_close {
+    display: grid;
+    justify-self: end;
+    button {
+      background-color: transparent;
+      border: none;
+      height: 40px;
+      display: grid;
+      padding: 15px;
+      img {
+        height: 40px;
+        width: 40px;
+      }
+    }
+  }
+  * {
     text-decoration: none;
-}
+    color: black;
+  }
 }
 .icon {
-  height: 40px;
+  height: 90%;
   width: 40px;
-}
-.button_open {
-  button {
-    background-color: transparent;
-    border: none;
-  }
+  padding: 5px 5px 5px 10px;
 }
 </style>
