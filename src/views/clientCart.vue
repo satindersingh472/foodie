@@ -54,6 +54,7 @@ export default {
       cookies.set(`orders`, JSON.stringify(this.order_details))
     },
     send_request() {
+      this.restaurant = cookies.get(`restaurant_selected`)[`restaurant_id`] 
       axios
         .request({
           // endpoint url for making an ap request to place order
@@ -68,7 +69,7 @@ export default {
           // menu items and restaurant id are used to send data for an order
           data: {
             menu_items: this.items,
-            restaurant_id: cookies.get(`restaurant_number`),
+            restaurant_id: this.restaurant
           },
         })
         .then((response) => {
@@ -96,9 +97,9 @@ export default {
     return {
       order_details: undefined,
       items: [],
-      unique_orders: [],
       message: undefined,
       show_something: false,
+      restaurant: undefined
     }
   },
 }

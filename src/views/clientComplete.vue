@@ -1,17 +1,16 @@
 <template>
-  <div>
-    <!-- this component will show the orders placed by the client that is logged in -->
+  <div class="main_page">
     <page-header></page-header>
     <div class="links">
-      <button class="confirmed_button" >
-        <router-link class="confirmed_link" to="/client_confirmed">
-          View Confirmed Orders
-        </router-link>
+      <button class="all_button" >
+        <router-link to="/all_orders">View All Orders</router-link>
       </button>
-      <button class="complete_button" ><router-link to="/client_complete">View Completed Orders</router-link></button>
+      <button class="confirmed_button">
+        <router-link to="/client_confirmed">View Confirmed Orders</router-link>
+      </button>
     </div>
     <div class="all_orders">
-      <h2>All Orders</h2>
+      <h2 class="completed_heading">Completed Orders</h2>
       <div class="unique_order" v-for="(order, index) in orders" :key="index">
         <div class="order_number">
           <h2 ref="order_box">Order No. {{ order }}</h2>
@@ -29,47 +28,45 @@
 <script>
 import axios from 'axios'
 import cookies from 'vue-cookies'
-import pageHeader from '@/components/pageHeader.vue'
+import PageHeader from '@/components/pageHeader.vue'
 export default {
-  components: { pageHeader },
+  components: {
+    PageHeader,
+  },
   methods: {
-unique_orders() {
+    unique_orders() {
       for (let i = 0; i < this.details.length; i++) {
         if (this.orders.includes(this.details[i][`order_id`]) === false) {
-          this.orders.push(this.details[i][`order_id`]);
+          this.orders.push(this.details[i][`order_id`])
+        }
       }
-    }
-  },
+    },
   },
   mounted() {
     axios
       .request({
-        // endpoint for getting all the orders placed by the client
         url: `https://innotechfoodie.ml/api/client-order`,
         headers: {
-          'x-api-key': `TVTZDiQZDzjkWqVkNCxr`,
+          'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
           token: cookies.get(`token`),
+        },
+        params: {
+          is_complete: `true`,
         },
       })
       .then((response) => {
-        // if response is successfull then all the orders will be stored in an array called details
         this.details = response[`data`]
-        // the following code is to set the decimal place for price to 2
         for (let i = 0; i < response[`data`].length; i++) {
           this.details[i][`price`] = response[`data`][i][`price`].toFixed(2)
         }
         this.unique_orders()
       })
       .catch((error) => {
-        if (error) {
-          // if error exists then the following string will be shown as a message
-          this.message = `something went wrong`
-        }
+        error
       })
   },
   data() {
     return {
-      message: undefined,
       details: undefined,
       orders: [],
     }
@@ -78,48 +75,49 @@ unique_orders() {
 </script>
 
 <style lang="scss" scoped>
-*{
-  margin: 0px;
+* {
   padding: 0px;
+  margin: 0px;
 }
 .links {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   place-items: center;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
   margin: 10px auto;
-  *{
+  * {
     text-decoration: none;
   }
-  .complete_button{
-    background-color: lightgreen;
+  .all_button {
+    background-color: lightcoral;
+    padding: 10px;
   }
-  .confirmed_button{
+  .confirmed_button {
     background-color: orange;
   }
-}
-.main_page {
-  display: grid;
-  place-items: center;
-  grid-auto-flow: column;
 }
 .all_orders {
   display: grid;
   place-items: center;
-  text-align: center;
-  gap: 10px;
+  .completed_heading {
+    display: grid;
+    text-align: center;
+    color: green;
+  }
   .unique_order {
-    border: 2px solid lightcoral;
-    width: 100%;
+    border: 2px solid green;
     padding: 10px;
+    width: 100%;
+    text-align: center;
     .order_number {
-        background-color: lightcoral;
-        padding: 10px;
+      background-color: lightgreen;
+      text-align: center;
+      padding: 5px;
     }
   }
 }
 @media only screen and (min-width:400px){
-  .complete_button,.confirmed_button{
+  .confirmed_button{
     padding: 10px;
   }
 }

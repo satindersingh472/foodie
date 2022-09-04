@@ -3,6 +3,9 @@
     <restaurant-header></restaurant-header>
     <!-- unique order div has all the unique orders -->
     <div class="unique_order" v-for="(order, index) in orders" :key="index">
+      <div class="order_number">
+        <h2> Order No. {{order}}</h2>
+      </div>
       <!-- confirm order will confirm the specific order which is clicked -->
       <!-- order props is being sent thru the attribue to the confirm order component -->
       <!-- confirm order will use this props as a data required for an endpont to confirm -->

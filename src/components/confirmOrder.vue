@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- confirm order component is a button inside restaurant orders to confirm orders -->
-    <button @click="send_request(order,$event) " >Confirm</button>
+    <button @click="send_request(order,$event) ">Confirm</button>
     <!-- if order not get confirmed or get confirmed an appropriate message will get displayed -->
     <h2 v-if="message !== undefined">{{message}}</h2>
   </div>
