@@ -16,14 +16,14 @@
             </h2>
           </div>
           <div class="image">
-            <!-- edit profile image is a component which is used to change the proifle image for a client  -->
-            <edit-profile-image class="edit_button"></edit-profile-image>
             <img
               class="img"
               :src="details[`image_url`]"
               ref="image_url"
               :alt="`image of ${details[`first_name`]}`"
             />
+              <!-- edit profile image is a component which is used to change the proifle image for a client  -->
+            <edit-profile-image class="edit_button"></edit-profile-image>
           </div>
         </div>
         <div class="form_data">
@@ -179,7 +179,7 @@ export default {
 .form_header {
   display: grid;
   width: 100%;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 4fr 1fr;
   align-items: center;
   div {
     align-items: center;
@@ -191,10 +191,10 @@ export default {
   .image {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    justify-items: start;
+    justify-items: end;
     .edit_button {
       display: grid;
-      justify-items: end;
+      justify-items: start;
       align-self: end;
     }
     .img {

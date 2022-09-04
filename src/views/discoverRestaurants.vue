@@ -17,7 +17,10 @@
       <h1>{{ detail[`name`] }}</h1>
       <div class="content_item_detail">
         <p> {{detail[`address`]}}<br/>{{ detail[`city`] }}</p>
+        <div>
         <p>{{ detail[`phone_number`] }}</p>
+        <p>{{detail[`email`]}}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -34,7 +37,7 @@ export default {
   methods: {
     // send detail will set cookies restaurant number and route the user to the view menu page
     send_detail(detail) {
-    cookies.set(`restaurant_number`, detail[`restaurant_id`])
+    cookies.set(`restaurant_selected`, detail)
       this.$router.push(`/view_menu`);
     }
   },

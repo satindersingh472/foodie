@@ -2,25 +2,22 @@
   <div>
     <!-- view menu component is for the client side menu view 
     it is little different from restaurant menu because it -->
- <page-header></page-header>
-    <h1>this is menu profile page</h1>
+    <page-header></page-header>
+    <h1>{{info[`name`]}}'s Menu</h1>
     <div v-if="info !== undefined">
-      <div class="content_item" v-for="(detail,index) in details" :key="index">
+      <div class="content_item" v-for="(detail, index) in details" :key="index">
         <img
           class="content_item_image"
           :src="detail[`image_url`]"
           :alt="`image of ${detail[`name`]}`"
         />
-        <div class="content_item_options">
+        <div class="details_container">
+          <div class="content_item_details">
+            <p>{{ detail[`name`] }}</p>
+            <p>${{ detail[`price`] }}</p>
+          </div>
           <p>{{ detail[`description`] }}</p>
-          <p>{{detail[`id`]}}</p>
-          <button @click="add_items(detail,$event)">
-          Add to cart
-          </button>
-        </div>
-        <div class="content_item_details">
-          <p>{{ detail[`name`] }}</p>
-          <p>${{ detail[`price`] }}</p>
+          <button @click="add_items(detail, $event)">Add</button>
         </div>
       </div>
     </div>
@@ -33,19 +30,19 @@ import cookies from "vue-cookies";
 import PageHeader from "@/components/pageHeader.vue";
 export default {
   components: {
-PageHeader,
+    PageHeader,
   },
-methods: {
+  methods: {
     add_items(detail) {
-        this.orders.push(detail);
-        cookies.set(`orders`, JSON.stringify(this.orders));
-    }
-},
+      this.orders.push(detail);
+      cookies.set(`orders`, JSON.stringify(this.orders));
+    },
+  },
   mounted() {
-    if(cookies.get(`orders`)){
+    if (cookies.get(`orders`)) {
       this.orders = JSON.parse(cookies.get(`orders`));
     }
-    this.info = cookies.get(`restaurant_number`);
+    this.info = cookies.get(`restaurant_selected`);
     axios
       .request({
         url: `https://innotechfoodie.ml/api/menu`,
@@ -53,7 +50,7 @@ methods: {
           "x-api-key": "TVTZDiQZDzjkWqVkNCxr",
         },
         params: {
-          restaurant_id: this.info,
+          restaurant_id: this.info[`restaurant_id`],
         },
       })
       .then((response) => {
@@ -70,7 +67,7 @@ methods: {
     return {
       info: undefined,
       details: undefined,
-      orders:[]
+      orders: [],
     };
   },
 };
@@ -80,6 +77,7 @@ methods: {
 * {
   padding: 0px;
   margin: 0px;
+  text-align: center;
 }
 img {
   width: 100%;
@@ -87,15 +85,28 @@ img {
 }
 .content_item {
   display: grid;
-  text-align: center;
-  .content_item_options {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    place-items: center;
+  grid-template-columns: 1fr 1fr;
+  margin: 10px;
+  box-shadow: 3px 3px 6px grey;
+  .content_item_image {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
   }
-  .content_item_details {
+  .details_container {
     display: grid;
-    grid-auto-flow: column;
+   align-items: center;
+    text-align: start;
+    button{
+      justify-self: center;
+      padding: 5px;
+    }
+    .content_item_details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      text-align: start;
+    }
   }
 }
 </style>
