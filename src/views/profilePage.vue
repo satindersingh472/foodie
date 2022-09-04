@@ -11,7 +11,7 @@
         <!-- the form header is the header for the form which will contain the images and other options as well -->
         <div class="form_header">
           <div>
-            <h2>Profile</h2>
+            <h2>Welcome, {{details[`first_name`]}} {{details[`last_name`]}}</h2>
           </div>
           <div class="image">
             <!-- edit profile image is a component which is used to change the proifle image for a client  -->
@@ -180,9 +180,8 @@ export default {
 }
 .form_header {
   display: grid;
-  background-color: #b0cad9;
   width: 100%;
-  height: 100px;
+  height: 10vh;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   div {
@@ -193,16 +192,16 @@ export default {
   }
   .image {
     display: grid;
-    justify-self: end;
     grid-template-columns: 1fr 1fr;
+  place-items: center;
     .edit_button {
+      display: grid;
+      place-items: center;
       align-self: end;
     }
-
     .img {
       height: 70px;
       width: 70px;
-      padding-right: 20px;
       object-fit: cover;
     }
   }

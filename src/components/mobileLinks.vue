@@ -81,12 +81,11 @@ export default {
     display: grid;
     grid-auto-flow: column;
     height: 10vh;
-    align-items: start;
+    align-items:center;
     background-color: #b0cad8;
     .logo{
         display: grid;
         justify-items: start;
-        padding: 0px 0px 10px 10px;
         h4{
             font-family: gluten,sans-serif;
         }
@@ -134,8 +133,7 @@ export default {
   }
 }
 .icon {
-  height: 90%;
   width: 40px;
-  padding: 5px 5px 5px 10px;
+  padding-left:10px;
 }
 </style>
