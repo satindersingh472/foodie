@@ -14,7 +14,7 @@
             will further call the api -->
           <button @click="login">LOGIN</button>
             </div>
-          <div class="sign_up_link">
+          <div class="sign_up_links">
             <h3>Don't have an account?</h3>
             <h2>
               <!-- if the user do not have an account the following router link will
@@ -121,10 +121,6 @@ export default {
       border-radius: 15px;
       background-color: #b0cad8;
     }
-    .links {
-      color: blue;
-      text-decoration: none;
-    }
     button {
       font-size: 1.2rem;
       padding: 10px;
@@ -132,6 +128,12 @@ export default {
       background-color: #f79797;
     }
   }
+   .sign_up_links {
+      .links {
+        color: blue;
+        text-decoration: none;
+      }
+   }
 }
 @media only screen and (min-width:400px){
   .main_login{

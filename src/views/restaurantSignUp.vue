@@ -135,12 +135,11 @@ export default {
 * {
   padding: 0px;
   margin: 0px;
+  text-align: center;
 }
 .main_signup {
   display: grid;
   gap: 20px;
-  place-items: center;
-  width: 100%;
   .question {
     font-size: 1.2rem;
   }
@@ -159,10 +158,10 @@ export default {
 .main_form {
   display: grid;
   place-items: center;
+  gap: 20px;
   .content_item {
     width: 100%;
     display: grid;
-    place-items: center;
     p {
       justify-self: start;
       padding: 5px;
@@ -170,11 +169,11 @@ export default {
     }
     input,
     textarea {
-      font-size: 0.8rem;
+      font-size: 1.3rem;
       width: 100%;
       border-radius: 10px;
       text-align: center;
-      padding: 10px 0px;
+      padding: 5px 0px;
       background-color: #b0cad8;
     }
   }
@@ -182,16 +181,15 @@ export default {
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 100%;
-    place-items: center;
     gap: 20px;
     font-family: judson, serif;
   }
 }
 
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 600px) {
   .main_form {
     width: 500px;
-    place-items: center;
+    justify-self: center;
   }
 }
 </style>
