@@ -1,18 +1,20 @@
 <template>
+<div class="main_page">
 <!-- restaurant sign up component will be used to allow a restaurant user to create a new restaurant -->
-  <div class="main_signup">
+<restaurant-profile v-if="cookies_exist === true"></restaurant-profile>
+  <div v-if="cookies_exist === false" class="main_signup">
     <foodie-header></foodie-header>
-    <h1>Register as a Restauurant</h1>
+    <h1 class="heading_form" >Register as a Restaurant</h1>
     <!-- if already have an account the below router link
     will take the user to the restaurant login page -->
-    <h3>Already have an account? <router-link class="links" to="/restaurant_login">LogIn</router-link></h3>
+    <h3 class="question" >Already have an account? <router-link class="links" to="/restaurant_login">LogIn</router-link></h3>
     <div class="form">
       <div class="content_item">
         <p>Name</p>
         <input type="text" placeholder="Restaurant's name" ref="name" />
       </div>
       <div class="content_item">
-        <p>Addess</p>
+        <p>Address</p>
         <input type="url" placeholder="Restaurant's address" ref="address" />
       </div>
       <div class="content_item">
@@ -48,15 +50,25 @@
    <button class="submit" @click="send_request">Register</button>
    <h2 v-if="message !== undefined">{{message}}</h2>
   </div>
+</div>
 </template>
 
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
 import FoodieHeader from "@/components/foodieHeader.vue";
+import RestaurantProfile from "@/views/restaurantProfile.vue";
 export default {
   components: {
     FoodieHeader,
+    RestaurantProfile,
+  },
+  mounted () {
+    if(cookies.get(`restaurant_id`) && cookies.get(`token`)){
+      this.cookies_exist = true;
+    } else {
+      this.cookies_exist = false;
+    }
   },
   methods: {
     /*send request method will call the api */
@@ -102,6 +114,7 @@ export default {
   },
   data() {
     return {
+      cookies_exist: false,
       details: undefined,
       message: undefined
     };
@@ -110,7 +123,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import url("https://fonts.googleapis.com/css2?family=Gluten:wght@100;200;300;400;600;700;900&family=Judson:ital,wght@0,400;0,700;1,400&display=swap");
 * {
   padding: 0px;
   margin: 0px;
@@ -119,6 +131,15 @@ export default {
   display: grid;
   gap: 20px;
   place-items: center;
+  .question{
+    font-size: 1.2rem;
+  }
+  .links{
+  color: #f79797;
+}
+  .heading_form{
+    font-size: 1.5rem;
+  }
   .submit {
     background-color: #f79797;
     padding: 10px;
@@ -140,6 +161,7 @@ export default {
   p {
     justify-self: start;
     padding: 5px;
+    font-size: 1.2rem;
   }
   input,
   textarea {
@@ -148,9 +170,8 @@ export default {
     border-radius: 10px;
     text-align: center;
     padding: 10px 0px;
+    background-color: #b0cad8;
   }
 }
-.links{
-  color: #f79797;
-}
+
 </style>
