@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="cookies_exist === true">
     <page-header></page-header>
     <!-- content item div will display each restaurant available to the client -->
     <!-- each div can trigger send detail method and send detail with it -->
@@ -62,6 +62,12 @@ export default {
     },
   },
   mounted() {
+    if (cookies.get(`token`) && cookies.get(`client_id`)) {
+      this.cookies_exist = true
+    } else {
+      this.cookies_exist = false
+    }
+
     axios
       .request({
         // endpoint for discovering all the restaurants available
@@ -83,6 +89,7 @@ export default {
   },
   data() {
     return {
+      cookies_exist: false,
       details: undefined,
       message: undefined,
     }

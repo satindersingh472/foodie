@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="main_page" >
         <!-- foodie header is for the components where navbar should not displayed -->
 <h1><router-link class="main_heading" to="/">Foodie</router-link></h1>
     </div>
@@ -12,15 +12,17 @@
 </script>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Gluten:wght@100;200;300;400;600;700;900&display=swap');
 *{
     display: grid;
     padding: 0px;
     margin: 0px;
     place-items: center;
 }
+
 .main_heading{
     font-family: Gluten,cursive;
     font-size: 3rem;
+    text-decoration: none;
+    color: black;
 }
 </style>

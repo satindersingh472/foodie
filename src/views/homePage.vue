@@ -12,13 +12,13 @@
       <foodie-header></foodie-header>
       <div class="client">
         <!-- router link to login or sign up as customer -->
-        <router-link class="links" to="/client_sign_up"
+        <router-link class="links" to="/client_login"
           ><button>Login / Sign Up as a Customer</button></router-link
         >
       </div>
       <div class="client">
         <!-- link to login or sign up as a restaurant -->
-        <router-link class="links" to="/restaurant_sign_up"
+        <router-link class="links" to="/restaurant_login"
           ><button>Login / Sign Up as a Restaurant</button></router-link
         >
       </div>

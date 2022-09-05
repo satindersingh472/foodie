@@ -3,7 +3,7 @@
     <!-- view menu component is for the client side menu view 
     it is little different from restaurant menu because it -->
     <page-header></page-header>
-    <h1>{{info[`name`]}}'s Menu</h1>
+    <h1>{{ info[`name`] }}'s Menu</h1>
     <div class="all_content" v-if="info !== undefined">
       <div class="content_item" v-for="(detail, index) in details" :key="index">
         <img
@@ -18,6 +18,7 @@
           </div>
           <p>{{ detail[`description`] }}</p>
           <button @click="add_items(detail, $event)">Add</button>
+          <h3 v-if="cart_message === undefined"> {{cart_message}}</h3>
         </div>
       </div>
     </div>
@@ -25,52 +26,53 @@
 </template>
 
 <script>
-import axios from "axios";
-import cookies from "vue-cookies";
-import PageHeader from "@/components/pageHeader.vue";
+import axios from 'axios'
+import cookies from 'vue-cookies'
+import PageHeader from '@/components/pageHeader.vue'
 export default {
   components: {
     PageHeader,
   },
   methods: {
     add_items(detail) {
-      this.orders.push(detail);
-      cookies.set(`orders`, JSON.stringify(this.orders));
+           this.orders.push(detail);
+          cookies.set(`orders`, JSON.stringify(this.orders));
+      }
     },
-  },
   mounted() {
     if (cookies.get(`orders`)) {
-      this.orders = JSON.parse(cookies.get(`orders`));
+      this.orders = JSON.parse(cookies.get(`orders`))
     }
-    this.info = cookies.get(`restaurant_selected`);
+    this.info = cookies.get(`restaurant_selected`)
     axios
       .request({
         url: `https://innotechfoodie.ml/api/menu`,
         headers: {
-          "x-api-key": "TVTZDiQZDzjkWqVkNCxr",
+          'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
         },
         params: {
           restaurant_id: this.info[`restaurant_id`],
         },
       })
       .then((response) => {
-        this.details = response[`data`];
+        this.details = response[`data`]
         for (let i = 0; i < response[`data`].length; i++) {
-          this.details[i][`price`] = response[`data`][i][`price`].toFixed(2);
+          this.details[i][`price`] = response[`data`][i][`price`].toFixed(2)
         }
       })
       .catch((error) => {
-        error;
-      });
+        error
+      })
   },
   data() {
     return {
       info: undefined,
       details: undefined,
       orders: [],
-    };
+      cart_message: undefined
+    }
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -95,9 +97,9 @@ img {
   }
   .details_container {
     display: grid;
-   align-items: center;
+    align-items: center;
     text-align: start;
-    button{
+    button {
       justify-self: center;
       padding: 5px;
     }
@@ -109,15 +111,15 @@ img {
     }
   }
 }
-@media only screen and (min-width: 500px){
-  .all_content{
+@media only screen and (min-width: 500px) {
+  .all_content {
     display: grid;
-    grid-template-columns:repeat(auto-fit,minmax(500px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
     place-items: center;
-    .content_item{
+    .content_item {
       width: 500px;
-      img{
-        width:100%;
+      img {
+        width: 100%;
         height: 25vh;
       }
     }
