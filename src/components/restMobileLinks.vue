@@ -8,9 +8,9 @@
       <div class="button_open">
         <button>
           <img
+          src="@/assets/menu_icon_open.svg"
             @click="show_links"
             class="icon"
-            src="@/assets/menu_icon_open.svg"
             alt="icon to open menu"
           />
         </button>
@@ -26,28 +26,20 @@
           />
         </button>
       </div>
-      <router-link to="/profile_page">Profile</router-link>
-      <router-link to="/discover_restaurants">Restaurants</router-link>
-      <router-link to="/all_orders">Orders</router-link>
-      <router-link to="/client_cart">Cart</router-link>
-      <all-logout v-if="cookies_exist === true"></all-logout>
+      <router-link to="/restaurant_profile">Profile</router-link>
+      <router-link to="/restaurant_orders">Orders</router-link>
+      <router-link to="/add_items">Add Items</router-link>
+      <router-link to="/view_menu_rest">View Menu</router-link>
+      <all-logout></all-logout>
     </div>
   </div>
 </template>
 
 <script>
 import AllLogout from "@/components/allLogout.vue";
-import cookies from "vue-cookies";
 export default {
   components: {
     AllLogout,
-  },
-  mounted() {
-    if (cookies.get(`client_id`)) {
-      this.cookies_exist = true;
-    } else {
-      this.cookies_exist = false;
-    }
   },
   methods: {
     show_links() {
@@ -59,7 +51,6 @@ export default {
   },
   data() {
     return {
-      cookies_exist: undefined,
       show_links_all: false,
     };
   },
@@ -133,4 +124,5 @@ export default {
   width: 40px;
   padding-left:10px;
 }
+
 </style>

@@ -31,7 +31,7 @@
           </div>
           <div class="content_item">
             <p>Phone Number</p>
-            <input type="tel" placeholder="phone" ref="phone_number" />
+            <input type="tel" placeholder="###-###-####" ref="phone_number" />
           </div>
         </div>
         <div class="content_item">

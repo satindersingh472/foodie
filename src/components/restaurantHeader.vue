@@ -1,20 +1,42 @@
-<template>
+<template> 
   <div class="navbar">
-    <!-- restaurant header is displayed when the page will have restaurant cookies  -->
-    <!-- it has vaious links to navigate through restaurant side of the website and a logout component as well -->
-    <router-link to="/restaurant_profile">Profile</router-link>
-    <router-link to="/restaurant_orders">Orders</router-link>
-    <all-logout></all-logout>
+    <!-- various links from the client header to navigate to different pages and logout as well  -->
+    <div v-if="desktop_view === false" class="navbar_mobile">
+        <rest-mobile-links></rest-mobile-links>
+    </div>
+    <div v-if="desktop_view === true" class="navbar_desktop">
+      <rest-desktop-links></rest-desktop-links>      
+    </div>
   </div>
 </template>
 
 <script>
 // importing various components 
-import AllLogout from "@/components/allLogout.vue";
+import RestMobileLinks from  "@/components/restMobileLinks.vue";
+import RestDesktopLinks from "@/components/restDesktopLinks";
 export default {
   components: {
-    AllLogout,
+    RestMobileLinks,
+    RestDesktopLinks
   },
+    methods: {
+    change_querie() {
+    if(document.documentElement.clientWidth < 500){
+        this.desktop_view = false;
+    } else if(document.documentElement.clientWidth >= 500){
+        this.desktop_view = true;
+    }
+    }
+  },
+mounted () {
+this.change_querie();
+window.addEventListener(`resize`,this.change_querie);
+},
+data() {
+  return {
+    desktop_view: false
+  }
+},
 };
 </script>
 

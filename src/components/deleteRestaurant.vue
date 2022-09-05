@@ -65,5 +65,7 @@ export default {
 .delete {
   background-color: red;
   color: white;
+  padding: 10px;
+  border-radius: 10px;
 }
 </style>
