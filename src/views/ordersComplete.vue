@@ -8,6 +8,9 @@
       <button class="confirmed_button">
         <router-link to="/orders_confirmed">View Confirmed Orders</router-link>
       </button>
+            <button class="not_confirmed_button"><router-link to="/orders_not_confirmed">View Not Confirmed Orders</router-link></button>
+            <button class="not_complete_button" ><router-link to="/orders_not_complete">View Not Completed Orders</router-link> </button>
+
     </div>
     <div class="all_orders">
       <h2 class="completed_heading">Completed Orders</h2>
@@ -101,6 +104,12 @@ export default {
   }
   .confirmed_button {
     background-color: orange;
+  }
+  .not_confirmed_button{
+    background-color: goldenrod;
+  }
+  .not_complete_button{
+    background-color: yellowgreen;
   }
 }
 .all_orders {

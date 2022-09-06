@@ -2,15 +2,21 @@
   <div class="main_page">
     <page-header></page-header>
     <div class="links">
-      <button class="all_button" ><router-link to="/all_orders">View All Orders</router-link></button>
-            <button class="not_confirmed_button" ><router-link to="/orders_not_confirmed">View Not Confirmed Orders</router-link></button>
-            <button class="not_complete_button"  ><router-link to="/orders_not_complete">View Not Completed Orders</router-link></button>
+      <button class="all_button">
+        <router-link to="/all_orders">View All Orders</router-link>
+      </button>
       <button class="complete_button">
         <router-link to="/orders_complete">View Completed Orders</router-link>
       </button>
+            <button class="confirmed_button"  ><router-link to="/orders_confirmed">View Confirmed Orders</router-link></button>
+      <button class="not_complete_button">
+        <router-link to="/orders_not_complete">
+          View Not Completed Orders
+        </router-link>
+      </button>
     </div>
     <div class="all_orders">
-             <h2 class="confirmed_heading" >Confirmed Orders</h2>
+      <h2 class="not_confirmed_heading">Not Confirmed Orders</h2>
       <div class="unique_order" v-for="(order, index) in orders" :key="index">
         <div class="order_number">
           <h2 ref="order_box">Order No. {{ order }}</h2>
@@ -43,12 +49,11 @@ export default {
     },
   },
   mounted() {
-    if(cookies.get(`client_id`)){
-      this.url_value = `https://innotechfoodie.ml/api/client-order`;
-    } else if(cookies.get(`restaurant_id`)){
-      this.url_value = `https://innotechfoodie.ml/api/restaurant-order`;
+    if (cookies.get(`client_id`)) {
+      this.url_value = `https://innotechfoodie.ml/api/client-order`
+    } else if (cookies.get(`restaurant_id`)) {
+      this.url_value = `https://innotechfoodie.ml/api/restaurant-order`
     }
-
 
     axios
       .request({
@@ -58,7 +63,7 @@ export default {
           token: cookies.get(`token`),
         },
         params: {
-          is_confirmed: `true`,
+          is_confirmed: `false`,
         },
       })
       .then((response) => {
@@ -92,18 +97,18 @@ export default {
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   margin: 10px auto;
-  *{
+  * {
     text-decoration: none;
   }
-  .complete_button{
+  .complete_button {
     background-color: lightgreen;
   }
-  .all_button{
+  .all_button {
     background-color: lightcoral;
     padding: 10px;
   }
-  .not_confirmed_button{
-    background-color: goldenrod;
+  .confirmed_button{
+    background-color: orange;
   }
   .not_complete_button{
     background-color: yellowgreen;
@@ -113,21 +118,21 @@ export default {
   display: grid;
   place-items: center;
   text-align: center;
-  .confirmed_heading{
-    color: orange;
+  .not_confirmed_heading {
+    color: goldenrod;
   }
   .unique_order {
-    border: 2px solid orange;
+    border: 2px solid goldenrod;
     padding: 10px;
     width: 100%;
-    .order_number{
-        background-color: orange;
-        padding: 10px;
+    .order_number {
+      background-color: goldenrod;
+      padding: 10px;
     }
   }
 }
-@media only screen and (min-width:400px){
-  .complete_button{
+@media only screen and (min-width: 400px) {
+  .complete_button {
     padding: 10px;
   }
 }

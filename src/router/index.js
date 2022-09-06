@@ -15,6 +15,8 @@ import ClientCart from "@/views/clientCart.vue";
 import AllOrders from "@/views/allOrders.vue";
 import OrdersConfirmed from "@/views/ordersConfirmed.vue";
 import OrdersComplete from "@/views/ordersComplete.vue"
+import OrdersNotConfirmed from "@/views/ordersNotConfirmed.vue";
+import OrdersNotComplete from "@/views/ordersNotComplete.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -77,6 +79,14 @@ const routes = [
   {
     path:`/orders_complete`,
     component: OrdersComplete
+  },
+  {
+    path: `/orders_not_confirmed`,
+    component: OrdersNotConfirmed
+  },
+  {
+    path: `/orders_not_complete`,
+    component: OrdersNotComplete
   }
 ];
 

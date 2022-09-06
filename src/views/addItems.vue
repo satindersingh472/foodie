@@ -10,20 +10,20 @@
       <div class="form">
         <!-- this component will gather all the values from these fields i.e from the form and use them as a data for post request -->
         <div class="content_item">
-          <h4>Product Name:</h4>
-          <input type="text" ref="name" />
+          <h4>Item's Name:</h4>
+          <input type="text" ref="name" placeholder="Name of Item" />
         </div>
         <div class="content_item">
-          <h4>Product Description:</h4>
-          <input type="text" ref="description" />
+          <h4>Item's Description:</h4>
+          <input type="text" ref="description"  placeholder="Description of Item " />
         </div>
         <div class="content_item">
-          <h4>Product Image URL:</h4>
-          <input type="url" ref="image_url" />
+          <h4>Item's Image URL:</h4>
+          <input type="url" ref="image_url" placeholder="Item Image url" />
         </div>
         <div class="content_item">
-          <h4>Product Price:</h4>
-          <input type="text" ref="price" />
+          <h4>Item's Price:</h4>
+          <input type="text" ref="price" placeholder="Price of an Item" />
         </div>
         <!-- add items button triggers send request and call the api  -->
         <button @click="send_request">Add Items</button>
@@ -99,14 +99,31 @@ export default {
 }
 .form {
   display: grid;
-  gap: 10px;
+  place-items: center;
+  gap: 3vh;
   .content_item {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    place-items: center;
     h4 {
       display: grid;
       text-align: start;
+    }
+    input{
+      font-size:1.1rem;
+    }
+  }
+  button{
+padding: 10px;
+background-color: #f79797;
+border-radius: 15px;
+  }
+}
+@media only screen and (min-width:450px){
+  .form{
+    .content_item{
+      input{
+        font-size: 1.5rem;
+      }
     }
   }
 }

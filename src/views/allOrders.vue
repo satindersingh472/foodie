@@ -8,6 +8,8 @@
           View Confirmed Orders
         </router-link>
       </button>
+      <button class="not_confirmed_button"  ><router-link to="/orders_not_confirmed">View Not Confirmed Orders</router-link></button>
+            <button class="not_complete_button"  ><router-link to="/orders_not_complete">View Not Completed Orders</router-link></button>
       <button class="complete_button" ><router-link to="/orders_complete">View Completed Orders</router-link></button>
     </div>
     <div class="all_orders">
@@ -74,7 +76,7 @@ unique_orders() {
         for (let i = 0; i < response[`data`].length; i++) {
           this.details[i][`price`] = response[`data`][i][`price`].toFixed(2)
         }
-        this.unique_orders()
+        this.unique_orders();
       })
       .catch((error) => {
         if (error) {
@@ -114,6 +116,12 @@ unique_orders() {
   }
   .confirmed_button{
     background-color: orange;
+  }
+  .not_confirmed_button{
+    background-color: goldenrod;
+  }
+  .not_complete_button{
+    background-color: yellowgreen;
   }
 }
 .main_page {
