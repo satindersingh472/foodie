@@ -1,7 +1,7 @@
 <template>
 <div>
   <!-- Edit menu component will show up when edit menu button is pressed on the restaurant menu view -->
-<button @click="show_options" >Edit Menu</button>
+<button @click="show_options" >Edit</button>
 <!-- following div will show when edit menu button changes the value of a show form after clicking the button -->
   <div v-if="show_form !== false">
     <!-- the form will have ref and value which will get used to display details in input fields and

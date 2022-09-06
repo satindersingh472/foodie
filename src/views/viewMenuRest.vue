@@ -1,7 +1,7 @@
 <template>
   <div>
-<page-header></page-header>
-    <div v-if="info !== undefined">
+    <page-header></page-header>
+    <div class="all_items" v-if="info !== undefined">
       <div class="content_item" v-for="detail in details" :key="detail[`id`]">
         <img
           class="content_item_image"
@@ -9,17 +9,17 @@
           :alt="`image of ${detail[`name`]}`"
         />
         <div class="content_item_options">
-          <p>{{ detail[`description`] }}</p>
-          <div>
+          <div class="content_item_details">
+            <p>{{ detail[`name`] }}</p>
+            <p>${{ detail[`price`] }}</p>
+          </div>
+          <div class="description">
+            <p>{{ detail[`description`] }}</p>
+          </div>
+          <div class="buttons">
             <edit-menu :detail="detail"></edit-menu>
+            <delete-menu :detail="detail"></delete-menu>
           </div>
-          <div class="delete_button">
-            <delete-menu :detail="detail" ></delete-menu>
-          </div>
-        </div>
-        <div class="content_item_details">
-          <p>{{ detail[`name`] }}</p>
-          <p>${{ detail[`price`] }}</p>
         </div>
       </div>
     </div>
@@ -27,11 +27,11 @@
 </template>
 
 <script>
-import axios from "axios";
-import cookies from "vue-cookies";
-import EditMenu from "@/components/editMenu.vue";
-import DeleteMenu from "@/components/deleteMenu.vue";
-import PageHeader from "@/components/pageHeader.vue";
+import axios from 'axios'
+import cookies from 'vue-cookies'
+import EditMenu from '@/components/editMenu.vue'
+import DeleteMenu from '@/components/deleteMenu.vue'
+import PageHeader from '@/components/pageHeader.vue'
 export default {
   components: {
     EditMenu,
@@ -39,34 +39,34 @@ export default {
     DeleteMenu,
   },
   mounted() {
-    this.info = cookies.get(`restaurant_id`);
+    this.info = cookies.get(`restaurant_id`)
     axios
       .request({
         url: `https://innotechfoodie.ml/api/menu`,
         headers: {
-          "x-api-key": "TVTZDiQZDzjkWqVkNCxr",
+          'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
         },
         params: {
           restaurant_id: this.info,
         },
       })
       .then((response) => {
-        this.details = response[`data`];
+        this.details = response[`data`]
         for (let i = 0; i < response[`data`].length; i++) {
-          this.details[i][`price`] = response[`data`][i][`price`].toFixed(2);
+          this.details[i][`price`] = response[`data`][i][`price`].toFixed(2)
         }
       })
       .catch((error) => {
-        error;
-      });
+        error
+      })
   },
   data() {
     return {
       info: undefined,
       details: undefined,
-    };
+    }
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -78,17 +78,39 @@ img {
   width: 100%;
   height: 250px;
 }
-.content_item {
+.all_items {
   display: grid;
-  text-align: center;
-  .content_item_options {
+  .content_item {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    place-items: center;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    margin-top: 1vh;
+    box-shadow: 3px 3px 6px grey;
+    .content_item_image {
+      height: 150px;
+      object-fit: cover;
+    }
+    .content_item_options {
+      display: grid;
+      place-items: center;
+      .content_item_details {
+        display: grid;
+        text-align: start;
+      }
+      .buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+    }
   }
-  .content_item_details {
-    display: grid;
-    grid-auto-flow: column;
+}
+@media only screen and (min-width: 500px) {
+  .all_items {
+    place-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    .content_item{
+      width: 400px;
+    }
   }
 }
 </style>

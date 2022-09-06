@@ -2,7 +2,7 @@
   <div>
     <!-- delete item will delete the item from restaurant side 
     delete item button will trigger the delete detail method -->
-    <button @click="delete_detail">Delete Item</button>
+    <button @click="delete_detail">Delete</button>
     <!-- if something happens after the api request then an appropriate message will be displayed here -->
     <h2 v-if="message !== undefined">{{message}}</h2>
   </div>

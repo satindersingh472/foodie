@@ -154,6 +154,7 @@ export default {
   justify-self: center;
   width: 100%;
   gap: 3vh;
+  margin-top: 2vh;
   .images {
     display: grid;
     gap: 10px;
