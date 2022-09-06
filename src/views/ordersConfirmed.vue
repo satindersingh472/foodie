@@ -4,7 +4,7 @@
     <div class="links">
       <button class="all_button" ><router-link to="/all_orders">View All Orders</router-link></button>
       <button class="complete_button">
-        <router-link to="/client_complete">View Completed Orders</router-link>
+        <router-link to="/orders_complete">View Completed Orders</router-link>
       </button>
     </div>
     <div class="all_orders">
@@ -41,9 +41,16 @@ export default {
     },
   },
   mounted() {
+    if(cookies.get(`client_id`)){
+      this.url_value = `https://innotechfoodie.ml/api/client-order`;
+    } else if(cookies.get(`restaurant_id`)){
+      this.url_value = `https://innotechfoodie.ml/api/restaurant-order`;
+    }
+
+
     axios
       .request({
-        url: `https://innotechfoodie.ml/api/client-order`,
+        url: this.url_value,
         headers: {
           'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
           token: cookies.get(`token`),

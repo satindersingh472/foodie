@@ -5,10 +5,9 @@
       <h4>Foodie</h4>
     </div>
     <div class="links">
-      <router-link to="/profile_page">Profile</router-link>
-      <router-link to="/discover_restaurants">Restaurants</router-link>
+      <router-link to="/restaurant_profile">Profile</router-link>
+      <router-link to="/view_menu_rest"> Menu</router-link>
       <router-link to="/all_orders">Orders</router-link>
-      <router-link to="/client_cart">Cart</router-link>
       <all-logout></all-logout>
     </div>
   </div>

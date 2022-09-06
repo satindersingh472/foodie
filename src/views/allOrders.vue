@@ -4,21 +4,26 @@
     <page-header></page-header>
     <div class="links">
       <button class="confirmed_button" >
-        <router-link class="confirmed_link" to="/client_confirmed">
+        <router-link class="confirmed_link" to="/orders_confirmed">
           View Confirmed Orders
         </router-link>
       </button>
-      <button class="complete_button" ><router-link to="/client_complete">View Completed Orders</router-link></button>
+      <button class="complete_button" ><router-link to="/orders_complete">View Completed Orders</router-link></button>
     </div>
     <div class="all_orders">
       <h2>All Orders</h2>
       <div class="unique_order" v-for="(order, index) in orders" :key="index">
         <div class="order_number">
           <h2 ref="order_box">Order No. {{ order }}</h2>
+             <div v-if="cookies_exist === `restaurant`" class="confirm_complete">
+              <confirm-order :order="order"></confirm-order>
+              <complete-order :order="order"></complete-order>
+            </div>
         </div>
         <div v-for="detail in details" :key="detail[`order_id`]">
           <div v-if="order === detail[`order_id`]">
             <h2>{{ detail[`name`] }} ${{ detail[`price`] }}</h2>
+         
           </div>
         </div>
       </div>
@@ -27,11 +32,13 @@
 </template>
 
 <script>
-import axios from 'axios'
-import cookies from 'vue-cookies'
-import pageHeader from '@/components/pageHeader.vue'
+import axios from 'axios';
+import cookies from 'vue-cookies';
+import pageHeader from '@/components/pageHeader.vue';
+import ConfirmOrder from "@/components/confirmOrder.vue";
+import CompleteOrder from "@/components/completeOrder.vue";
 export default {
-  components: { pageHeader },
+  components: { pageHeader,ConfirmOrder,CompleteOrder },
   methods: {
 unique_orders() {
       for (let i = 0; i < this.details.length; i++) {
@@ -42,10 +49,19 @@ unique_orders() {
   },
   },
   mounted() {
+
+  if(cookies.get(`client_id`)){
+    this.cookies_exist = `client`;
+      this.url_value = `https://innotechfoodie.ml/api/client-order`;
+    } else if(cookies.get(`restaurant_id`)){
+      this.cookies_exist = `restaurant`;
+      this.url_value = `https://innotechfoodie.ml/api/restaurant-order`;
+    }
+
     axios
       .request({
         // endpoint for getting all the orders placed by the client
-        url: `https://innotechfoodie.ml/api/client-order`,
+        url: this.url_value,
         headers: {
           'x-api-key': `TVTZDiQZDzjkWqVkNCxr`,
           token: cookies.get(`token`),
@@ -72,6 +88,8 @@ unique_orders() {
       message: undefined,
       details: undefined,
       orders: [],
+      url_value: undefined,
+      cookies_exist: undefined
     }
   },
 }
@@ -115,6 +133,10 @@ unique_orders() {
     .order_number {
         background-color: lightcoral;
         padding: 10px;
+        .confirm_complete{
+          display: grid;
+          gap: 1vh;
+        }
     }
   }
 }

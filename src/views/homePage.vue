@@ -1,6 +1,6 @@
 <template>
   <!-- this page contains the options to login or signup as a client or a restaurant -->
-  <div>
+  <div class="main_page">
     <!-- if cookies token are present then there will be no options -->
     <div v-if="show_user === `discover_restaurant`">
       <discover-restaurants></discover-restaurants>
@@ -57,22 +57,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.both_options {
+.main_page{
   display: grid;
-  gap: 10%;
-  place-items: center;
-  .links {
-    text-decoration: none;
-  }
-  .client {
+}
+  .both_options{
     display: grid;
-    width: 30vw;
-    button {
-      font-size: 2rem;
-      text-transform: uppercase;
-      padding: 10%;
-      display: grid;
+    place-items: center;
+    gap: 10vh;
+    .client{
+      button{
+        font-size: 2rem;
+        padding: 5px;
+        border-radius: 20px;
+        box-shadow: 3px 3px 6px;  
+      }
     }
   }
-}
+  @media only screen and (min-width:500px){
+    .both_options{
+      width: 500px;
+      justify-self: center;
+    }
+  }
 </style>

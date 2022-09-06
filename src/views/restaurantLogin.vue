@@ -2,8 +2,8 @@
   <div class="main_page">
     <!-- restaurant login component is for login as a restaurant -->
     <!-- will show a restaurant profile if logged in -->
-    <restaurant-profile v-if="hide_fields === true"></restaurant-profile>
-    <div v-if="hide_fields === false">
+    <restaurant-profile class="restaurant_component" v-if="hide_fields === true"></restaurant-profile>
+    <div  class="login_page" v-if="hide_fields === false">
       <div class="main_login" ref="main_login">
         <foodie-header></foodie-header>
         <h1 class="heading_form">Login as a Restaurant</h1>
@@ -99,16 +99,19 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Gluten:wght@100;200;300;400;600;700;900&family=Judson:ital,wght@0,400;0,700;1,400&display=swap');
 * {
   display: grid;
-  place-items: center;
+  text-align: center;
   font-family: judson, serif;
   margin: 0px;
   padding: 0px;
   width: 100%;
 }
+.main_page{
+  display: grid;
+}
 .main_login {
   display: grid;
   gap: 8vh;
-  place-items: center;
+  justify-self: center;
   .heading_form {
     font-size: 1.2rem;
   }

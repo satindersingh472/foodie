@@ -27,7 +27,7 @@
         </button>
       </div>
       <router-link to="/restaurant_profile">Profile</router-link>
-      <router-link to="/restaurant_orders">Orders</router-link>
+      <router-link to="/all_orders">Orders</router-link>
       <router-link to="/add_items">Add Items</router-link>
       <router-link to="/view_menu_rest">View Menu</router-link>
       <all-logout></all-logout>

@@ -13,9 +13,8 @@ import ViewMenuRest from "@/views/viewMenuRest.vue";
 import AddItems from "@/views/addItems.vue";
 import ClientCart from "@/views/clientCart.vue";
 import AllOrders from "@/views/allOrders.vue";
-import RestaurantOrders from "@/views/restaurantOrders.vue";
-import ClientConfirmed from "@/views/clientConfirmed.vue";
-import ClientComplete from "@/views/clientComplete.vue"
+import OrdersConfirmed from "@/views/ordersConfirmed.vue";
+import OrdersComplete from "@/views/ordersComplete.vue"
 Vue.use(VueRouter);
 
 const routes = [
@@ -72,16 +71,12 @@ const routes = [
     component: AllOrders
   },
   {
-    path: `/restaurant_orders`,
-    component: RestaurantOrders
+    path: `/orders_confirmed`,
+    component: OrdersConfirmed
   },
   {
-    path: `/client_confirmed`,
-    component: ClientConfirmed
-  },
-  {
-    path:`/client_complete`,
-    component: ClientComplete
+    path:`/orders_complete`,
+    component: OrdersComplete
   }
 ];
 
