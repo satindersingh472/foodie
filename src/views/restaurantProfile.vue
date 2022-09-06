@@ -146,8 +146,13 @@ export default {
   padding: 0px;
   margin: 0px;
 }
+.main_page{
+  display: grid;
+}
 .all_profile {
   display: grid;
+  justify-self: center;
+  width: 100%;
   gap: 3vh;
   .images {
     display: grid;
