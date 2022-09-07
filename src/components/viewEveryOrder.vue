@@ -40,6 +40,7 @@ unique_orders() {
       for (let i = 0; i < this.details.length; i++) {
         if (this.orders.includes(this.details[i][`order_id`]) === false) {
           this.orders.push(this.details[i][`order_id`]);
+          this.orders.reverse();
       }
     }
   },

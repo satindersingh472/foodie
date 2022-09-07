@@ -21,15 +21,18 @@ import axios from 'axios'
 import cookies from 'vue-cookies'
 export default {
   methods: {
+       /*unique orders will create a new array called orders and will contain all the unique values of orders that are made */
     unique_orders() {
       for (let i = 0; i < this.details.length; i++) {
         if (this.orders.includes(this.details[i][`order_id`]) === false) {
-          this.orders.push(this.details[i][`order_id`])
+          this.orders.push(this.details[i][`order_id`]);
+          this.orders.reverse();
         }
       }
     },
   },
   mounted() {
+    /*url value is api end point */
     if(cookies.get(`client_id`)){
       this.url_value = `https://innotechfoodie.ml/api/client-order`;
     } else if(cookies.get(`restaurant_id`)){

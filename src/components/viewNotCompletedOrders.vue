@@ -21,15 +21,19 @@ import axios from 'axios'
 import cookies from 'vue-cookies'
 export default {
   methods: {
+    /*unique orders is an array with unique orders value */
     unique_orders() {
       for (let i = 0; i < this.details.length; i++) {
         if (this.orders.includes(this.details[i][`order_id`]) === false) {
           this.orders.push(this.details[i][`order_id`])
+          this.orders.reverse();
         }
       }
     },
   },
   mounted() {
+        /*it checks for cookies if client is logged in then url value will call client api and vice-versa */
+
     if (cookies.get(`client_id`)) {
       this.url_value = `https://innotechfoodie.ml/api/client-order`
     } else if (cookies.get(`restaurant_id`)) {
@@ -49,6 +53,7 @@ export default {
       })
       .then((response) => {
         this.details = response[`data`]
+        // price will be set to 2 decimal points
         for (let i = 0; i < response[`data`].length; i++) {
           this.details[i][`price`] = response[`data`][i][`price`].toFixed(2)
         }
