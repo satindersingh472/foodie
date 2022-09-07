@@ -3,7 +3,8 @@
     <!-- view menu component is for the client side menu view 
     it is little different from restaurant menu because it -->
     <page-header></page-header>
-    <h1>{{ info[`name`] }}'s Menu</h1>
+    <info-restaurant :info="info" ></info-restaurant>
+    <h1 class="heading_menu" >{{info[`name`]}}'s Menu</h1>
     <div class="all_content" v-if="info !== undefined">
       <div class="content_item" v-for="(detail, index) in details" :key="index">
         <img
@@ -28,9 +29,11 @@
 import axios from 'axios'
 import cookies from 'vue-cookies'
 import PageHeader from '@/components/pageHeader.vue'
+import InfoRestaurant from '@/components/infoRestaurant.vue'
 export default {
   components: {
     PageHeader,
+    InfoRestaurant,
   },
   methods: {
     add_items(detail) {
@@ -93,6 +96,9 @@ img {
   width: 100%;
   height: 250px;
 }
+.heading_menu{
+  text-transform: capitalize;
+}
 .content_item {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -106,10 +112,11 @@ img {
   .details_container {
     display: grid;
     align-items: center;
-    text-align: start;
     button {
       justify-self: center;
-      padding: 5px;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 1.1rem;
     }
     .content_item_details {
       display: grid;

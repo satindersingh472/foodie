@@ -29,17 +29,6 @@
             />
           </div>
           <h1>{{ detail[`name`] }}</h1>
-          <div class="content_item_detail">
-            <p>
-              {{ detail[`address`] }}
-              <br />
-              {{ detail[`city`] }}
-            </p>
-            <div>
-              <p>{{ detail[`phone_number`] }}</p>
-              <p>{{ detail[`email`] }}</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -125,12 +114,6 @@ export default {
       height: 100%;
       object-fit: cover;
     }
-  }
-  .content_item_detail {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    align-items: center;
-    justify-items: center;
   }
 }
 
