@@ -37,7 +37,6 @@ import pageHeader from '@/components/pageHeader.vue'
 export default {
   components: { pageHeader },
   mounted() {
-this.restaurant_present = cookies.get(`restaurant_present`)
 
     this.order_details = JSON.parse(cookies.get(`orders`))
     // if cookies are there then show something is true
@@ -111,7 +110,6 @@ this.restaurant_present = cookies.get(`restaurant_present`)
       items: [],
       message: undefined,
       show_something: false,
-      restaurant_present: undefined
     }
   },
 }

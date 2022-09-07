@@ -1,11 +1,13 @@
 <template>
   <div>
-    <!-- this component will show the orders placed by the client that is logged in -->
+    <!-- this component will show the orders placed by the client or restaurant that is logged in -->
     <div class="all_orders">
       <h2>All Orders</h2>
+      <!-- following div will use the orders array and compare value from  -->
       <div class="unique_order" v-for="(order, index) in orders" :key="index">
         <div class="order_number">
           <h2 ref="order_box">Order No. {{ order }}</h2>
+          <!-- if restaurant is logged in then the following components will show up inside orders -->
              <div v-if="cookies_exist === `restaurant`" class="confirm_complete">
               <confirm-order :order="order"></confirm-order>
               <complete-order :order="order"></complete-order>
@@ -33,6 +35,7 @@ export default {
     CompleteOrder
   },
   methods: {
+    /*unique orders will create a new array called orders and will contain all the unique values of orders that are made */
 unique_orders() {
       for (let i = 0; i < this.details.length; i++) {
         if (this.orders.includes(this.details[i][`order_id`]) === false) {
@@ -42,7 +45,8 @@ unique_orders() {
   },
   },
   mounted() {
-
+/*if cleint is logged in then api for client will be called
+and if restaurant is logged in aoai for restaurant will be called  */
   if(cookies.get(`client_id`)){
     this.cookies_exist = `client`;
       this.url_value = `https://innotechfoodie.ml/api/client-order`;

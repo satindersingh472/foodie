@@ -1,6 +1,6 @@
 <template>
 <!-- add items components is used for adding menu items on the restaurant side -->
-  <div class="main_page" >
+  <div v-if="authenticated === true" class="main_page" >
   <page-header></page-header>
     <div class="main_form">
       <h2>
@@ -41,7 +41,11 @@ import PageHeader from "@/components/pageHeader.vue";
 export default {
   components: {
     PageHeader,
-
+  },
+  mounted () {
+    if(cookies.get(`restaurant_id`)){
+      this.authenticated = true;
+    }
   },
   methods: {
     // send request will call the api to add the menu item
@@ -82,6 +86,7 @@ export default {
   data() {
     return {
       message: undefined,
+      authenticated: false
     };
   },
 };
