@@ -2,6 +2,8 @@
   <div class="main_page">
     <div class="all_orders">
       <h2 class="completed_heading">Completed Orders</h2>
+      <!-- loop thru unique orders and match the order id with order ids in details array
+      and put them in a same div if they match the same order id -->
       <div class="unique_order" v-for="(order, index) in orders" :key="index">
         <div class="order_number">
           <h2 ref="order_box">Order No. {{ order }}</h2>
@@ -52,6 +54,7 @@ export default {
       })
       .then((response) => {
         this.details = response[`data`]
+        /*price in the response will be fixed to 2 decimal places */
         for (let i = 0; i < response[`data`].length; i++) {
           this.details[i][`price`] = response[`data`][i][`price`].toFixed(2)
         }

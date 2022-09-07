@@ -2,6 +2,8 @@
   <div class="main_page">
     <div class="all_orders">
              <h2 class="confirmed_heading" >Confirmed Orders</h2>
+             <!-- unique order contains the unique order values
+             it will match order id from details and group the same ones -->
       <div class="unique_order" v-for="(order, index) in orders" :key="index">
         <div class="order_number">
           <h2 ref="order_box">Order No. {{ order }}</h2>
@@ -53,6 +55,7 @@ export default {
       })
       .then((response) => {
         this.details = response[`data`]
+        /*fixing the decimal place for response price to 2 decimal places */
         for (let i = 0; i < response[`data`].length; i++) {
           this.details[i][`price`] = response[`data`][i][`price`].toFixed(2)
         }

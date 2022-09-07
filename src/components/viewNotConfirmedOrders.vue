@@ -55,6 +55,7 @@ export default {
       })
       .then((response) => {
         this.details = response[`data`]
+        /*the following code will set the price of all items to 2 decimal places */
         for (let i = 0; i < response[`data`].length; i++) {
           this.details[i][`price`] = response[`data`][i][`price`].toFixed(2)
         }
