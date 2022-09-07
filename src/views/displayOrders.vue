@@ -2,8 +2,12 @@
   <div v-if="authenticated === true" >
     <page-header></page-header>
     <div>
+      <!-- filters component has been used here to choose between options -->
       <filter-orders @recieve_string="use_String"></filter-orders>
     </div>
+    <!-- different type of orders can be choosed from following components the filter option's value is coming from filter orders 
+    filters orders is emitting that value and display orders is recieving that value by listening to that event through
+    the attribute in filter orders component -->
     <view-completed-orders v-if="filter_option === `completed_orders`" ></view-completed-orders>
     <view-confirmed-orders v-if="filter_option === `confirmed_orders`" ></view-confirmed-orders>
     <view-every-order v-if="filter_option === `all_orders`" ></view-every-order>
@@ -32,11 +36,13 @@ export default {
     ViewNotConfirmedOrders,
   },
   mounted () {
+    /*check if cookies exist */
     if(cookies.get(`token`)){
         this.authenticated = true;
     }
   },
   methods: {
+    /*recieving the value for filter options and storing it equal to filter options */
     use_String(string) {
       this.filter_option = string
     },
