@@ -1,20 +1,6 @@
 <template>
   <div class="main_page">
-    <page-header></page-header>
-    <div class="links">
-      <button class="all_button">
-        <router-link to="/all_orders">View All Orders</router-link>
-      </button>
-      <button class="complete_button">
-        <router-link to="/orders_complete">View Completed Orders</router-link>
-      </button>
-            <button class="confirmed_button"  ><router-link to="/orders_confirmed">View Confirmed Orders</router-link></button>
-      <button class="not_complete_button">
-        <router-link to="/orders_not_complete">
-          View Not Completed Orders
-        </router-link>
-      </button>
-    </div>
+ 
     <div class="all_orders">
       <h2 class="not_confirmed_heading">Not Confirmed Orders</h2>
       <div class="unique_order" v-for="(order, index) in orders" :key="index">
@@ -34,11 +20,9 @@
 <script>
 import axios from 'axios'
 import cookies from 'vue-cookies'
-import PageHeader from '@/components/pageHeader.vue'
+
 export default {
-  components: {
-    PageHeader,
-  },
+ 
   methods: {
     unique_orders() {
       for (let i = 0; i < this.details.length; i++) {
@@ -91,29 +75,6 @@ export default {
   padding: 0px;
   margin: 0px;
 }
-.links {
-  display: grid;
-  place-items: center;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin: 10px auto;
-  * {
-    text-decoration: none;
-  }
-  .complete_button {
-    background-color: lightgreen;
-  }
-  .all_button {
-    background-color: lightcoral;
-    padding: 10px;
-  }
-  .confirmed_button{
-    background-color: orange;
-  }
-  .not_complete_button{
-    background-color: yellowgreen;
-  }
-}
 .all_orders {
   display: grid;
   place-items: center;
@@ -129,11 +90,6 @@ export default {
       background-color: goldenrod;
       padding: 10px;
     }
-  }
-}
-@media only screen and (min-width: 400px) {
-  .complete_button {
-    padding: 10px;
   }
 }
 </style>

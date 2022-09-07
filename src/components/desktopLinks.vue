@@ -9,7 +9,7 @@
       <!-- following links will be present inside desktop navbar on any page -->
       <router-link to="/profile_page">Profile</router-link>
       <router-link to="/discover_restaurants">Restaurants</router-link>
-      <router-link to="/all_orders">Orders</router-link>
+      <router-link to="/display_orders">Orders</router-link>
       <router-link to="/client_cart">Cart</router-link>
       <all-logout></all-logout>
     </div>

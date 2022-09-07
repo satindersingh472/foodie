@@ -12,11 +12,7 @@ import ViewMenu from "@/views/viewMenu.vue";
 import ViewMenuRest from "@/views/viewMenuRest.vue";
 import AddItems from "@/views/addItems.vue";
 import ClientCart from "@/views/clientCart.vue";
-import AllOrders from "@/views/allOrders.vue";
-import OrdersConfirmed from "@/views/ordersConfirmed.vue";
-import OrdersComplete from "@/views/ordersComplete.vue";
-import OrdersNotConfirmed from "@/views/ordersNotConfirmed.vue";
-import OrdersNotComplete from "@/views/ordersNotComplete.vue";
+import DisplayOrders from "@/views/displayOrders.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -273,128 +269,46 @@ const routes = [
     ],
   },
   {
-    path: `/all_orders`,
-    component: AllOrders,
+    path: `/display_orders`,
+    component: DisplayOrders,
     meta: [
       {
-        title: `all_orders`,
+        title: `Display_orders`,
       },
       {
         name: `description`,
-        content: `All orders can be seen on all orders page. it gathers all the orders either confirmed or not and completed or not`,
+        content: `clients and restaurants can track their orders and filter to see different kinds of orders`,
       },
       {
         name: `keywords`,
-        content: `foodie, orders, confirmed, completed, not_confirmed, not_completed`,
+        content: `foodie,cart,items,remove,place_order,quick, order_id, completed,confirmed, not_confirmed,not_completed`,
       },
       {
         name: `author`,
         content: `satinder_singh`,
       },
     ],
-  },
-  {
-    path: `/orders_confirmed`,
-    component: OrdersConfirmed,
-    meta: [
-      {
-        title: `confirmed_orders`,
-      },
-      {
-        name: `description`,
-        content: `confirmed orders can be filtered and seen with the help of confirmed orders.Restaurants and clients can now see their confirmed orders`,
-      },
-      {
-        name: `keywords`,
-        content: `foodie, orders, confirmed_orders,easy_to_filter,group_orders`,
-      },
-      {
-        name: `author`,
-        content: `satinder_singh`,
-      },
-    ],
-  },
-  {
-    path: `/orders_complete`,
-    component: OrdersComplete,
-    meta: [
-      {
-        title: `completed_orders`,
-      },
-      {
-        name: `description`,
-        content: `completed orders can now be seen on completed orders page. Restaurants and clients can see their completed orders anytime`,
-      },
-      {
-        name: `keywords`,
-        content: `foodie,completed_orders,filter,easy_to_access,differentiate_orders `,
-      },
-      {
-        name: `author`,
-        content: `satinder_singh`,
-      },
-    ],
-  },
-  {
-    path: `/orders_not_confirmed`,
-    component: OrdersNotConfirmed,
-    meta: [
-      {
-        title: `Not_confirmed_orders`,
-      },
-      {
-        name: `description`,
-        content: `Restaurants and clients can see the not confirmed orders on the not confirmed orders page. it gets easier to filter between not confirmed orders and other orders`,
-      },
-      {
-        name: `keywords`,
-        content: `foodie, orders, not_confirmed_orders, filtered_orders,customer_Service, support24*7 `,
-      },
-      {
-        name: `author`,
-        content: `satinder_singh`,
-      },
-    ],
-  },
-  {
-    path: `/orders_not_complete`,
-    component: OrdersNotComplete,
-    meta: [
-      {
-        title: `Not_completed_orders`,
-      },
-      {
-        name: `description`,
-        content: `restaurants can see not completed orders on the not completed orders page.it gets easy to differentiate between other orders and not completed orders`,
-      },
-      {
-        name: `keywords`,
-        content: `foodie, not_comlete_orders, filter, orders, restaurants, clients, quick, customer_service`,
-      },
-      {
-        name: `author`,
-        content: `satinder_singh`,
-      },
-    ],
-  },
+  }
 ];
 
 const router = new VueRouter({
   routes,
 });
+/*remove the old meta tag */
 router.beforeEach((to, from, next) => {
   let current_meta_tags = document.querySelectorAll(`meta`);
   for (let i = 0; i < current_meta_tags.length; i++) {
     current_meta_tags[i].remove();
   }
+  /*put the title tag inside head */
   let new_meta_tags = to[`meta`];
   document.querySelector(`title`)[`innerText`] = new_meta_tags[0][`title`];
-
+/*put the other meta tags other than the title tag inside the head */
   for (let i = 1; i < new_meta_tags.length; i++) {
     document
       .querySelector(`head`)
       .insertAdjacentHTML(
-        `beforeEnd`,
+        `afterbegin`,
         `<meta name="${new_meta_tags[i][`name`]}" content="${
           new_meta_tags[i][`content`]
         }"/>`
