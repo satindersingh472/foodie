@@ -18,7 +18,7 @@
           </div>
           <p>{{ detail[`description`] }}</p>
           <button @click="add_items(detail, $event)">Add</button>
-          <h3 v-if="cart_message === undefined"> {{cart_message}}</h3>
+          <h3 v-if="cart_error !== undefined">{{ cart_error }}</h3>
         </div>
       </div>
     </div>
@@ -35,10 +35,10 @@ export default {
   },
   methods: {
     add_items(detail) {
-           this.orders.push(detail);
-          cookies.set(`orders`, JSON.stringify(this.orders));
-      }
-    },
+      this.orders.push(detail);
+      cookies.set(`orders`,JSON.stringify(this.orders));
+    }
+  },
   mounted() {
     if (cookies.get(`orders`)) {
       this.orders = JSON.parse(cookies.get(`orders`))
@@ -69,7 +69,7 @@ export default {
       info: undefined,
       details: undefined,
       orders: [],
-      cart_message: undefined
+      cart_error: undefined,
     }
   },
 }

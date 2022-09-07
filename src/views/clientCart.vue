@@ -4,23 +4,28 @@
     <page-header></page-header>
     <!-- all items div will have divs with class order recieved  -->
     <!-- if show something is true then show the items i.e if no cookies then show something is false and there will be nothing on the page -->
-    <div v-if="show_something === true" class="all_items">
-      <!-- order_recieved will have detail about the items in cart -->
-      <div
-        class="order_recieved"
-        v-for="(order_detail, index) in order_details"
-        :key="index"
-      >
-        <img :src="order_detail[`image_url`]" />
-        <h2>{{ order_detail[`name`] }}</h2>
-        <p>{{ order_detail[`price`] }}</p>
-        <!-- remove button will remove the particular item based on index -->
-        <button @click="delete_item(index, $event)">Remove</button>
-      </div>
+    <div v-if="show_something === false">
+      <h2>Your cart is empty</h2>
     </div>
-    <!-- place order button will send the request to place an order -->
-    <button @click="send_request" class="place_order">Place order</button>
-    <h2 v-if="message !== undefined">{{ message }}</h2>
+    <div class="items_container" v-if="show_something === true">
+      <div class="all_items">
+        <!-- order_recieved will have detail about the items in cart -->
+        <div
+          class="order_recieved"
+          v-for="(order_detail, index) in order_details"
+          :key="index"
+        >
+          <img :src="order_detail[`image_url`]" />
+          <h2>{{ order_detail[`name`] }}</h2>
+          <p>{{ order_detail[`price`] }}</p>
+          <!-- remove button will remove the particular item based on index -->
+          <button @click="delete_item(index, $event)">Remove</button>
+        </div>
+      </div>
+      <!-- place order button will send the request to place an order -->
+      <button @click="send_request" class="place_order">Place order</button>
+    </div>
+     <h2 v-if="message !== undefined">{{ message }}</h2>
   </div>
 </template>
 
@@ -33,7 +38,7 @@ export default {
   mounted() {
     this.order_details = JSON.parse(cookies.get(`orders`))
     // if cookies are there then show something is true
-    if (cookies.get(`orders`)) {
+    if (this.order_details.length !== 0) {
       this.show_something = true
     }
     // order details is parsed value of cookies orders
@@ -51,10 +56,13 @@ export default {
       this.order_details.splice(index, 1)
       // after deleting the item it will set the cookies back again to stringify
       // mounted lifecycle will help parse the cookies back again
-      cookies.set(`orders`, JSON.stringify(this.order_details))
+      cookies.set(`orders`, JSON.stringify(this.order_details));
+       if (this.order_details.length === 0) {
+        this.show_something = false
+      }
     },
     send_request() {
-      this.restaurant = cookies.get(`restaurant_selected`)[`restaurant_id`] 
+      this.restaurant = cookies.get(`restaurant_selected`)[`restaurant_id`]
       axios
         .request({
           // endpoint url for making an ap request to place order
@@ -69,7 +77,7 @@ export default {
           // menu items and restaurant id are used to send data for an order
           data: {
             menu_items: this.items,
-            restaurant_id: this.restaurant
+            restaurant_id: this.restaurant,
           },
         })
         .then((response) => {
@@ -99,7 +107,7 @@ export default {
       items: [],
       message: undefined,
       show_something: false,
-      restaurant: undefined
+      restaurant: undefined,
     }
   },
 }
@@ -115,6 +123,9 @@ img {
   height: 250px;
   width: 300px;
   object-fit: cover;
+}
+.items_container {
+  display: grid;
 }
 .all_items {
   display: grid;
