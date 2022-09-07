@@ -4,6 +4,7 @@
     it is little different from restaurant menu because it -->
     <page-header></page-header>
     <info-restaurant :info="info" ></info-restaurant>
+    <div v-if="message !== undefined"><h1>{{message}}</h1></div>
     <h1 class="heading_menu" >{{info[`name`]}}'s Menu</h1>
     <div class="all_content" v-if="info !== undefined">
       <div class="content_item" v-for="(detail, index) in details" :key="index">
@@ -37,23 +38,33 @@ export default {
   },
   methods: {
     add_items(detail) {
+      /*if orders length is 0 then the item from any restaurant can be pushed to the orders array */
       if (this.orders.length === 0) {
         this.orders.push(detail)
+        // cookies restaurant present will always be set on then first item added 
         cookies.set(`restaurant_present`,this.info[`restaurant_id`]);
+        // orders array will get stringify
         cookies.set(`orders`, JSON.stringify(this.orders))
+        /*if second or other than the first item user try to add it will check
+        if the previously set cookies restaurant present equual to the cookies restaurant selected i.e this.info[`restaurant id`] */
       } else if (this.info[`restaurant_id`] === Number(cookies.get(`restaurant_present`))){
         this.orders.push(detail)
+        // after pushing cookies value will be stringified
         cookies.set(`orders`,JSON.stringify(this.orders))
       } else {
-        this.cart_error = `Purchase or delete items for ${this.info[`name`]} from the cart before adding items from other restaurant`;
+        /*if user try to add items from restaurant other than the restaurant whose items were already in the cart 
+        the error alert will pop up to delete or purchase from cart before */
+        this.cart_error = `Cart already contains items from other restaurant.Please purchase or remove other items from the cart before adding.`;
         alert(this.cart_error);
       }
     },
   },
   mounted() {
+    // if cookies exist on mount then orders value will get parsed to add more data
     if (cookies.get(`orders`)) {
       this.orders = JSON.parse(cookies.get(`orders`))
     }
+    // restaurant selected will be the restaurant clicked from discovered restaurant page
     this.info = cookies.get(`restaurant_selected`)
     axios
       .request({
@@ -65,6 +76,8 @@ export default {
           restaurant_id: this.info[`restaurant_id`],
         },
       })
+      /*after successful response all the menu items will have price in more than 2 decimal places
+      so the below loop will change the decimals to only 2 fixed decimal positions */
       .then((response) => {
         this.details = response[`data`]
         for (let i = 0; i < response[`data`].length; i++) {
@@ -72,7 +85,9 @@ export default {
         }
       })
       .catch((error) => {
-        error
+        if(error){
+          this.message = `Error in getting information about the menu items of this restuarant`;
+        }
       })
   },
   data() {
@@ -81,6 +96,7 @@ export default {
       details: undefined,
       orders: [],
       cart_error: undefined,
+      message: undefined
     }
   },
 }

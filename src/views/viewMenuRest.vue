@@ -1,7 +1,10 @@
 <template>
   <div>
+    <!-- if there is any error loading the page then the message will be shown -->
+    <div v-if="message !== undefined">{{ message }}</div>
     <page-header></page-header>
     <div class="all_items" v-if="info !== undefined">
+      <!-- content item div loop through details and get one detail displayed each time -->
       <div class="content_item" v-for="detail in details" :key="detail[`id`]">
         <img
           class="content_item_image"
@@ -17,7 +20,11 @@
             <p>{{ detail[`description`] }}</p>
           </div>
           <div class="buttons">
-            <edit-menu :detail="detail"></edit-menu>
+            <!-- edit menu will edit the menu for restaurant  -->
+            <edit-menu
+              :detail="detail"
+            ></edit-menu>
+            <!-- delete menu will delete the menu item  -->
             <delete-menu :detail="detail"></delete-menu>
           </div>
         </div>
@@ -39,31 +46,44 @@ export default {
     DeleteMenu,
   },
   mounted() {
-    this.info = cookies.get(`restaurant_id`)
-    axios
-      .request({
-        url: `https://innotechfoodie.ml/api/menu`,
-        headers: {
-          'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
-        },
-        params: {
-          restaurant_id: this.info,
-        },
-      })
-      .then((response) => {
-        this.details = response[`data`]
-        for (let i = 0; i < response[`data`].length; i++) {
-          this.details[i][`price`] = response[`data`][i][`price`].toFixed(2)
-        }
-      })
-      .catch((error) => {
-        error
-      })
+    this.get_menu()
+  },
+  methods: {
+    get_menu() {
+      this.info = cookies.get(`restaurant_id`)
+      axios
+        .request({
+          /*api endpoint for calling the api */
+          url: `https://innotechfoodie.ml/api/menu`,
+          headers: {
+            'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
+          },
+          params: {
+            restaurant_id: this.info,
+          },
+        })
+        .then((response) => {
+          this.details = response[`data`]
+          /* if response is successfull then details will the data array from response 
+          and response gives back the price of an item in decimals so the below loop
+          will help convert that price to two decimal positions */
+          for (let i = 0; i < response[`data`].length; i++) {
+            this.details[i][`price`] = response[`data`][i][`price`].toFixed(2)
+          }
+        })
+        .catch((error) => {
+          if (error) {
+            /*if there is an error then the following message will be shown */
+            this.message = `Error while Loading page`
+          }
+        })
+    },
   },
   data() {
     return {
       info: undefined,
       details: undefined,
+      message: undefined,
     }
   },
 }
@@ -108,7 +128,7 @@ img {
   .all_items {
     place-items: center;
     grid-template-columns: repeat(auto-fit, minmax(410px, 2fr));
-    .content_item{
+    .content_item {
       width: 400px;
     }
   }

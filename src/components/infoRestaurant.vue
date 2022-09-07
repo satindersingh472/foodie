@@ -1,5 +1,7 @@
 <template>
   <div>
+    <!-- info restaurant component is to show the information about the restaurant on view menu component
+    it will get the info as a props from menu page and display information from that -->
     <div class="main_page">
       <div class="image">
         <img class="banner" :src="info[`banner_url`]" alt="" />
@@ -23,6 +25,7 @@
 <script>
 export default {
   props: {
+    /*getting info object from view menu component */
     info: Object,
   },
 }

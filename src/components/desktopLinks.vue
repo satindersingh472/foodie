@@ -1,10 +1,12 @@
 <template>
   <div class="navbar">
     <div class="logo">
+      <!-- desktop navbar will contain a logo and links -->
       <img class="logo_image" src="@/assets/logo.svg" alt="foodie logo" />
       <h4>Foodie</h4>
     </div>
     <div class="links">
+      <!-- following links will be present inside desktop navbar on any page -->
       <router-link to="/profile_page">Profile</router-link>
       <router-link to="/discover_restaurants">Restaurants</router-link>
       <router-link to="/all_orders">Orders</router-link>

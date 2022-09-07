@@ -93,6 +93,7 @@ export default {
 }
 .content_item {
   display: grid;
+  align-items: center;
   gap: 10px;
   margin-top: 15px;
   box-shadow: 3px 3px 6px grey;

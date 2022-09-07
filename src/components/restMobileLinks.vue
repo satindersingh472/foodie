@@ -1,4 +1,5 @@
 <template>
+<!-- resturant mobile links will have links for the mobile view navigation bar -->
   <div class="main_header">
     <div class="navbar">
       <div class="logo">
@@ -6,6 +7,7 @@
         <h4>Foodie</h4>
       </div>
       <div class="button_open">
+        <!-- button as an image for opening the navbar links -->
         <button>
           <img
           src="@/assets/menu_icon_open.svg"
@@ -16,7 +18,9 @@
         </button>
       </div>
     </div>
+    <!-- show link all will be true if button open is clicked -->
     <div v-if="show_links_all === true" class="links">
+      <!-- button close will help hide the navbar link in a mobile view  -->
       <div class="button_close">
         <button>
           <img
@@ -26,6 +30,7 @@
           />
         </button>
       </div>
+      <!-- following are the links that will get displayed on the mobile view -->
       <router-link to="/restaurant_profile">Profile</router-link>
       <router-link to="/all_orders">Orders</router-link>
       <router-link to="/add_items">Add Items</router-link>

@@ -1,4 +1,5 @@
 <template>
+<!-- restaurant desktop links contains the links for desktop view of a navigation bar -->
   <div class="navbar">
     <div class="logo">
       <img class="logo_image" src="@/assets/logo.svg" alt="foodie logo" />

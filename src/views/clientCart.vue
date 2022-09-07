@@ -8,6 +8,7 @@
       <h2>Your cart is empty</h2>
     </div>
     <div class="items_container" v-if="show_something === true">
+      <h1>Cart</h1>
       <div class="all_items">
         <!-- order_recieved will have detail about the items in cart -->
         <div
@@ -17,9 +18,9 @@
         >
           <img :src="order_detail[`image_url`]" />
           <h2>{{ order_detail[`name`] }}</h2>
-          <p>{{ order_detail[`price`] }}</p>
+          <p>${{ order_detail[`price`] }}</p>
           <!-- remove button will remove the particular item based on index -->
-          <button @click="delete_item(index, $event)">Remove</button>
+          <button class="delete_button" @click="delete_item(index, $event)">Remove</button>
         </div>
       </div>
       <!-- place order button will send the request to place an order -->
@@ -36,6 +37,8 @@ import pageHeader from '@/components/pageHeader.vue'
 export default {
   components: { pageHeader },
   mounted() {
+this.restaurant_present = cookies.get(`restaurant_present`)
+
     this.order_details = JSON.parse(cookies.get(`orders`))
     // if cookies are there then show something is true
     if (this.order_details.length !== 0) {
@@ -54,6 +57,7 @@ export default {
     // delete item will delete the item based on index
     delete_item(index) {
       this.order_details.splice(index, 1)
+      this.items.splice(index,1)
       // after deleting the item it will set the cookies back again to stringify
       // mounted lifecycle will help parse the cookies back again
       cookies.set(`orders`, JSON.stringify(this.order_details));
@@ -63,7 +67,6 @@ export default {
       }
     },
     send_request() {
-      this.restaurant = cookies.get(`restaurant_selected`)[`restaurant_id`]
       axios
         .request({
           // endpoint url for making an ap request to place order
@@ -78,7 +81,7 @@ export default {
           // menu items and restaurant id are used to send data for an order
           data: {
             menu_items: this.items,
-            restaurant_id: this.restaurant,
+            restaurant_id: cookies.get(`restaurant_present`),
           },
         })
         .then((response) => {
@@ -108,7 +111,7 @@ export default {
       items: [],
       message: undefined,
       show_something: false,
-      restaurant: undefined,
+      restaurant_present: undefined
     }
   },
 }
@@ -122,7 +125,7 @@ export default {
 }
 img {
   height: 250px;
-  width: 300px;
+  width: 100%;
   object-fit: cover;
 }
 .items_container {
@@ -133,11 +136,29 @@ img {
 }
 .order_recieved {
   width: 100%;
+  box-shadow: 3px 3px 6px grey;
+  margin: 10px auto;
+  display: grid;
+  place-items: center;
+  gap: 1vh;
+  p{
+    font-size: 1.3rem;
+
+  }
+}
+.delete_button{
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 15px;
 }
 .place_order {
   display: grid;
   justify-self: center;
   padding: 10px;
+  margin: 10px;
+  background-color: green;
+  color: white;
+  font-size: 1.5rem;
 }
 .main_page {
   display: grid;
@@ -148,10 +169,10 @@ img {
   .all_items {
     display: grid;
     place-items: center;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     .order_recieved {
       display: grid;
-      width: 250px;
+      width: 300px;
       place-items: center;
     }
   }

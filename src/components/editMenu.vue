@@ -23,6 +23,9 @@
       Image URL:
       <input type="url" ref="image_url" :value="`${detail[`image_url`]}`" />
     </h4>
+    <!-- cancel button will hide the options to edit -->
+    <button @click="hide_options" >Cancel</button>
+    <!-- save button will save the changes -->
     <button @click="send_request">save</button>
     <h2 v-if="message !== undefined" >
         {{message}}
@@ -42,8 +45,13 @@ export default {
         detail: Object 
         },
   methods: {
+    /*show option true will help show the options  */
 show_options(){
     this.show_form = true;
+},
+/*show form false will false the show form */
+hide_options(){
+  this.show_form = false;
 },
 // send request will make an api call to submit changes in the values of a form in the html above
     send_request() {

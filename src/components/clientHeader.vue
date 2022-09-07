@@ -1,4 +1,5 @@
 <template> 
+<!-- client header component contains the mobile and desktop navigation bars -->
   <div class="navbar">
     <!-- various links from the client header to navigate to different pages and logout as well  -->
     <div v-if="desktop_view === false" class="navbar_mobile">
@@ -19,6 +20,8 @@ export default {
     MobileLinks,
   },
   methods: {
+    /*this logic is for the media queries when width is less than 500 then desktop is false 
+    and when width is 500 or more desktop view is true and these conditions will change the html on the page*/
     change_querie() {
     if(document.documentElement.clientWidth < 500){
         this.desktop_view = false;
@@ -28,6 +31,8 @@ export default {
     }
   },
 mounted () {
+  /*change querie method will get activated on mounting so what ever the size of the screen while opening the page it will be responsive
+  window add event listener will act upon resizing the window */
 this.change_querie();
 window.addEventListener(`resize`,this.change_querie);
 },

@@ -22,7 +22,7 @@
               ref="image_url"
               :alt="`image of ${details[`first_name`]}`"
             />
-              <!-- edit profile image is a component which is used to change the proifle image for a client  -->
+            <!-- edit profile image is a component which is used to change the proifle image for a client  -->
             <edit-profile-image class="edit_button"></edit-profile-image>
           </div>
         </div>
@@ -77,12 +77,12 @@
 </template>
 
 <script>
-import axios from "axios";
-import cookies from "vue-cookies";
-import PageHeader from "@/components/pageHeader.vue";
-import EditProfile from "@/components/editProfile.vue";
-import DeleteExistense from "@/components/deleteExistense.vue";
-import EditProfileImage from "@/components/editProfileImage.vue";
+import axios from 'axios'
+import cookies from 'vue-cookies'
+import PageHeader from '@/components/pageHeader.vue'
+import EditProfile from '@/components/editProfile.vue'
+import DeleteExistense from '@/components/deleteExistense.vue'
+import EditProfileImage from '@/components/editProfileImage.vue'
 export default {
   components: {
     PageHeader,
@@ -94,44 +94,50 @@ export default {
     send_info() {
       // send info method will emit the data from the forms to the edit profile component
       // edit profile component will use the data in the api call
-      this.details[`first_name`] = this.$refs[`first_name`][`value`];
-      this.details[`last_name`] = this.$refs[`last_name`][`value`];
-      this.details[`email`] = this.$refs[`email`][`value`];
-      this.details[`username`] = this.$refs[`username`][`value`];
-      this.details[`password`] = this.$refs[`password`][`value`];
-      this.$root.$emit(`send_details`, this.details);
+      this.details[`first_name`] = this.$refs[`first_name`][`value`]
+      this.details[`last_name`] = this.$refs[`last_name`][`value`]
+      this.details[`email`] = this.$refs[`email`][`value`]
+      this.details[`username`] = this.$refs[`username`][`value`]
+      this.details[`password`] = this.$refs[`password`][`value`]
+      this.$root.$emit(`send_details`, this.details)
+    },
+
+    /*get info will call the api whenever asked for */
+    get_info() {
+      axios
+        .request({
+          // api endpoint to get information of client's profile
+          url: `https://innotechfoodie.ml/api/client`,
+          headers: {
+            'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
+          },
+          params: {
+            client_id: cookies.get(`client_id`),
+          },
+        })
+        .then((response) => {
+          // there will be only one object in data array from response
+          this.details = response[`data`][0]
+        })
+        .catch((error) => {
+          if (error) {
+            this.message = `There is an error while showing the user profile`
+          }
+        })
     },
   },
   mounted() {
-    axios
-      .request({
-        // api endpoint to get information of client's profile
-        url: `https://innotechfoodie.ml/api/client`,
-        headers: {
-          "x-api-key": "TVTZDiQZDzjkWqVkNCxr",
-        },
-        params: {
-          client_id: cookies.get(`client_id`),
-        },
-      })
-      .then((response) => {
-        // there will be only one object in data array from response
-        this.details = response[`data`][0];
-      })
-      .catch((error) => {
-        if (error) {
-          this.message = `There is an error while showing the user profile`;
-        }
-      });
+    /*get info method will get called on mounting */
+    this.get_info()
   },
   data() {
     return {
       details: undefined,
       show_edit: true,
       message: undefined,
-    };
+    }
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -210,7 +216,7 @@ export default {
     margin-top: 20px;
     gap: 20px;
   }
-  .form_data{
+  .form_data {
     gap: 10px;
   }
 }

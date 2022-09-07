@@ -17,8 +17,8 @@ export default {
     RestaurantHeader,
   },
   mounted() {
-    // to check if cookies of client or restaurant are present 
-    // if client cookies are present or client logged in then cookies client id is true and vice-versa
+/*    to check if cookies of client or restaurant are present 
+    if client cookies are present or client logged in then cookies client id is true and vice-versa*/
     if (cookies.get(`restaurant_id`)) {
       this.cookies_restaurant = true;
       this.cookies_client = false;

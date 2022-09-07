@@ -1,4 +1,5 @@
 <template>
+<!-- this component will contain mobile links for client side -->
   <div class="main_header">
     <div class="navbar">
       <div class="logo">
@@ -6,6 +7,7 @@
         <h4>Foodie</h4>
       </div>
       <div class="button_open">
+        <!-- the following button is an image to display the minimize navigation links -->
         <button>
           <img
             @click="show_links"
@@ -18,6 +20,7 @@
     </div>
     <div v-if="show_links_all === true" class="links">
       <div class="button_close">
+        <!-- the following button will help to close the navigation links upon open -->
         <button>
           <img
             @click="hide_links"
@@ -26,40 +29,35 @@
           />
         </button>
       </div>
+      <!-- the following links will get displayed on the mobile navbar for client side -->
       <router-link to="/profile_page">Profile</router-link>
       <router-link to="/discover_restaurants">Restaurants</router-link>
       <router-link to="/all_orders">Orders</router-link>
       <router-link to="/client_cart">Cart</router-link>
-      <all-logout v-if="cookies_exist === true"></all-logout>
+      <all-logout></all-logout>
     </div>
   </div>
 </template>
 
 <script>
 import AllLogout from "@/components/allLogout.vue";
-import cookies from "vue-cookies";
 export default {
   components: {
     AllLogout,
   },
-  mounted() {
-    if (cookies.get(`client_id`)) {
-      this.cookies_exist = true;
-    } else {
-      this.cookies_exist = false;
-    }
-  },
+
   methods: {
+    /*show links will help show the navigation links upon clicking the button open */
     show_links() {
       this.show_links_all = true;
     },
+    /*hide links will hide the navigation links upon clicking the button close */
     hide_links() {
       this.show_links_all = false;
     },
   },
   data() {
     return {
-      cookies_exist: undefined,
       show_links_all: false,
     };
   },
