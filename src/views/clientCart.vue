@@ -58,6 +58,7 @@ export default {
       // mounted lifecycle will help parse the cookies back again
       cookies.set(`orders`, JSON.stringify(this.order_details));
        if (this.order_details.length === 0) {
+        cookies.remove(`orders`);
         this.show_something = false
       }
     },

@@ -67,7 +67,6 @@
           <input
             type="password"
             ref="password"
-            :value="`${details[`password`]}`"
           />
         </div>
       </div>

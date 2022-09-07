@@ -18,7 +18,6 @@
           </div>
           <p>{{ detail[`description`] }}</p>
           <button @click="add_items(detail, $event)">Add</button>
-          <h3 v-if="cart_error !== undefined">{{ cart_error }}</h3>
         </div>
       </div>
     </div>
@@ -35,9 +34,18 @@ export default {
   },
   methods: {
     add_items(detail) {
-      this.orders.push(detail);
-      cookies.set(`orders`,JSON.stringify(this.orders));
-    }
+      if (this.orders.length === 0) {
+        this.orders.push(detail)
+        cookies.set(`restaurant_present`,this.info[`restaurant_id`]);
+        cookies.set(`orders`, JSON.stringify(this.orders))
+      } else if (this.info[`restaurant_id`] === Number(cookies.get(`restaurant_present`))){
+        this.orders.push(detail)
+        cookies.set(`orders`,JSON.stringify(this.orders))
+      } else {
+        this.cart_error = `Purchase or delete items for ${this.info[`name`]} from the cart before adding items from other restaurant`;
+        alert(this.cart_error);
+      }
+    },
   },
   mounted() {
     if (cookies.get(`orders`)) {
