@@ -159,7 +159,7 @@ const routes = [
       },
       {
         name: `keywords`,
-        content: ``,
+        content: `foodie,restaurants,clients,login,secure,support24*7,reliable,quick,easy_to_use`,
       },
       {
         name: `author`,
@@ -172,15 +172,15 @@ const routes = [
     component: DiscoverRestaurants,
     meta: [
       {
-        title: ``,
+        title: `Discover_Restaurants`,
       },
       {
         name: `description`,
-        content: ``,
+        content: `clients are able to see different restaurants available on discover restaurants page`,
       },
       {
         name: `keywords`,
-        content: ``,
+        content: `foodie, restaurants,clients, nearby_restaurants, fresh_food, accessible, quick`,
       },
       {
         name: `author`,
@@ -193,15 +193,15 @@ const routes = [
     component: ViewMenu,
     meta: [
       {
-        title: ``,
+        title: `View_menu`,
       },
       {
         name: `description`,
-        content: ``,
+        content: `Clients can see the menu of a restaurant after login. the menu page contains all the information about the restaurant and its menu`,
       },
       {
         name: `keywords`,
-        content: ``,
+        content: `foodie, options, menus, restaurants, variety, nearby_restaurants, order`,
       },
       {
         name: `author`,
@@ -214,15 +214,15 @@ const routes = [
     component: ViewMenuRest,
     meta: [
       {
-        title: ``,
+        title: `view_restaurant_menu`,
       },
       {
         name: `description`,
-        content: ``,
+        content: `Restaurants can view, change or delete the menu item from  menu page`,
       },
       {
         name: `keywords`,
-        content: ``,
+        content: `foodie,restaurants,view_menu_restaurant,easy_to_change, edit, delete, quick, reliable`,
       },
       {
         name: `author`,
@@ -235,15 +235,15 @@ const routes = [
     component: AddItems,
     meta: [
       {
-        title: ``,
+        title: `Add_items_restaurant`,
       },
       {
         name: `description`,
-        content: ``,
+        content: `Restaurants can add new items to their menu at anytime through the add items page`,
       },
       {
         name: `keywords`,
-        content: ``,
+        content: `foodie, add_items, menu, edit, new_menu, image,price,description,title`,
       },
       {
         name: `author`,
@@ -256,15 +256,15 @@ const routes = [
     component: ClientCart,
     meta: [
       {
-        title: ``,
+        title: `cart_foodie`,
       },
       {
         name: `description`,
-        content: ``,
+        content: `clients can see the items added in cart and remove items from it as well`,
       },
       {
         name: `keywords`,
-        content: ``,
+        content: `foodie,cart,items,remove,place_order,quick, order_id`,
       },
       {
         name: `author`,
@@ -277,15 +277,15 @@ const routes = [
     component: AllOrders,
     meta: [
       {
-        title: ``,
+        title: `all_orders`,
       },
       {
         name: `description`,
-        content: ``,
+        content: `All orders can be seen on all orders page. it gathers all the orders either confirmed or not and completed or not`,
       },
       {
         name: `keywords`,
-        content: ``,
+        content: `foodie, orders, confirmed, completed, not_confirmed, not_completed`,
       },
       {
         name: `author`,
@@ -298,15 +298,15 @@ const routes = [
     component: OrdersConfirmed,
     meta: [
       {
-        title: ``,
+        title: `confirmed_orders`,
       },
       {
         name: `description`,
-        content: ``,
+        content: `confirmed orders can be filtered and seen with the help of confirmed orders.Restaurants and clients can now see their confirmed orders`,
       },
       {
         name: `keywords`,
-        content: ``,
+        content: `foodie, orders, confirmed_orders,easy_to_filter,group_orders`,
       },
       {
         name: `author`,
@@ -319,15 +319,15 @@ const routes = [
     component: OrdersComplete,
     meta: [
       {
-        title: ``,
+        title: `completed_orders`,
       },
       {
         name: `description`,
-        content: ``,
+        content: `completed orders can now be seen on completed orders page. Restaurants and clients can see their completed orders anytime`,
       },
       {
         name: `keywords`,
-        content: ``,
+        content: `foodie,completed_orders,filter,easy_to_access,differentiate_orders `,
       },
       {
         name: `author`,
@@ -340,15 +340,15 @@ const routes = [
     component: OrdersNotConfirmed,
     meta: [
       {
-        title: ``,
+        title: `Not_confirmed_orders`,
       },
       {
         name: `description`,
-        content: ``,
+        content: `Restaurants and clients can see the not confirmed orders on the not confirmed orders page. it gets easier to filter between not confirmed orders and other orders`,
       },
       {
         name: `keywords`,
-        content: ``,
+        content: `foodie, orders, not_confirmed_orders, filtered_orders,customer_Service, support24*7 `,
       },
       {
         name: `author`,
@@ -361,15 +361,15 @@ const routes = [
     component: OrdersNotComplete,
     meta: [
       {
-        title: ``,
+        title: `Not_completed_orders`,
       },
       {
         name: `description`,
-        content: ``,
+        content: `restaurants can see not completed orders on the not completed orders page.it gets easy to differentiate between other orders and not completed orders`,
       },
       {
         name: `keywords`,
-        content: ``,
+        content: `foodie, not_comlete_orders, filter, orders, restaurants, clients, quick, customer_service`,
       },
       {
         name: `author`,
