@@ -33,7 +33,7 @@ export default {
          this.message = `request cancelled`;
        setTimeout(() => {
         this.message = undefined
-       }, 800);
+       }, 2000);
       }
     },
     send_request() {
