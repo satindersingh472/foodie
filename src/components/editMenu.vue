@@ -81,6 +81,7 @@ hide_options(){
             this.message = `changes applied`;
             // false value of show form will help hide the edit form component
             this.show_form = false;
+            this.$emit(`recieve_response`,response);
           }
         })
         .catch((error) => {

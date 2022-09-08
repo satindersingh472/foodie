@@ -20,8 +20,10 @@
             <p>{{ detail[`description`] }}</p>
           </div>
           <div class="buttons">
-            <!-- edit menu will edit the menu for restaurant  -->
+            <!-- edit menu will edit the menu for restaurant and also listen for the recieve response 
+            event to change the items on the screen -->
             <edit-menu
+            @recieve_response="get_details"
               :detail="detail"
             ></edit-menu>
             <!-- delete menu will delete the menu item  -->
@@ -46,9 +48,17 @@ export default {
     DeleteMenu,
   },
   mounted() {
-    this.get_menu()
+    /*on mounted get menu will called and which will further call the api */
+    this.get_menu();
   },
   methods: {
+    /*get details will change the menu on the main menu screen after editing the item */
+get_details(response){
+  if(response){
+    this.get_menu()
+  }
+},
+
     get_menu() {
       this.info = cookies.get(`restaurant_id`)
       axios
