@@ -13,15 +13,15 @@
         />
         <div class="content_item_options">
           <div class="content_item_details">
-            <p>{{ detail[`name`] }}</p>
+            <h3>{{ detail[`name`] }}</h3>
             <p>${{ detail[`price`] }}</p>
           </div>
           <div class="description">
             <p>{{ detail[`description`] }}</p>
           </div>
           <div class="buttons">
-            <!-- delete menu will delete the menu item  -->
-            <delete-menu :detail="detail"></delete-menu>
+            <!-- delete menu will delete the menu item and will listen for the event -->
+            <delete-menu @recieve_delete_response="get_details" :detail="detail"></delete-menu>
           </div>
         </div>
         <div class="edit_comp">
@@ -134,6 +134,7 @@ img {
       .content_item_details, .description {
         display: grid;
         text-align: start;
+        text-transform: capitalize;
         .edit_comp{
           display: grid;
           place-items:center;
