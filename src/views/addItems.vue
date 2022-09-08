@@ -73,6 +73,10 @@ export default {
           if (response) {
             // if response is successfull then the following value will get displayed as a message
             this.message = `Added successfully`;
+            this.$refs[`description`][`value`] = ``;
+            this.$refs[`image_url`][`value`] = ``;
+            this.$refs[`name`][`value`]=``;
+            this.$refs[`price`][`value`]=``;
           }
         })
         .catch((error) => {
