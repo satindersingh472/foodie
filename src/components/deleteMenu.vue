@@ -30,7 +30,10 @@ export default {
       if (confirm(this.warning)) {
         this.send_request();
       } else {
-        this.message = `request cancelled`;
+         this.message = `request cancelled`;
+       setTimeout(() => {
+        this.message = undefined
+       }, 800);
       }
     },
     send_request() {

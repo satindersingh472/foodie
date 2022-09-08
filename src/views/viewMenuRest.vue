@@ -34,6 +34,7 @@
         </div>
       </div>
     </div>
+   
   </div>
 </template>
 
@@ -96,6 +97,7 @@ get_details(response){
       info: undefined,
       details: undefined,
       message: undefined,
+      message_edit: undefined
     }
   },
 }

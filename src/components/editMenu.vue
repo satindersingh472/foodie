@@ -76,11 +76,15 @@ hide_options(){
         })
         .then((response) => {
           if(response){
-            // if chnages applied successfully then message will appear 
+            // if chnages applied successfully then 
             this.message = `changes applied`;
             // false value of show form will help hide the edit form component
-            this.show_form = false;
             this.$emit(`recieve_response`,response);
+            // it will show the message for 2 seconds and then del the message the hide form
+            setTimeout(() => {
+                  this.message = undefined;
+                     this.show_form = false;
+            }, 2000);
           }
         })
         .catch((error) => {
