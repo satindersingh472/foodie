@@ -20,15 +20,17 @@
             <p>{{ detail[`description`] }}</p>
           </div>
           <div class="buttons">
-            <!-- edit menu will edit the menu for restaurant and also listen for the recieve response 
+            <!-- delete menu will delete the menu item  -->
+            <delete-menu :detail="detail"></delete-menu>
+          </div>
+        </div>
+        <div class="edit_comp">
+          <!-- edit menu will edit the menu for restaurant and also listen for the recieve response 
             event to change the items on the screen -->
             <edit-menu
             @recieve_response="get_details"
               :detail="detail"
             ></edit-menu>
-            <!-- delete menu will delete the menu item  -->
-            <delete-menu :detail="detail"></delete-menu>
-          </div>
         </div>
       </div>
     </div>
@@ -108,11 +110,16 @@ img {
   width: 100%;
   height: 250px;
 }
+.button{
+  font-size: 1.3rem
+}
 .all_items {
   display: grid;
   .content_item {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: column;
+    gap: 1vh;
+    padding:10px;
     text-align: center;
     margin-top: 1vh;
     box-shadow: 3px 3px 6px grey;
@@ -122,14 +129,13 @@ img {
     }
     .content_item_options {
       display: grid;
-      place-items: center;
-      .content_item_details {
+      .content_item_details, .description {
         display: grid;
         text-align: start;
-      }
-      .buttons {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        .edit_comp{
+          display: grid;
+          place-items:center;
+        }
       }
     }
   }
