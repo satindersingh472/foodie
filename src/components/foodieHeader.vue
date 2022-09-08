@@ -2,6 +2,7 @@
     <div class="main_page" >
         <!-- foodie header is for the components where navbar should not displayed -->
 <h1><router-link class="main_heading" to="/">Foodie</router-link></h1>
+<p>(click foodie for homepage)</p>
     </div>
 </template>
 
