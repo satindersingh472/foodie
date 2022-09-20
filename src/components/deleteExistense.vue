@@ -39,6 +39,8 @@ export default {
         .then((response) => {
           if(response){
             // if account gets deleted then following message will appear
+            cookies.remove(`token`);
+            cookies.remove(`client_id`);
             this.message = `Account  Deleted Successfuly`;
             this.$router.push(`/`);
           }

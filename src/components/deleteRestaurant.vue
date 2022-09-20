@@ -39,6 +39,8 @@ export default {
         .then((response) => {
           if(response){
             // if api response is successfull then the following msg will be shown
+            cookies.remove(`token`);
+            cookies.remove(`restaurant_id`);
             this.message = `Account  Deleted Successfuly`;
             // the user will be routed to the homepage 
             this.$router.push(`/`);
