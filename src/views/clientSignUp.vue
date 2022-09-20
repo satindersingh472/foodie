@@ -66,16 +66,16 @@ export default {
           method: `POST`,
           // api key is used as headers
           headers: {
-            'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
+            'x-api-key': 'TVTZDiQZDzjkWqVkNCxr'
           },
           // the following data is used from the form to send as a data
           data: {
             email: this.$refs[`email`][`value`],
             password: this.$refs[`password`][`value`],
             username: this.$refs[`username`][`value`],
-            image_url: this.$refs[`image_url`][`value`],
+            image_url: this.$refs[`file`][`value`],
             first_name: this.$refs[`first_name`][`value`],
-            last_name: this.$refs[`last_name`][`value`],
+            last_name: this.$refs[`last_name`][`value`]
           },
         })
         .then((response) => {
@@ -83,7 +83,7 @@ export default {
           cookies.set(`token`, response[`data`][`token`])
           cookies.set(`client_id`, response[`data`][`client_id`])
           // the user will be routed to discover restaurants
-          this.$router.push(`/discover_restaurants`)
+          this.$router.push(`/discover_restaurants`);
         })
         .catch((error) => {
           // if user exists then message will be displayed
