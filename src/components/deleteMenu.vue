@@ -39,10 +39,9 @@ export default {
     send_request() {
       axios
         .request({
-          url: "https://innotechfoodie.ml/api/menu",
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/menu`,
           method: `DELETE`,
           headers: {
-            "x-api-key": "TVTZDiQZDzjkWqVkNCxr",
             token: cookies.get(`token`),
           },
           data: {
