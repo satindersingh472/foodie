@@ -57,13 +57,12 @@ hide_options(){
       axios
         .request({
           // endpoint for editing the restaurant menu items individually
-          url: ` https://innotechfoodie.ml/api/menu`,
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/menu`,
           // type of method is patch
           method: `PATCH`,
           // headers required are key and token of restaurant from authentication
           headers: {
-            'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
-            token: cookies.get(`token`),
+            token: cookies.get(`token`)
           },
           // data required for the api call
           data:{
