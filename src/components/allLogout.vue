@@ -2,7 +2,7 @@
   <!-- if show component is not false then the following div will show up -->
   <div v-if="show_component !== false">
     <!-- at click will trigger delete token function -->
-    <button @click="delete_token">LogOut</button>
+    <button @click="send_request">LogOut</button>
     <div  v-if="message !== undefined" >{{message}}</div>
   </div>
 </template>
