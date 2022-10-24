@@ -26,10 +26,9 @@ export default {
     confirm_delete() {
       axios
         .request({
-          url: `https://innotechfoodie.ml/api/restaurant`,
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/restaurant`,
           method:`DELETE`,
           headers:{
-            'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
             token: cookies.get(`token`)
           },
           data:{
