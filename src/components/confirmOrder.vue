@@ -22,10 +22,9 @@ export default {
     send_request(order) {
       axios
         .request({
-          url: `https://innotechfoodie.ml/api/restaurant-order`,
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/restaurant_order`,
           method: `PATCH`,
           headers: {
-            'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
             token: cookies.get(`token`)
           },
           data:{
