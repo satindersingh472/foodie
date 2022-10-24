@@ -37,17 +37,16 @@ export default {
   mounted() {
     /*it checks for cookies if client is logged in then url value will call client api and vice-versa */
     if (cookies.get(`client_id`)) {
-      this.url_value = `https://innotechfoodie.ml/api/client-order`
+      this.url_value = `${process.env.VUE_APP_BASE_DOMAIN}/api/client_order`
     } else if (cookies.get(`restaurant_id`)) {
-      this.url_value = `https://innotechfoodie.ml/api/restaurant-order`
+      this.url_value = `${process.env.VUE_APP_BASE_DOMAIN}/api/restaurant_order`
     }
 
     axios
       .request({
         url: this.url_value,
         headers: {
-          'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
-          token: cookies.get(`token`),
+          token: cookies.get(`token`)
         },
         params: {
           is_confirmed: `false`,
