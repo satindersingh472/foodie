@@ -36,13 +36,12 @@ export default {
       axios
         .request({
           // endpoint for changing the profile image for client
-          url: `https://innotechfoodie.ml/api/client`,
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/client`,
           // patch method is used
           method: `PATCH`,
           // headers required are api key and token from client authentication
           headers: {
-            "x-api-key": `TVTZDiQZDzjkWqVkNCxr`,
-            token: cookies.get(`token`),
+            token: cookies.get(`token`)
           },
           // data required is just the image url
           data: {
