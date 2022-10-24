@@ -21,13 +21,12 @@ export default {
       axios
         .request({
           // endpoint url for making changes to restaurant profile
-          url: ` https://innotechfoodie.ml/api/restaurant`,
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/restaurant`,
           // patch method is used
           method: `PATCH`,
           // api key and restaurant authentication token is used as headers
           headers: {
-            'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
-            token: cookies.get(`token`),
+            token: cookies.get(`token`)
           },
           // all of the following data was emiited by the other component 
           // with the event send edit and details
