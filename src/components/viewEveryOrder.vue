@@ -50,10 +50,10 @@ unique_orders() {
 and if restaurant is logged in aoai for restaurant will be called  */
   if(cookies.get(`client_id`)){
     this.cookies_exist = `client`;
-      this.url_value = `https://innotechfoodie.ml/api/client-order`;
+      this.url_value = `${process.env.VUE_APP_BASE_DOMAIN}/api/client_order`;
     } else if(cookies.get(`restaurant_id`)){
       this.cookies_exist = `restaurant`;
-      this.url_value = `https://innotechfoodie.ml/api/restaurant-order`;
+      this.url_value = `${process.env.VUE_APP_BASE_DOMAIN}/api/restaurant_order`;
     }
 
     axios
@@ -61,8 +61,7 @@ and if restaurant is logged in aoai for restaurant will be called  */
         // endpoint for getting all the orders placed by the client
         url: this.url_value,
         headers: {
-          'x-api-key': `TVTZDiQZDzjkWqVkNCxr`,
-          token: cookies.get(`token`),
+          token: cookies.get(`token`)
         },
       })
       .then((response) => {
