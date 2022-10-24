@@ -25,12 +25,11 @@ export default {
       axios
         .request({
           // endpoint for changing the profile or make changes to the profile
-          url: `https://innotechfoodie.ml/api/client`,
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/client`,
           // patch request is used for this endpoint
           method: `PATCH`,
           // api key and token came with authentication of a client will be used as headers
           headers: {
-            'x-api-key': `TVTZDiQZDzjkWqVkNCxr`,
             token: cookies.get(`token`)
           },
           // data is sent to be changed
