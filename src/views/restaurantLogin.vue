@@ -50,11 +50,8 @@ export default {
       axios
         .request({
           // endpoint for the post method to authenticate the user
-          url: `https://innotechfoodie.ml/api/restaurant-login`,
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/restaurant_login`,
           method: `POST`,
-          headers: {
-            'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
-          },
           data: {
             // email and password sent as data
             email: this.$refs[`email`][`value`],
