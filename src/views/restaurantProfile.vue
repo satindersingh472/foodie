@@ -111,10 +111,7 @@ export default {
     axios
       .request({
         /*endpoint for getting profile a restaurant */
-        url: `https://innotechfoodie.ml/api/restaurant`,
-        headers: {
-          'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
-        },
+        url: `${process.env.VUE_APP_BASE_DOMAIN}/api/restaurant`,
         params: {
           /*restaurant id is required for as a params */
           restaurant_id: cookies.get(`restaurant_id`),
