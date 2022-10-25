@@ -67,10 +67,8 @@ get_details(response){
       axios
         .request({
           /*api endpoint for calling the api */
-          url: `https://innotechfoodie.ml/api/menu`,
-          headers: {
-            'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
-          },
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/menu`,
+        
           params: {
             restaurant_id: this.info,
           },
