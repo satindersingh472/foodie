@@ -53,13 +53,12 @@ export default {
       axios
         .request({
           // endpoint to add new item
-          url: ` https://innotechfoodie.ml/api/menu`,
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/menu`,
           // post method is used
           method: `POST`,
           // api key and restaurant token is used as headers
           headers: {
-            "x-api-key": "TVTZDiQZDzjkWqVkNCxr",
-            token: cookies.get(`token`),
+            token: cookies.get(`token`)
           },
           // all the data will be coming from the values of input fields from the form
           data: {
