@@ -54,13 +54,9 @@ export default {
       axios
         .request({
           // endpoint to send the post request for login
-          url: `https://innotechfoodie.ml/api/client-login`,
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/client-login`,
           // post method is used
-          method: `POST`,
-          // api key used as a header
-          headers: {
-            'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
-          },
+          method: `POST`
           // email and password is sent as a data
           data: {
             email: this.email,
