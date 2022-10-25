@@ -60,11 +60,7 @@ export default {
     axios
       .request({
         // endpoint for discovering all the restaurants available
-        url: `https://innotechfoodie.ml/api/restaurants`,
-        headers: {
-          // api key is used as a headers
-          'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
-        },
+        url: `${process.env.VUE_APP_BASE_DOMAIN}/api/restaurants`,
       })
       .then((response) => {
         // if response is successfull then details array will have data from the response
