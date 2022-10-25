@@ -68,10 +68,7 @@ export default {
     this.info = cookies.get(`restaurant_selected`)
     axios
       .request({
-        url: `https://innotechfoodie.ml/api/menu`,
-        headers: {
-          'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
-        },
+        url: `${process.env.VUE_APP_BASE_DOMAIN}/api/menu`,
         params: {
           restaurant_id: this.info[`restaurant_id`],
         },
