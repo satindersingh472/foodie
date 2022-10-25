@@ -69,13 +69,12 @@ export default {
       axios
         .request({
           // endpoint url for making an ap request to place order
-          url: `https://innotechfoodie.ml/api/client-order`,
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/client-order`,
           // post method is used to send order request
           method: `POST`,
           // api key and token for client authentication is used as headers
           headers: {
-            'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
-            token: cookies.get(`token`),
+            token: cookies.get(`token`)
           },
           // menu items and restaurant id are used to send data for an order
           data: {
