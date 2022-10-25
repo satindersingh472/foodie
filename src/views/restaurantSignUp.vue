@@ -85,11 +85,8 @@ export default {
       axios
         .request({
           /*endpoint url for post method */
-          url: `https://innotechfoodie.ml/api/restaurant`,
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/restaurant`,
           method: `POST`,
-          headers: {
-            'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
-          },
           data: {
             /*data is grabbed  from the input fields  */
             name: this.$refs[`name`][`value`],
