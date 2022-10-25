@@ -60,7 +60,7 @@ export default {
     axios
       .request({
         // endpoint for discovering all the restaurants available
-        url: `${process.env.VUE_APP_BASE_DOMAIN}/api/restaurants`,
+        url: `${process.env.VUE_APP_BASE_DOMAIN}/api/restaurants`
       })
       .then((response) => {
         // if response is successfull then details array will have data from the response

@@ -107,12 +107,9 @@ export default {
       axios
         .request({
           // api endpoint to get information of client's profile
-          url: `https://innotechfoodie.ml/api/client`,
-          headers: {
-            'x-api-key': 'TVTZDiQZDzjkWqVkNCxr',
-          },
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/client`,
           params: {
-            client_id: cookies.get(`client_id`),
+            client_id: cookies.get(`client_id`)
           },
         })
         .then((response) => {
