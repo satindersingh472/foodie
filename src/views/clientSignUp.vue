@@ -61,13 +61,9 @@ export default {
       axios
         .request({
           // endpoint used for signup
-          url: `https://innotechfoodie.ml/api/client`,
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/client`,
           // post method is used
           method: `POST`,
-          // api key is used as headers
-          headers: {
-            'x-api-key': 'TVTZDiQZDzjkWqVkNCxr'
-          },
           // the following data is used from the form to send as a data
           data: {
             email: this.$refs[`email`][`value`],

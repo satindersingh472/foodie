@@ -56,7 +56,7 @@ export default {
           // endpoint to send the post request for login
           url: `${process.env.VUE_APP_BASE_DOMAIN}/api/client-login`,
           // post method is used
-          method: `POST`
+          method: `POST`,
           // email and password is sent as a data
           data: {
             email: this.email,
