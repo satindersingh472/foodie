@@ -28,7 +28,7 @@ export default {
             token: cookies.get(`token`)
           },
           data:{
-             order_id: order,
+            order_id: order,
             is_confirmed: `true`
           }
         })

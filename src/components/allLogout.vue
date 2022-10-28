@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 // cookies are imported
 import cookies from 'vue-cookies'
 export default {
@@ -34,10 +35,10 @@ export default {
             token: cookies.get('token')
           }
         })
-        .then((response) => {
+        .then(() => {
           this.delete_token()
         })
-        .catch((error) => {
+        .catch(() => {
           this.message = 'There is some error in log out'
         })
     },
