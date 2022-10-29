@@ -23,7 +23,14 @@ export default {
     delete_account() {
       this.show_input = true;
     },
-    confirm_delete() {
+
+  confirm_delete(){
+    if(confirm('This will delete your account permanently..') === true){
+      this.send_request()
+    }
+  },
+
+    send_request() {
       axios
         .request({
           url: `${process.env.VUE_APP_BASE_DOMAIN}/api/client`,
@@ -36,19 +43,16 @@ export default {
           }
         })
         .then((response) => {
-          if(response){
             // if account gets deleted then following message will appear
+            this.message = response['data']
             cookies.remove(`token`);
             cookies.remove(`client_id`);
             this.message = `Account  Deleted Successfuly`;
             this.$router.push(`/`);
-          }
+          
         })
         .catch((error) => {
-          if(error){
-            // if there is an error in deleting then the following message will be displayed
-            this.message = `Error! in Deleting Account`;
-          }
+          this.message = error['response']['data']
         });
     },
   },

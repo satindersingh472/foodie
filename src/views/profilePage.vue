@@ -63,6 +63,7 @@
         <edit-profile></edit-profile>
         <!-- the form contains the delete existense component to delete the client account -->
         <delete-existense class="delete_button"></delete-existense>
+        <change-password class="change_password" ></change-password>
       </div>
     </div>
   </div>
@@ -75,12 +76,14 @@ import PageHeader from '@/components/pageHeader.vue'
 import EditProfile from '@/components/editProfile.vue'
 import DeleteExistense from '@/components/deleteExistense.vue'
 import EditProfileImage from '@/components/editProfileImage.vue'
+import ChangePassword from "@/components/changePassword.vue";
 export default {
   components: {
     PageHeader,
     EditProfile,
     DeleteExistense,
     EditProfileImage,
+    ChangePassword
   },
   methods: {
     send_info() {
