@@ -54,13 +54,13 @@ export default {
       axios
         .request({
           // endpoint to send the post request for login
-          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/client-login`,
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/client_login`,
           // post method is used
           method: `POST`,
           // email and password is sent as a data
           data: {
             email: this.email,
-            password: this.password,
+            password: this.password
           },
         })
         .then((response) => {
@@ -73,7 +73,7 @@ export default {
         })
         .catch((error) => {
           if (error) {
-            this.message = `Email or Password is invalid`
+            this.message = error['response']['data']
           }
           // if there is an error in authentication then the below message will display an error
         })
