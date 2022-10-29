@@ -31,15 +31,15 @@ export default {
         .request({
           url: this.url_value,
           method: 'DELETE',
-          Headers: {
+          headers: {
             token: cookies.get('token')
           }
         })
-        .then(() => {
+        .then((response) => {
           this.delete_token()
         })
-        .catch(() => {
-          this.message = 'There is some error in log out'
+        .catch((error) => {
+          this.message = error['response']['data']
         })
     },
   },
