@@ -83,12 +83,9 @@ export default {
         })
         .catch((error) => {
           // if user exists then message will be displayed
-          if (error[`response`][`status`] === 409) {
-            this.message = `User Already Exists`
-          } else if (error) {
-            // if there is any other error than the following message will get displayed
-            this.message = `Please fill out all the Required fields`
-          }
+          if (error) {
+            this.message = error['response']['data']
+          } 
         })
     },
   },
