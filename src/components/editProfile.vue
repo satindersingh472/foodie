@@ -37,8 +37,7 @@ export default {
             first_name: this.details[`first_name`],
             last_name: this.details[`last_name`],
             email: this.details[`email`],
-            username: this.details[`username`],
-            password: this.details[`password`],
+            username: this.details[`username`]
           }
         })
         .then((response) => {

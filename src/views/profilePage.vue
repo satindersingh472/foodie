@@ -55,14 +55,6 @@
               ref="username"
             />
           </div>
-          <div class="content_item">
-            <p>Password</p>
-            <input
-              type="text"
-              ref="password"
-              placeholder="enter password to save changes"
-            />
-          </div>
         </div>
         <!-- save button will trigger send info and which will emit the info grabbed from all the form values -->
         <button @click="send_info">Save</button>
@@ -98,7 +90,6 @@ export default {
       this.details[`last_name`] = this.$refs[`last_name`][`value`]
       this.details[`email`] = this.$refs[`email`][`value`]
       this.details[`username`] = this.$refs[`username`][`value`]
-      this.details[`password`] = this.$refs[`password`][`value`]
       this.$root.$emit(`send_details`, this.details)
     },
 

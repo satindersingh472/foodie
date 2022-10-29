@@ -36,7 +36,9 @@ export default {
           }
         })
         .then((response) => {
+          if(response){
           this.delete_token()
+          }
         })
         .catch((error) => {
           this.message = error['response']['data']

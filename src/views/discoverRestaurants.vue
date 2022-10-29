@@ -68,7 +68,7 @@ export default {
       })
       .catch((error) => {
         if (error) {
-          this.message = `There is an error in retrieving Restaurants`
+          this.message = error['response']['data']
         }
       })
   },
