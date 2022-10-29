@@ -3,8 +3,7 @@
     <!-- edit profile is for client side profile  -->
     <!-- it will just show a message but actually it will call an api to make changes and show the appropriate message from the 
     following to the page according to the conditions -->
-    <h2 v-if="message === true">profile changed successfull</h2>
-    <h2 v-else-if="message === false">Changes not applied</h2>
+    <h2 v-if="message !== undefined">{{message}}</h2>
   </div>
 </template>
 
@@ -41,16 +40,10 @@ export default {
           }
         })
         .then((response) => {
-         if(response){
-          // if there is a response then message is true and show something based on its value in the html
-          this.message = true;
-         }
+         this.message = response['data']
         })
         .catch((error) => {
-          if(error){
-            // if there is an error then message is false and message is shown according to that
-            this.message = false
-          }
+          this.message = error['response']['data']
         });
     },
   },

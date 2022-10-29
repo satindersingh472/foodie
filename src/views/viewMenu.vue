@@ -77,9 +77,6 @@ export default {
       so the below loop will change the decimals to only 2 fixed decimal positions */
       .then((response) => {
         this.details = response[`data`]
-        for (let i = 0; i < response[`data`].length; i++) {
-          this.details[i][`price`] = response[`data`][i][`price`].toFixed(2)
-        }
       })
       .catch((error) => {
         if(error){

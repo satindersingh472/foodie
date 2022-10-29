@@ -49,16 +49,10 @@ export default {
           },
         })
         .then((response) => {
-          if (response) {
-            // if reponse is success then following value will be displayed on the page after hitting save
-            this.message = `change successfull`;
-          }
+          this.message = response['data']
         })
         .catch((error) => {
-          if (error) {
-            // if error exists then following value will be dispalyed on the page
-            this.message = `error! in changing`;
-          }
+          this.message = error['response']['data']
         });
     },
   },
