@@ -67,17 +67,11 @@ and if restaurant is logged in aoai for restaurant will be called  */
       .then((response) => {
         // if response is successfull then all the orders will be stored in an array called details
         this.details = response[`data`]
-        // the following code is to set the decimal place for price to 2
-        for (let i = 0; i < response[`data`].length; i++) {
-          this.details[i][`price`] = response[`data`][i][`price`].toFixed(2)
-        }
         this.unique_orders();
       })
       .catch((error) => {
-        if (error) {
           // if error exists then the following string will be shown as a message
-          this.message = `something went wrong`
-        }
+          this.message = error['response']['data']
       })
   },
   data() {
