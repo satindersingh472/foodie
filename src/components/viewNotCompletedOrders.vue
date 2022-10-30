@@ -2,6 +2,7 @@
   <div class="main_page">
     <div class="all_orders">
       <h2 class="completed_heading">Not Completed Orders</h2>
+      <h2 v-if="message !== undefined" >{{message}}</h2>
       <div class="unique_order" v-for="(order, index) in orders" :key="index">
         <div class="order_number">
           <h2 ref="order_box">Order No. {{ order }}</h2>
@@ -47,23 +48,20 @@ export default {
           token: cookies.get(`token`)
         },
         params: {
-          is_complete: `false`,
+          is_completed: `false`,
         },
       })
       .then((response) => {
         this.details = response[`data`]
-        // price will be set to 2 decimal points
-        for (let i = 0; i < response[`data`].length; i++) {
-          this.details[i][`price`] = response[`data`][i][`price`].toFixed(2)
-        }
         this.unique_orders()
       })
       .catch((error) => {
-        error
+        this.message = error['response']['data']
       })
   },
   data() {
     return {
+      message: undefined,
       details: undefined,
       orders: [],
       url_value: undefined,
