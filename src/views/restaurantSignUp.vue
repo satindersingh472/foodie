@@ -101,20 +101,16 @@ export default {
           },
         })
         .then((response) => {
-          if (response) {
             /* if response is successfull then the user will 
             get token and restaurant id in return and which will 
             be used for authetication purposes */
-            cookies.set(`restaurant_id`, response[`data`][`restaurantId`])
+            cookies.set(`restaurant_id`, response[`data`][`restaurant_id`])
             cookies.set(`token`, response[`data`][`token`])
             /*the user will sent to restaurant profile page */
             this.$router.push(`/restaurant_profile`)
-          }
         })
         .catch((error) => {
-          if (error) {
-            this.message = `Error Registering the Restaurant.`
-          }
+            this.message = error['response']['data']
         })
     },
   },

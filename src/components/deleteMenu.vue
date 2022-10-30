@@ -49,7 +49,6 @@ export default {
           },
         })
         .then((response) => {
-          if(response){
             // if deleted successfully than the following message value will be displayed after api gets response
             /*it will show this message and then after 2 seconds it will erase the message and emit the event
             to the parent element so that it will change the page */
@@ -58,13 +57,10 @@ export default {
               this.message = undefined;
               this.$emit(`recieve_delete_response`, response);
             }, 2000);
-          }
         })
         .catch((error) => {
-          if(error){
             // if there is an error in deleting then the following messsage will get displayed on the page.
-            this.message = this.detail[`name`] + ` NOT deleted due to error`;
-          }
+            this.message = error['response']['data']
         });
     },
   },

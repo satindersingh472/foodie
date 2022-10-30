@@ -49,7 +49,7 @@ export default {
     // for every item in the cart or inside the orders cookies the id will be pushed to items array
     for (let i = 0; i < this.order_details.length; i++) {
       // items array will be used to send menu items id coming from orders cookies
-      this.items.push(this.order_details[i][`id`])
+      this.items.push(this.order_details[i][`menu_id`])
     }
   },
   methods: {
@@ -69,7 +69,7 @@ export default {
       axios
         .request({
           // endpoint url for making an ap request to place order
-          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/client-order`,
+          url: `${process.env.VUE_APP_BASE_DOMAIN}/api/client_order`,
           // post method is used to send order request
           method: `POST`,
           // api key and token for client authentication is used as headers
@@ -83,23 +83,17 @@ export default {
           },
         })
         .then((response) => {
-          if (response) {
             // if response is successfull then the value of message will displayed on page
             // cookies will be removed
             cookies.remove(`orders`)
             // show something will set to false i.e there will be no items displayed after an order is placed
             this.show_something = false
             // the message will appear after the order is successfully placed
-            this.message = `Successfull!! Your order id is ${
-              response[`data`][`order_id`]
-            }`
-          }
+            this.message = `Successfull!! Your order id is ${response[`data`][`order_id`]}`
         })
         .catch((error) => {
-          if (error) {
             // if there is an error then the following message will get displayed
-            this.message = `Order not placed`
-          }
+            this.message = error['response']['data']
         })
     },
   },
