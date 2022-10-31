@@ -92,7 +92,7 @@ export default {
             name: this.$refs[`name`][`value`],
             address: this.$refs[`address`][`value`],
             city: this.$refs[`city`][`value`],
-            phone_number: this.$refs[`phone_number`][`value`],
+            phone_num: this.$refs[`phone_number`][`value`],
             email: this.$refs[`email`][`value`],
             password: this.$refs[`password`][`value`],
             bio: this.$refs[`bio`][`value`],

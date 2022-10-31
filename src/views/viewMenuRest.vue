@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- if there is any error loading the page then the message will be shown -->
-    <div v-if="message !== undefined">{{ message }}</div>
     <page-header></page-header>
+    <div v-if="message !== undefined">{{ message }}</div>
     <div class="all_items" v-if="info !== undefined">
       <!-- content item div loop through details and get one detail displayed each time -->
       <div class="content_item" v-for="detail in details" :key="detail[`id`]">
@@ -75,18 +75,10 @@ get_details(response){
         })
         .then((response) => {
           this.details = response[`data`]
-          /* if response is successfull then details will the data array from response 
-          and response gives back the price of an item in decimals so the below loop
-          will help convert that price to two decimal positions */
-          for (let i = 0; i < response[`data`].length; i++) {
-            this.details[i][`price`] = response[`data`][i][`price`].toFixed(2)
-          }
         })
         .catch((error) => {
-          if (error) {
             /*if there is an error then the following message will be shown */
-            this.message = `Error while Loading page`
-          }
+            this.message = error['response']['data']
         })
     },
   },
