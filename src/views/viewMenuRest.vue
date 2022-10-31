@@ -56,9 +56,8 @@ export default {
   },
   methods: {
     /*get details will change the menu on the main menu screen after editing the item */
-get_details(index){
-    this.details.splice(index,1)
-    this.message = 'No items available'
+get_details(){
+    this.get_menu()
 },
     get_menu() {
       this.info = cookies.get(`restaurant_id`)
