@@ -22,6 +22,13 @@
 import axios from 'axios'
 import cookies from 'vue-cookies'
 export default {
+  mounted () {
+    if(cookies.get('client_id')){
+      this.url_value = `${process.env.VUE_APP_BASE_DOMAIN}/api/client`
+    } else if (cookies.get('restaurant_id')){
+      this.url_value = `${process.env.VUE_APP_BASE_DOMAIN}/api/restaurant`
+    }
+  },
   methods: {
     show_hide_input(){
         if(this.show_input === false){
@@ -35,7 +42,7 @@ export default {
     send_request() {
       axios
         .request({ 
-            url: `${process.env.VUE_APP_BASE_DOMAIN}/api/client`,
+            url: this.url_value,
             method: `PATCH`,
             headers: {
                 token: cookies.get('token')
@@ -58,6 +65,7 @@ export default {
   },
   data() {
     return {
+      url_value: undefined,
         show_input: false,
         message: undefined
     }

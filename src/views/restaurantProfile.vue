@@ -35,7 +35,7 @@
           <input
             type="tel"
             ref="phone_number"
-            :value="`${details[`phone_number`]}`"
+            :value="`${details[`phone_num`]}`"
           />
         </div>
         <div class="content_item">
@@ -62,19 +62,13 @@
             :value="`${details[`profile_url`]}`"
           />
         </div>
-        <div class="content_item">
-          <h3>Password</h3>
-          <input
-            type="password"
-            ref="password"
-          />
-        </div>
       </div>
       <!-- save changes will trigger the send info method -->
       <!-- it will grab all the the values from the fields and emit them globally  -->
       <button @click="send_info">Save Changes</button>
       <!-- rest edit profile is the component that will listen for the global event and act -->
       <rest-edit-profile></rest-edit-profile>
+      <change-password class="keep_center" ></change-password>
       <delete-restaurant></delete-restaurant>
     </div>
   </div>
@@ -86,11 +80,13 @@ import cookies from 'vue-cookies'
 import PageHeader from '@/components/pageHeader.vue'
 import RestEditProfile from '@/components/restEditProfile.vue'
 import DeleteRestaurant from '@/components/deleteRestaurant.vue'
+import ChangePassword from "@/components/changePassword.vue"
 export default {
   components: {
     PageHeader,
     RestEditProfile,
     DeleteRestaurant,
+    ChangePassword
   },
   methods: {
     /* send info will grab the values from input fields and emit them globally */
@@ -99,8 +95,7 @@ export default {
       this.details[`address`] = this.$refs[`address`][`value`]
       this.details[`city`] = this.$refs[`city`][`value`]
       this.details[`email`] = this.$refs[`email`][`value`]
-      this.details[`phone_number`] = this.$refs[`phone_number`][`value`]
-      this.details[`password`] = this.$refs[`password`][`value`]
+      this.details[`phone_num`] = this.$refs[`phone_number`][`value`]
       this.details[`bio`] = this.$refs[`bio`][`value`]
       this.details[`banner_url`] = this.$refs[`banner_url`][`value`]
       this.details[`profile_url`] = this.$refs[`profile_url`][`value`]
@@ -188,6 +183,10 @@ export default {
     padding: 10px;
     border-radius: 10px;
   }
+}
+.keep_center{
+  display: grid;
+  place-items: center;
 }
 @media only screen and (min-width:500px){
   .all_profile{
