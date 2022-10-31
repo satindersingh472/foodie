@@ -45,7 +45,7 @@ export default {
             token: cookies.get(`token`),
           },
           data: {
-            menu_id: this.detail[`id`],
+            menu_id: this.detail[`menu_id`],
           },
         })
         .then((response) => {

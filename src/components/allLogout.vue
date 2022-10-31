@@ -55,10 +55,7 @@ export default {
     // show component will be true if
     // cookies token and client id are present or
     // cookies token and restaurant id are present
-    if (
-      cookies.get(`token`) &&
-      (cookies.get(`client_id`) || cookies.get(`restaurant_id`))
-    ) {
+    if (cookies.get(`client_id`) || cookies.get(`restaurant_id`)) {
       this.show_component = true
     }
   },

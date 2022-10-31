@@ -66,7 +66,7 @@ hide_options(){
           },
           // data required for the api call
           data:{
-            menu_id: this.detail[`id`],
+            menu_id: this.detail[`menu_id`],
             description: this.$refs[`description`][`value`],
             image_url: this.$refs[`image_url`][`value`],
             name: this.$refs[`name`][`value`],
