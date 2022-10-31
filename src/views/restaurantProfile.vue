@@ -114,12 +114,10 @@ export default {
       })
       .then((response) => {
         /*if there is a response then it will be stored inside details  */
-        this.details = response[`data`][0]
+        this.details = response[`data`]
       })
       .catch((error) => {
-        if (error) {
-          this.message = `There was an error loading the page`
-        }
+          this.message = error['response']['data']
       })
   },
   data() {
