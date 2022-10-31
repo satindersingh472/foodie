@@ -59,14 +59,12 @@ export default {
           },
         })
         .then((response) => {
-          if (response) {
             // if response is successfull then cookies are set
             // token and restaurant id cookies will be used for authentication
             cookies.set(`token`, response[`data`][`token`])
-            cookies.set(`restaurant_id`, response[`data`][`restaurantId`])
+            cookies.set(`restaurant_id`, response[`data`][`restaurant_id`])
             // authenticated function will get called after success
             this.authenticated()
-          }
         })
         .catch((error) => {
           if (error) {
