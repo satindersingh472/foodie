@@ -25,8 +25,8 @@ export default {
             token: cookies.get(`token`)
           },
           data:{
-             order_id: order,
-            is_complete: `true`
+            order_id: order,
+            is_completed: `true`
           }
         })
         .then((response) => {
